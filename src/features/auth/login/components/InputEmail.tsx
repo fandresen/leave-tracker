@@ -1,17 +1,21 @@
-import React from "react";
-import {Input} from "@nextui-org/react";
-
-export default function App() {
+interface propsT {
+  handleChange: (value: string | undefined, id: string) => void;
+  value?: string;
+}
+export function InputUserName({ handleChange, value }: propsT) {
   return (
-    <Input
-      isClearable
-      type="email"
-      label="Email"
-      variant="bordered"
-      placeholder="Enter your email"
-      defaultValue="junior@nextui.org"
-      onClear={() => console.log("input cleared")}
-      className="max-w-xs"
-    />
+    <div className="flex flex-col">
+      <label htmlFor="email" className="text-xl mb-2">
+        Username
+      </label>
+      <input
+        type="email"
+        id="username"
+        placeholder="John Doe"
+        className="py-3 px-3 w-[80vw] xl:w-[30vw] 2xl:w-[20vw] rounded-xl text-xl"
+        value={value}
+        onChange={(e) => handleChange(e.target.value, "username")}
+      />
+    </div>
   );
 }

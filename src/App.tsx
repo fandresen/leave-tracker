@@ -1,12 +1,17 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/login";
+import RequiredAuth from "./features/auth/RequiredAuth";
+import Home from "./pages/home";
 
-function App() {
-
+const App = () => {
   return (
-    <>
-      <h1 className="text-8xl font-bold text-center mt-10">Hello world !</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<RequiredAuth />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
-}
+};
 
 export default App;
