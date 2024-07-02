@@ -1,20 +1,29 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setToken } from "@/redux/authSlice";
+import { setAccessToken } from "@/lib/tokenService";
+import { useAxiosNormal } from "@/lib/interceptor";
 
-
+export interface errorT{
+  usernameMessage?: string;
+  passwordMessage?: string;
+  type?: "error" | "success" | "warning" | "info";
+}
 
 export default function useHandleLogin() {
-  const [userName, setUserName] = useState<string | undefined>();
-  const [password, setPassword] = useState<string | undefined>();
-  const dispatch = useDispatch()
+  const [userName, setUserName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<errorT>();
+  const axios = useAxiosNormal();
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleChange = (value: string | undefined, id: string) => {
+  const handleChange = (value: string, id: string) => {
+    //Remetre error en false quand on tappe
+    if (error) {
+      setError({type:'success'})
+    }
     if (id === "username") {
       setUserName(value);
       console.log(value);
@@ -25,35 +34,48 @@ export default function useHandleLogin() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(userName, password);
-    sendLoginData(userName, password)
-    
+    setUserName("");
+    setPassword("");
+    if(userName.length > 3 && passwordRegex.test(password)){
+      sendLoginData(userName, password);
+    }
+    else {
+       setError({passwordMessage:"Le mot de passe doit inclure un chiffre et un caractère spécial",type:'error'})
+    }
+  
   };
 
-  const sendLoginData = async (userName?: string, password?: string)=>{
-    try{
-      const res = await axios.post('http://localhost:3000/login', { 'username':userName, 'password':password})
+  const sendLoginData = async (userName?: string, password?: string) => {
+    try {
+      const res = await axios.post("/login", {
+        username: userName,
+        password: password,
+      });
 
-      if(res.status === 200) {
+      if (res.status === 200) {
         // add toast notification with success message
-        toast.success('Logged in successfully')
-        console.log(res); 
+        toast.success("Logged in successfully");
+        console.log(res);
+        // save access token to local storage
+        setAccessToken(res.data.token);
         // navigate to home page
-        dispatch(setToken({accessToken:res.data.token}))
-        navigate("/")
-    }
-    else{
-      // add toast notification with error message
-      toast.error('Invalid credentials')
-
+        navigate("/");
+      } else {
+        // add toast notification with error message
+        toast.error("Invalid credentials");
       }
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        setError({passwordMessage:"mot de passe incorrecte",type:'error'})
+      }
+      else  // add toast notification with error message
+      {
+        toast.error("Une erreur c'est produite, Veuillez reéssayer");
+      }
+     
+      
     }
-    catch(err){
-      console.error(err);
-      // add toast notification with error message
-      toast.error('Error when connecting to DB')
-    }
-  }
+  };
 
-  return {userName, password, handleChange, handleSubmit };
+  return { userName, password, handleChange, handleSubmit, error };
 }

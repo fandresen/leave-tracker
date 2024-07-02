@@ -6,10 +6,10 @@ import { Toaster
 export default function LoginError() { 
     
   return (
-    <div>
+    <div className="relative">
       <Toaster
         richColors
-        className="absolute top-[-30px]"
+        className="relative -top-14"
         duration={15000}
         position="top-center"
       />

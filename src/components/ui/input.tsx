@@ -1,9 +1,15 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { errorT } from "@/features/auth/login/hooks/useHandleLogin"
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+    type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search" | "date" | "datetime-local" | "month" | "week" | "time" | "color"
+    className?: string
+    error?: errorT
+    disabled?: boolean
+  }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
