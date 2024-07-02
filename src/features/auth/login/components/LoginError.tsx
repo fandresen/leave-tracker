@@ -10,7 +10,7 @@ export default function LoginError() {
       <Toaster
         richColors
         className="relative -top-14"
-        duration={15000}
+        duration={5000}
         position="top-center"
       />
     </div>
