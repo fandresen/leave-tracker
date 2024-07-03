@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setAccessToken } from "@/lib/tokenService";
 import { useAxiosNormal } from "@/lib/interceptor";
 
-export interface errorT{
+export interface errorT {
   usernameMessage?: string;
   passwordMessage?: string;
   type?: "error" | "success" | "warning" | "info";
@@ -15,14 +15,15 @@ export default function useHandleLogin() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const navigate = useNavigate();
 
   const handleChange = (value: string, id: string) => {
     //Remetre error en false quand on tappe
     if (error) {
-      setError({type:'success'})
+      setError({ type: "success" });
     }
     if (id === "username") {
       setUserName(value);
@@ -34,18 +35,26 @@ export default function useHandleLogin() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setUserName("");
+    if (userName.length > 3 && passwordRegex.test(password)) {
+      loginUser(userName, password);
+    } else if (!passwordRegex.test(password)) {
+      setError({
+        passwordMessage:
+          "Le mot de passe doit inclure un chiffre et un caractère spécial",
+        type: "error",
+      });
+    } else if (userName.length < 3) {
+      setError({
+        usernameMessage:
+          "Le nom d'utilisateur doit contenir au moins 3 caractères",
+        type: "error",
+      });
+    }
+    // setUserName("");
     setPassword("");
-    if(userName.length > 3 && passwordRegex.test(password)){
-      sendLoginData(userName, password);
-    }
-    else {
-       setError({passwordMessage:"Le mot de passe doit inclure un chiffre et un caractère spécial",type:'error'})
-    }
-  
   };
 
-  const sendLoginData = async (userName?: string, password?: string) => {
+  const loginUser = async (userName?: string, password?: string) => {
     try {
       const res = await axios.post("/login", {
         username: userName,
@@ -66,14 +75,13 @@ export default function useHandleLogin() {
       }
     } catch (err: any) {
       if (err?.response?.status === 401) {
-        setError({passwordMessage:"mot de passe incorrecte",type:'error'})
-      }
-      else  // add toast notification with error message
-      {
+        setError({ passwordMessage: "mot de passe incorrecte", type: "error" });
+      } // add toast notification with error message
+      else {
         toast.error("Une erreur c'est produite, Veuillez reéssayer");
+        setUserName("");
+        setPassword("");
       }
-     
-      
     }
   };
 
