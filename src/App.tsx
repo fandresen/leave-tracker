@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import RequiredAuth from "./features/auth/RequiredAuth";
 import Home from "./pages/home";
-import ForgetPasswprd from "./pages/ForgetPasswprd";
+import ForgetPasswprd from "./pages/ForgetPasswd";
 
 import RequireLayout from "./layout/RequireLayout";
 import Profile from "./pages/Profile";

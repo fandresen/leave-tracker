@@ -33,7 +33,7 @@ export default function LoginForm() {
           </AnimatedGridPatternDemo>
         )}
 
-        <div className="flex lg:justify-center mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[60vh] lg:min-h-[65vh] 2xl:min-h-[60vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
+        <div className="flex  mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[60vh] lg:min-h-[65vh] 2xl:min-h-[60vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
           <div className="flex flex-col items-center min-w-[95vw] lg:min-w-[40vw] 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw]">
             <h1 className="text-5xl lg:text-[4vw] text-center mt-[3vh] lg:mt-[3vh] 2xl:mt-[7vh] font-medium text-[#7BE8D7] mb-[3vh]">
               Log in
