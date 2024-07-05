@@ -32,26 +32,6 @@ export default function useHandleLogin() {
     }
   };
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (userName.length > 3 && passwordRegex.test(password)) {
-  //     loginUser(userName, password);
-  //   } else if (!passwordRegex.test(password)) {
-  //     setError({
-  //       passwordMessage:
-  //         "Le mot de passe doit inclure un chiffre et un caractère spécial",
-  //       type: "error",
-  //     });
-  //   } else if (userName.length < 3) {
-  //     setError({
-  //       usernameMessage:
-  //         "Le nom d'utilisateur doit contenir au moins 3 caractères",
-  //       type: "error",
-  //     });
-  //   }
-  //   // setUserName("");
-  //   setPassword("");
-  // };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};

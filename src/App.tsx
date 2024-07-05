@@ -22,6 +22,7 @@ const App = () => {
       document.documentElement.classList.remove("dark");
     }
   },[isDarkMode])
+  
   return (
     <Routes>
       <Route path="" element={<RequiredAuth />}>

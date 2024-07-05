@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 export default function LoginForm() {
-  const { userName, password, handleChange, handleSubmit, error } =
-    useHandleLogin();
+  const { userName, password, handleChange, handleSubmit, error } = useHandleLogin();
   const desktop = useMediaQuery({ minWidth: 1024 });
   return (
     <>
