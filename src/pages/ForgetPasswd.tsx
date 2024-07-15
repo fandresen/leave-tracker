@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ForgetPasswprd() {
   return (
     <>
@@ -33,12 +35,12 @@ export default function ForgetPasswprd() {
             <div className="mt-4 text-center">
               <p className="text-xl text-gray-600">
                 Remember your password?{" "}
-                <a
-                  href="/login"
+                <Link
+                  to="/login"
                   className="text-indigo-600 text-xl hover:text-indigo-500"
                 >
                   Login
-                </a>
+                </Link>
               </p>
             </div>
           </div>

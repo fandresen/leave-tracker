@@ -17,7 +17,7 @@ export default function MenuBtn({ desc, icon,onClick}: propsT) {
   return (
     <div className="relative">
       <Button onMouseEnter={handleHover} onMouseLeave={handleLeave} onClick={()=>onClick()}>
-        <img src={icon} className="w-10 h-10" />
+        <img src={icon} className="text-red-600 w-10 h-10" />
       </Button>
       <div
         className={`absolute -top-2 left-[70px] z-10 bg-gray-50 py-2 px-3 rounded-xl ${

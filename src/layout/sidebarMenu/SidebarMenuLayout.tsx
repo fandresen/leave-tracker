@@ -10,7 +10,7 @@ export default function SidebarMenuLayout() {
   const {logOut} = useLogout()
   const dispatch = useDispatch()
   return (
-      <div className="text-2xl min-w-[4vw] bg-[#ffffff] border-r-2 border-[#33333315] relative">
+      <div className="text-2xl min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#33333315] relative">
         <ul className="flex flex-col h-[100vh] gap-8 pt-[15vh]">
           <li ><MenuBtn desc="Home" icon="src/layout/sidebarMenu/icon/icons8-home.svg" onClick={()=>{navigate("/")}}/></li>
           <RequiredRole role="EMPLOYEE">  {/*Afficher quand l'utilisateur a le role EMPLOYEE*/}

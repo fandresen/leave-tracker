@@ -1,5 +1,6 @@
 import Cookies from "js-cookie";
 
+
 const setRole = (token: string) =>{
   const role = JSON.parse(atob(token.split(".")[1])).role; 
   Cookies.set("role", role);
