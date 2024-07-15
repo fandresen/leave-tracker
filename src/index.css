@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root > div > div.felx.flex-col.w-full.bg-\[\#fbfff6\].dark\:bg-slate-700 > div.text-gray-500.text-3xl.w-\[80\%\].mx-auto.mt-\[5vh\] > div > div > div.rbc-toolbar > span.rbc-toolbar-label{
+    font-size: 3rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#root > div > div.felx.flex-col.w-full.bg-\[\#fbfff6\].dark\:bg-slate-700 > div.text-gray-500.text-3xl.w-\[80\%\].mx-auto.mt-\[5vh\] > div > div > div.rbc-toolbar > span.rbc-btn-group > button{
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
+@media (max-width: 1800px){
+    #root > div > div.felx.flex-col.w-full.bg-\[\#fbfff6\].dark\:bg-slate-700 > div.text-gray-500.text-3xl.w-\[80\%\].mx-auto.mt-\[5vh\] > div > div > div.rbc-toolbar > span.rbc-btn-group > button{
+        font-size: 1rem;
+        padding: 0.7rem;
+        border-radius: 10px;
+    }
+    #root > div > div.felx.flex-col.w-full.bg-\[\#fbfff6\].dark\:bg-slate-700 > div.text-gray-500.text-3xl.w-\[80\%\].mx-auto.mt-\[5vh\] > div > div > div.rbc-toolbar > span.rbc-toolbar-label{
+        font-size: 2rem;
+    }
+}
