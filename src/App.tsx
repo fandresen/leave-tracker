@@ -6,8 +6,7 @@ import ForgetPasswprd from "./pages/ForgetPasswd";
 
 import RequireLayout from "./layout/RequireLayout";
 import Profile from "./pages/Profile";
-import DemandeConger from "./pages/DemandeConger";
-import DemandePermission from "./pages/DemandePermission";
+import DemandeConger from "./pages/Absence";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Rootstate } from "./redux/store";
@@ -29,9 +28,7 @@ const App = () => {
         <Route path="" element={<RequireLayout/>}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/conger" element={<DemandeConger/>} />
-          <Route path="/permission" element={<DemandePermission/>} />
-
+          <Route path="/absence" element={<DemandeConger/>} />
         </Route>
       </Route>
 

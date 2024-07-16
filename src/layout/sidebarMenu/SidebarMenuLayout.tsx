@@ -4,6 +4,12 @@ import useLogout from "@/features/auth/login/hooks/useLogout";
 import RequiredRole from "@/features/auth/RequiredRole";
 import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "@/redux/themeSlice";
+import { BiCalendarExclamation } from "react-icons/bi";
+import { IoMdHome } from "react-icons/io";
+import { IoIosNotifications } from "react-icons/io";
+import { BsPersonCircle } from "react-icons/bs";
+import { LuLogOut } from "react-icons/lu";
+import { MdOutlineLightMode } from "react-icons/md";
 
 export default function SidebarMenuLayout() {
   const navigate = useNavigate()
@@ -12,16 +18,15 @@ export default function SidebarMenuLayout() {
   return (
       <div className="text-2xl min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#33333315] relative">
         <ul className="flex flex-col h-[100vh] gap-8 pt-[15vh]">
-          <li ><MenuBtn desc="Home" icon="src/layout/sidebarMenu/icon/icons8-home.svg" onClick={()=>{navigate("/")}}/></li>
+          <li ><MenuBtn desc="Home" onClick={()=>{navigate("/")}}><IoMdHome/></MenuBtn> </li>
           <RequiredRole role="EMPLOYEE">  {/*Afficher quand l'utilisateur a le role EMPLOYEE*/}
-            <li><MenuBtn desc="Notification" icon="src/layout/sidebarMenu/icon/icons8-notification.svg"/></li>
-            <li><MenuBtn desc="Profile" icon="src/layout/sidebarMenu/icon/profil.svg" onClick={()=>{navigate("/profile")}}/></li>
-            <li><MenuBtn desc="Demander conger" icon="src/layout/sidebarMenu/icon/conger.svg" onClick={()=>{navigate("/conger")}}/></li>
-            <li><MenuBtn desc="Demander Permission" icon="src/layout/sidebarMenu/icon/permission.svg" onClick={()=>{navigate("/permission")}}/></li>
+            <li><MenuBtn desc="Notification"><IoIosNotifications/></MenuBtn></li>
+            <li><MenuBtn desc="Profile" onClick={()=>{navigate("/profile")}}><BsPersonCircle/></MenuBtn></li>
+            <li><MenuBtn desc="Demande d'absence" onClick={()=>{navigate("/absence")}}><BiCalendarExclamation/></MenuBtn></li>
           </RequiredRole>
-          <li><MenuBtn desc="Light Mode" icon="src/layout/sidebarMenu/icon/lightMode.svg" onClick={()=>dispatch(toggleDarkMode())}/></li>
+          <li><MenuBtn desc="Light Mode"onClick={()=>dispatch(toggleDarkMode())}><MdOutlineLightMode/></MenuBtn></li>
           
-          <li className="absolute bottom-6"><MenuBtn desc="Deconnexion" icon="src/layout/sidebarMenu/icon/logout-svgrepo-com.svg" onClick={()=>logOut()}/></li>
+          <li className="absolute bottom-6"><MenuBtn desc="Deconnexion" onClick={()=>logOut()}><LuLogOut/></MenuBtn></li>
         </ul>
       </div>
      
