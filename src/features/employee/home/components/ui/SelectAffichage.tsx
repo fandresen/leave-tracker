@@ -20,7 +20,7 @@ import {
   
           <SelectValue placeholder="Mode d'affichage" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white">
           <SelectGroup>
             <SelectItem value="week" className="text-xl cursor-pointer">Semaine</SelectItem>
             <SelectItem value="month"className="text-xl cursor-pointer">Mois</SelectItem>
