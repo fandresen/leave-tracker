@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { setAccessToken } from "@/lib/tokenService";
 import { useAxiosNormal } from "@/lib/interceptor";
+import { setAccessToken } from "@/lib/token&RoleService";
 
 export interface errorT {
   usernameMessage?: string;
@@ -15,8 +15,7 @@ export default function useHandleLogin() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const navigate = useNavigate();
 
@@ -35,23 +34,28 @@ export default function useHandleLogin() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (userName.length > 3 && passwordRegex.test(password)) {
-      loginUser(userName, password);
-    } else if (!passwordRegex.test(password)) {
-      setError({
-        passwordMessage:
-          "Le mot de passe doit inclure un chiffre et un caractère spécial",
-        type: "error",
-      });
-    } else if (userName.length < 3) {
-      setError({
-        usernameMessage:
-          "Le nom d'utilisateur doit contenir au moins 3 caractères",
-        type: "error",
-      });
+    const errors: { [key: string]: string } = {};
+
+    if (userName.length < 3) {
+      errors.usernameMessage =
+        "min. 3 caractères";
     }
-    // setUserName("");
-    setPassword("");
+
+    if (!passwordRegex.test(password)) {
+      errors.passwordMessage =
+        "min.8, 1 chiffre, 1 lettre et 1 caractère spécial";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setError({
+        ...errors,
+        type: "error",
+      });
+    } else {
+      loginUser(userName, password);
+      // setUserName("");
+      setPassword("");
+    }
   };
 
   const loginUser = async (userName?: string, password?: string) => {
@@ -79,6 +83,7 @@ export default function useHandleLogin() {
       } // add toast notification with error message
       else {
         toast.error("Une erreur c'est produite, Veuillez reéssayer");
+        console.log(err);
         setUserName("");
         setPassword("");
       }
