@@ -1,33 +1,34 @@
 import { useAxiosWithToken } from "@/lib/interceptor";
-import { useEffect, useState } from "react";
+import { setSoldeConger } from "@/redux/congerSlice";
+import { Rootstate } from "@/redux/store";
+import { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SoldeAbsence() {
-  const [solde,setSolde]=useState<number>()
+  const dispatch = useDispatch()
+  const solde = useSelector<Rootstate>((state) => state.conger.soldeConger) as number;
+  const userId = 0
 
   const axios = useAxiosWithToken();
   const fetchdata = async () => {
     // Fetch solde absence from API
     try {
-      const res = await axios.get("/soldeConger");
+      const res = await axios.get(`/soldeConger/:${userId}`);
       if (res.status === 200) {
-        console.log(res.data.soldeConger);
-        setSolde(res.data.soldeConger.solde);
+        dispatch(setSoldeConger(res.data.solde));
       }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    fetchdata(); // Fetch solde absence on component mount and update on every render
-
+    fetchdata();
     return () => {
-      // Clean up function
-      // Called when component unmounts
     };
   }, []);
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-xl 2xl:text-2xl text-gray-500 mb-2">
         Solde d'absence
       </h1>

@@ -10,12 +10,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { demandeAdbsenceDataT } from "../container/DemandeAbsenceContainer";
+import { dateSoustraction } from "@/lib/others";
 
 interface propsT {
   isOpen: boolean;
   onClose: () => void;
   data: demandeAdbsenceDataT;
 }
+
 export function ConfirmationPopUp({ isOpen, onClose, data }: propsT) {
   const tolisibleDate = (date?: Date) => {
     if (date) {
@@ -26,13 +28,6 @@ export function ConfirmationPopUp({ isOpen, onClose, data }: propsT) {
       });
     }
     return "";
-  };
-  const dateSoustraction = (date1?: Date, date2?: Date) => {
-    if (date1 && date2) {
-      const diffTime = Math.abs(date2.getTime() - date1.getTime());
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays;
-    }
   };
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -107,3 +102,4 @@ export function ConfirmationPopUp({ isOpen, onClose, data }: propsT) {
     </Dialog>
   );
 }
+

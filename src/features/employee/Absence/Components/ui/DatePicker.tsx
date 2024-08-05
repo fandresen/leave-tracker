@@ -12,18 +12,20 @@ import {
 import { Calendar } from "../../../../../components/ui/calendar";
 
 //interface for handleSelect function
-interface propsT{
-  handleSelectValue: (value?:Date) => void;
+interface propsT {
+  handleSelectValue: (value?: Date) => void;
   pastDate?: Date;
+  clasName?: string;
+  defaultValue?:Date;
 }
-export function DatePicker({handleSelectValue,pastDate}:propsT) {
-  const [date, setDate] = React.useState<Date>();
+export function DatePicker({ handleSelectValue, pastDate, clasName,defaultValue }: propsT) {
+  const [date, setDate] = React.useState<Date>(defaultValue!);
   const today = new Date();
 
-  const handleSelect = (value?:Date)=>{
-    setDate(value);
-    handleSelectValue(value)
-  }
+  const handleSelect = (value?: Date) => {
+    setDate(value!);
+    handleSelectValue(value);
+  };
 
   return (
     <Popover>
@@ -31,7 +33,8 @@ export function DatePicker({handleSelectValue,pastDate}:propsT) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[20vw] py-6 rounded-[8px] justify-start text-xl text-left font-normal bg-white border border-gray-200",
+            clasName,
+            " py-6 rounded-[8px] justify-start text-xl text-left font-normal bg-white border border-gray-200",
             !date && "text-muted-foreground"
           )}
         >
@@ -43,9 +46,12 @@ export function DatePicker({handleSelectValue,pastDate}:propsT) {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={(value)=>handleSelect(value)}
+          onSelect={(value) => handleSelect(value)}
           initialFocus
-          disabled= {(date)=> date<  new Date(today.getTime() - 24 * 60 * 60 * 1000) || date < pastDate! } //Today shouldn't de disabled
+          disabled={(date) =>
+            date < new Date(today.getTime() - 24 * 60 * 60 * 1000) ||
+            date < pastDate!
+          } //Today shouldn't de disabled
         />
       </PopoverContent>
     </Popover>

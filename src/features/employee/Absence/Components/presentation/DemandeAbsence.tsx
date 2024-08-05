@@ -21,11 +21,11 @@ export default function DemandeAbsence({handleEndDate,handleStartDate,handleType
             </div>
           <div>
             <label className="block text-xl mb-2">Date début</label>
-            <DatePicker handleSelectValue={(value)=>handleStartDate(value)}/>
+            <DatePicker clasName="w-[20vw]" handleSelectValue={(value)=>handleStartDate(value)}/>
           </div>
           <div>
             <label className="block text-xl mb-2">Date fin</label>
-            <DatePicker handleSelectValue={(value)=>handleEndDate(value)} pastDate={startDate}/>
+            <DatePicker clasName="w-[20vw]" handleSelectValue={(value)=>handleEndDate(value)} pastDate={startDate}/>
           </div>
 
           <button type="submit" className="w-[180px] h-16 p-3 text-xl text-[#333] rounded-xl mt-7 bg-[#7BE8D7] hover:bg-[#68c2b4] hover:text-[#ffffff]">Confirmer</button>
