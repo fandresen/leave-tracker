@@ -19,7 +19,7 @@ export function SelectTypeAbsence({handleChangeValue}:propsT) {
 
         <SelectValue placeholder="Type d'absence" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="bg-white">
         <SelectGroup>
           <SelectItem value="conger_annuel" className="text-xl cursor-pointer">Conger annuel</SelectItem>
           <SelectItem value="absence_ordinaire"className="text-xl cursor-pointer">Absence ordinaire</SelectItem>

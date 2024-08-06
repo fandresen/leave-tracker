@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
-import MyCalendar, { calendardataT } from "../presentation/MyCalendar";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { useAxiosWithToken } from "@/lib/interceptor";
 import LoadSpinner from "@/components/ui/LoadSpinner";
 import { dateToYMDString } from "@/lib/others";
@@ -7,6 +6,10 @@ import AbsenceComponent from "../ui/AbsenceComponent";
 import DemandeAbsencePopUp from "@/features/employee/Absence/Components/presentation/DemandeAbsencePopUp";
 import { useDispatch } from "react-redux";
 import { setStartDate, toggleModal } from "@/redux/demandeAbsenceSlice";
+import { SelectAffichage } from "../ui/SelectAffichage";
+import MonthlyCalendar from "../presentation/MonthlyCalendar";
+import { calendardataT } from "@/lib/interface";
+import { WeeklyCalendar } from "../presentation/WeeklyCalendar";
 
 export interface conger {
   id: number;
@@ -15,9 +18,17 @@ export interface conger {
   end: string;
 }
 
-export default function MycalendarContainer() {
+export default function MycalendarContainer({handleChangeValue}: {handleChangeValue: (value: string) => void}) {
   const axios = useAxiosWithToken();
   const dispatch = useDispatch();
+  const [calendarType, setCalendarType] = useState<string>('month');
+
+  const SwitchType = useCallback(() => {
+    setCalendarType(prevCalendarType => {
+      const newType = prevCalendarType === 'month' ? 'week' : 'month';
+      return newType;
+    });
+  }, [handleChangeValue]);
 
   const [dataConger, setDataConger] = useState<conger[]>();
 
@@ -139,15 +150,37 @@ export default function MycalendarContainer() {
   }
   return (
     <>
-      <MyCalendar
-        calendarData={dataCalendar!}
-        nextMonth={nextMonth}
-        prevMonth={prevMonth}
-        toDayDate={toDayDate}
-        handleDayClick={handleDayClick}
-        isConger={IsConger}
-        isPastDate={isPastDate}
-      />
+        <div className="mt-3">
+          <SelectAffichage 
+            handleChangeValue={SwitchType}
+          />
+        </div>
+        <div>
+          {
+            calendarType === 'month' && <MonthlyCalendar
+          calendarData={dataCalendar!}
+          nextMonth={nextMonth}
+          prevMonth={prevMonth}
+          toDayDate={toDayDate}
+          handleDayClick={handleDayClick}
+          isConger={IsConger}
+          isPastDate={isPastDate}
+        />
+          }
+
+          {
+            calendarType === 'week' && <WeeklyCalendar
+            calendarData={dataCalendar!}
+            nextMonth={nextMonth}
+            prevMonth={prevMonth}
+            toDayDate={toDayDate}
+            handleDayClick={handleDayClick}
+            isConger={IsConger}
+            isPastDate={isPastDate}
+          />
+          }
+        </div>
+      
       <DemandeAbsencePopUp />
     </>
   );

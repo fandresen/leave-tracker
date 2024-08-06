@@ -42,7 +42,7 @@ export function DatePicker({ handleSelectValue, pastDate, clasName,defaultValue 
           {date ? format(date, "PPP") : <span>Choisir une date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
+      <PopoverContent className="w-auto p-0 bg-white">
         <Calendar
           mode="single"
           selected={date}

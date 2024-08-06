@@ -8,16 +8,14 @@ import {
     SelectValue,
   } from "@/components/ui/select"
   
-  // interface propsT{
-  //   handleChangeValue: (value: string) => void;
-  // }
+  interface propsT{
+    handleChangeValue: (value: string) => void;
+  }
   
-  export function SelectAffichage() {
+  export function SelectAffichage({handleChangeValue}: propsT) {
     return (
-      // <Select onValueChange={(e)=>handleChangeValue(e)}>
-      <Select>
+      <Select onValueChange={handleChangeValue}>
         <SelectTrigger className="w-[11vw] py-6 rounded-[8px] bg-white text-lg 2xl:text-xl border border-gray-200">
-  
           <SelectValue placeholder="Mode d'affichage" />
         </SelectTrigger>
         <SelectContent className="bg-white">

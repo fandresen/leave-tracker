@@ -1,32 +1,10 @@
+import { propsT } from "@/lib/interface";
 import { dateToYMDString, getDateByDate, numberToMonth } from "@/lib/others";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
-import { SelectAffichage } from "../ui/SelectAffichage";
-import { ReactNode } from "react";
 
-export interface calendardataT {
-  year: number;
-  month: number;
-  calendarDays: [
-    {
-      date: string;
-      inMonth: boolean;
-    }
-  ];
-}
-
-interface propsT {
-  calendarData: calendardataT;
-  prevMonth: () => void;
-  nextMonth: () => void;
-  toDayDate: () => void;
-  handleDayClick: (date: string) => void;
-  isConger: (date: string) => ReactNode;
-  isPastDate: (date: string) => boolean;
-}
-
-const MyCalendar = ({
+const MonthlyCalendar = ({
   calendarData,
   nextMonth,
   prevMonth,
@@ -50,7 +28,7 @@ const MyCalendar = ({
 
   return (
     <>
-      <div className="flex justify-between mb-5">
+      <div className="flex gap-5 mb-5">
         <div className="flex">
           <button
             className="mx-10  text-lg px-3 border-[3px] border-sky-300 hover:bg-sky-300 hover:text-white rounded-xl"
@@ -68,9 +46,6 @@ const MyCalendar = ({
         <div className="mt-3 text-sm- 2xl:text-2xl font-semibold text-[#333]">
           {numberToMonth(calendarData.month)}
           {` ${calendarData.year}`}
-        </div>
-        <div className="mt-3">
-          <SelectAffichage />
         </div>
       </div>
       <div>
@@ -119,4 +94,4 @@ const MyCalendar = ({
   );
 };
 
-export default MyCalendar;
+export default MonthlyCalendar;
