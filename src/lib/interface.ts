@@ -4,7 +4,7 @@ export interface calendardataT {
     year: number;
     month: number;
     weekday?: number;
-    calendarDays: [
+    days: [
       {
         date: string;
         inMonth: boolean;

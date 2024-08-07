@@ -10,6 +10,7 @@ import { SelectAffichage } from "../ui/SelectAffichage";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
 import { calendardataT } from "@/lib/interface";
 import { WeeklyCalendar } from "../presentation/WeeklyCalendar";
+import axios from "axios";
 
 export interface conger {
   id: number;
@@ -19,7 +20,7 @@ export interface conger {
 }
 
 export default function MycalendarContainer({handleChangeValue}: {handleChangeValue: (value: string) => void}) {
-  const axios = useAxiosWithToken();
+  const axios1 = useAxiosWithToken();
   const dispatch = useDispatch();
   const [calendarType, setCalendarType] = useState<string>('month');
 
@@ -36,7 +37,7 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     weekday: new Date().getDay(),
-    calendarDays: [
+    days: [
       {
         date: "",
         inMonth: false,
@@ -50,14 +51,14 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
     try {
       //fetching dataCalendar and puting year and month in the request
       const response = await axios.get(
-        `/calendar?year=${dataCalendar.year}&month=${dataCalendar.month}`
+        `http://192.168.1.87:8080/firstapi-1.0/api/resource?year=${dataCalendar.year}&month=${dataCalendar.month}`
       );
       if (response.status === 200) {
         setDataCalendar(response.data);
       }
 
       //fetching data for conger
-      const res = await axios.get("/absence");
+      const res = await axios1.get("/absence");
       if (res.status === 200) {
         setDataConger(res.data);
       }
@@ -94,49 +95,62 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
     }
   };
 
-  const nextWeek = () => {
-    if (dataCalendar?.month === 12 && dataCalendar?.weekday === 0) {
-      setDataCalendar({
-        ...dataCalendar,
-        year: dataCalendar.year + 1,
-        month: 1,
-        weekday: new Date(dataCalendar.year + 1, 1, 1).getDay(),
-      });
-    } else if (dataCalendar?.weekday === 0) {
-      setDataCalendar({
-        ...dataCalendar,
-        month: dataCalendar.month + 1,
-        weekday: new Date(dataCalendar.year, dataCalendar.month + 1, 1).getDay(),
-      });
-    } else {
-      setDataCalendar({
-       ...dataCalendar,
-        weekday: (dataCalendar.weekday! + 1) % 7,
-      });
-    }
-  }
+const nextWeek = () => {
+  const currentWeekday = dataCalendar?.weekday!;
+  const currentMonth = dataCalendar?.month;
+  const currentYear = dataCalendar?.year;
 
-  const prevWeek = () => {
-    if (dataCalendar?.month === 1 && dataCalendar?.weekday === 0) {
+  if (currentWeekday === 6) {
+    if (currentMonth === 12) {
       setDataCalendar({
         ...dataCalendar,
-        year: dataCalendar.year - 1,
-        month: 12,
-        weekday: new Date(dataCalendar.year - 1, 12, 0).getDay(),
-      });
-    } else if (dataCalendar?.weekday === 0) {
-      setDataCalendar({
-        ...dataCalendar,
-        month: dataCalendar.month - 1,
-        weekday: new Date(dataCalendar.year, dataCalendar.month - 1, 0).getDay(),
+        year: currentYear + 1,
+        month: 1,
+        weekday: 0,
       });
     } else {
       setDataCalendar({
-       ...dataCalendar,
-        weekday: (dataCalendar.weekday! - 1) % 7,
+        ...dataCalendar,
+        month: currentMonth + 1,
+        weekday: 0,
       });
     }
+  } else {
+    setDataCalendar({
+      ...dataCalendar,
+      weekday: currentWeekday + 1,
+    });
   }
+};
+
+const prevWeek = () => {
+  const currentWeekday = dataCalendar?.weekday!;
+  const currentMonth = dataCalendar?.month;
+  const currentYear = dataCalendar?.year;
+
+  if (currentWeekday === 0) {
+    if (currentMonth === 1) {
+      setDataCalendar({
+        ...dataCalendar,
+        year: currentYear - 1,
+        month: 12,
+        weekday: 6,
+      });
+    } else {
+      setDataCalendar({
+        ...dataCalendar,
+        month: currentMonth - 1,
+        weekday: 6,
+      });
+    }
+  } else {
+    setDataCalendar({
+      ...dataCalendar,
+      weekday: currentWeekday - 1,
+    });
+  }
+};
+
 
   const toDayDate = () => {
     setDataCalendar({
