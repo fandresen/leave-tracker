@@ -1,7 +1,8 @@
 export const numberToMonth =(number: number):string=>{
-    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     return months[number-1];
 }
+
 export const getDateByDate=(date: string)=>{
     const newDate = new Date(date);
     return `${newDate.getDate()}`;
@@ -17,6 +18,29 @@ export const dateToYMDString=(date:string)=>{
   // Formatage de la date
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
+}
+
+export const getDateByWeekday=(date: string, weekday: number)=>{
+  const newDate = new Date(date);
+  const daysOfWeek = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+  newDate.setDate(newDate.getDate() + weekday);
+  return daysOfWeek[newDate.getDay()];
+}
+
+export const dateToWeekday = (date: Date) => {
+  
+  const newDate = new Date(date);
+
+  // Extraction de l'année,  du mois, de la semaine et du jour
+  const year = newDate.getFullYear();
+  const month = newDate.getMonth() + 1;
+  const weekday = newDate.getDay();
+  const day = ("0" + newDate.getDate()).slice(-2);
+  
+  // Formatage du jour de la semaine
+  const formattedWeek = `${year}-${month}-${weekday}-${day}`;
+  return formattedWeek;
+  
 }
 
 export const dateSoustraction = (date1?: Date, date2?: Date) => {

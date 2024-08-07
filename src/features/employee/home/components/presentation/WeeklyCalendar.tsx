@@ -1,16 +1,18 @@
-import { propsT } from '@/lib/interface';
+
+import { propsTWeeks } from '@/lib/interface';
 import { dateToYMDString, numberToMonth } from '@/lib/others';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import AbsenceComponent from '../ui/AbsenceComponent';
 
 export const WeeklyCalendar = ({
   calendarData,
-  nextMonth,
-  prevMonth,
+  nextWeek,
+  prevWeek,
   toDayDate,
   handleDayClick,
   isConger,
   isPastDate,
-}: propsT) => {
+}: propsTWeeks) => {
     const today = new Date().toString();
   const daysPerWeek = 7;
 
@@ -35,10 +37,10 @@ export const WeeklyCalendar = ({
           >
             Today
           </button>
-          <button onClick={prevMonth}>
+          <button onClick={prevWeek}>
             <GrPrevious className="mt-1 mr-2 text-black" />
           </button>
-          <button onClick={nextMonth}>
+          <button onClick={nextWeek}>
             <GrNext className="mt-1 ml-2 text-black" />
           </button>
         </div>
@@ -86,6 +88,8 @@ export const WeeklyCalendar = ({
           </tbody>
         </table>
       </div>
+      <div>
+  </div>
     </>
   );
 };

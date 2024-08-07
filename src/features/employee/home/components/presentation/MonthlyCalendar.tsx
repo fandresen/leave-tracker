@@ -1,4 +1,4 @@
-import { propsT } from "@/lib/interface";
+import { propsTMonths } from "@/lib/interface";
 import { dateToYMDString, getDateByDate, numberToMonth } from "@/lib/others";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { GrNext } from "react-icons/gr";
@@ -12,7 +12,7 @@ const MonthlyCalendar = ({
   handleDayClick,
   isConger,
   isPastDate,
-}: propsT) => {
+}: propsTMonths) => {
   const today = new Date().toString();
   const rows = [];
   const daysPerWeek = 7;

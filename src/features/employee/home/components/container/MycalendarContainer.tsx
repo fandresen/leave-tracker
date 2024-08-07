@@ -35,6 +35,7 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
   const [dataCalendar, setDataCalendar] = useState<calendardataT>({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
+    weekday: new Date().getDay(),
     calendarDays: [
       {
         date: "",
@@ -92,6 +93,50 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
       setDataCalendar({ ...dataCalendar!, month: dataCalendar!.month - 1 });
     }
   };
+
+  const nextWeek = () => {
+    if (dataCalendar?.month === 12 && dataCalendar?.weekday === 0) {
+      setDataCalendar({
+        ...dataCalendar,
+        year: dataCalendar.year + 1,
+        month: 1,
+        weekday: new Date(dataCalendar.year + 1, 1, 1).getDay(),
+      });
+    } else if (dataCalendar?.weekday === 0) {
+      setDataCalendar({
+        ...dataCalendar,
+        month: dataCalendar.month + 1,
+        weekday: new Date(dataCalendar.year, dataCalendar.month + 1, 1).getDay(),
+      });
+    } else {
+      setDataCalendar({
+       ...dataCalendar,
+        weekday: (dataCalendar.weekday! + 1) % 7,
+      });
+    }
+  }
+
+  const prevWeek = () => {
+    if (dataCalendar?.month === 1 && dataCalendar?.weekday === 0) {
+      setDataCalendar({
+        ...dataCalendar,
+        year: dataCalendar.year - 1,
+        month: 12,
+        weekday: new Date(dataCalendar.year - 1, 12, 0).getDay(),
+      });
+    } else if (dataCalendar?.weekday === 0) {
+      setDataCalendar({
+        ...dataCalendar,
+        month: dataCalendar.month - 1,
+        weekday: new Date(dataCalendar.year, dataCalendar.month - 1, 0).getDay(),
+      });
+    } else {
+      setDataCalendar({
+       ...dataCalendar,
+        weekday: (dataCalendar.weekday! - 1) % 7,
+      });
+    }
+  }
 
   const toDayDate = () => {
     setDataCalendar({
@@ -171,8 +216,8 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
           {
             calendarType === 'week' && <WeeklyCalendar
             calendarData={dataCalendar!}
-            nextMonth={nextMonth}
-            prevMonth={prevMonth}
+            nextWeek={nextWeek}
+            prevWeek={prevWeek}
             toDayDate={toDayDate}
             handleDayClick={handleDayClick}
             isConger={IsConger}
