@@ -49,7 +49,7 @@ const MonthlyCalendar = ({
         </div>
       </div>
       <div className="p-4">
-        <table className="w-full h-[70vh] borderdark:border-gray-500 border-gray-200 rounded-lg bg-slate-300/40 dark:bg-slate-100">
+        <table className="w-full h-[70vh] border dark:border-gray-500 border-gray-200 rounded-lg bg-slate-300/40 dark:bg-slate-100">
           <thead>
             <tr className="text-center font-normal text-black">
               <td className="py-2 2xl:py-4 w-[14%] text-sm 2xl:text-ls border border-gray-100">
@@ -70,11 +70,11 @@ const MonthlyCalendar = ({
                   <td
                     key={day.date}
                     className={`border border-sky-100 relative hover:bg-sky-50 dark:hover:bg-sky-100  text-sm 2xl:text-lg ${
-                      isPastDate(day.date)
-                      ? "cursor-not-allowed"
-                        : "cursor-pointer"
-                    } ${day.inMonth ? "bg-slate-100" : ""}
-                    ${day.date == dateToYMDString(today) ? "bg-blue-300/40" : ""}`}
+                      !isPastDate(day.date)
+                        ? "cursor-pointer"
+                        : "cursor-not-allowed"
+                    } ${!day.inMonth ? "bg-slate-100" : ""}
+                    ${day.date == dateToYMDString(today) ? "bg-blue-200" : ""}`}
                     onClick={() => handleDayClick(day.date)}
                   >
                     <div className=" min-h-[13vh]">

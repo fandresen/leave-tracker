@@ -27,21 +27,6 @@ export const getDateByWeekday=(date: string, weekday: number)=>{
   return daysOfWeek[newDate.getDay()];
 }
 
-export const dateToWeekday = (date: Date) => {
-  
-  const newDate = new Date(date);
-
-  // Extraction de l'année,  du mois, de la semaine et du jour
-  const year = newDate.getFullYear();
-  const month = newDate.getMonth() + 1;
-  const weekday = newDate.getDay();
-  const day = ("0" + newDate.getDate()).slice(-2);
-  
-  // Formatage du jour de la semaine
-  const formattedWeek = `${year}-${month}-${weekday}-${day}`;
-  return formattedWeek;
-  
-}
 
 export const dateSoustraction = (date1?: Date, date2?: Date) => {
     if (date1 && date2) {

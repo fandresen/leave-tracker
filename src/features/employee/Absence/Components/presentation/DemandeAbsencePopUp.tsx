@@ -34,7 +34,7 @@ export default function DemandeAbsencePopUp() {
     <>
     
         <Dialog open={isOpen} onOpenChange={handleClosePopUp}>
-          <DialogContent className="bg-white min-w-[60vw] min-h-[80vh] 2xl:min-w-[40vw] 2xl:min-h-[60vh]">
+          <DialogContent className="bg-white min-w-[60vw] min-h-[80vh] 2xl:min-w-[40vw] 2xl:min-h-[60vh] rounded-lg">
             <DialogHeader>
               <DialogTitle className="2xl:text-2xl">
                 Demande d'absence

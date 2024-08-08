@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { setStartDate, toggleModal } from "@/redux/demandeAbsenceSlice";
 import { SelectAffichage } from "../ui/SelectAffichage";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
+import  WeeklyCalendar  from "../presentation/WeeklyCalendar";
 import { calendardataT } from "@/lib/interface";
-import { WeeklyCalendar } from "../presentation/WeeklyCalendar";
 import axios from "axios";
 
 export interface conger {
@@ -23,29 +23,17 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
   const axios1 = useAxiosWithToken();
   const dispatch = useDispatch();
   const [calendarType, setCalendarType] = useState<string>('month');
-
-  const SwitchType = useCallback(() => {
-    setCalendarType(prevCalendarType => {
-      const newType = prevCalendarType === 'month' ? 'week' : 'month';
-      return newType;
-    });
-  }, [handleChangeValue]);
-
   const [dataConger, setDataConger] = useState<conger[]>();
-
   const [dataCalendar, setDataCalendar] = useState<calendardataT>({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     weekday: new Date().getDay(),
-    calendarDays: [
-      {
-        date: "",
-        inMonth: false,
-      },
-    ],
+    calendarDays: [{ date: "", inMonth: false }],
   });
 
-  const todayDate = new Date();
+  const SwitchType = useCallback(() => {
+    setCalendarType((prevCalendarType) => (prevCalendarType === 'month' ? 'week' : 'month'));
+  }, [handleChangeValue]);
 
   const fetchData = async () => {
     try {
@@ -72,27 +60,19 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
   }, [dataCalendar.month]);
 
   const nextMonth = () => {
-    if (dataCalendar?.month === 12) {
-      setDataCalendar({
-        ...dataCalendar,
-        month: 1,
-        year: dataCalendar.year + 1,
-      });
-    } else {
-      setDataCalendar({ ...dataCalendar!, month: dataCalendar!.month + 1 });
-    }
+    setDataCalendar({
+      ...dataCalendar,
+      month: dataCalendar.month === 12 ? 1 : dataCalendar.month + 1,
+      year: dataCalendar.month === 12 ? dataCalendar.year + 1 : dataCalendar.year,
+    });
   };
 
   const prevMonth = () => {
-    if (dataCalendar?.month === 1) {
-      setDataCalendar({
-        ...dataCalendar,
-        month: 12,
-        year: dataCalendar.year - 1,
-      });
-    } else {
-      setDataCalendar({ ...dataCalendar!, month: dataCalendar!.month - 1 });
-    }
+    setDataCalendar({
+      ...dataCalendar,
+      month: dataCalendar.month === 1 ? 12 : dataCalendar.month - 1,
+      year: dataCalendar.month === 1 ? dataCalendar.year - 1 : dataCalendar.year,
+    });
   };
 
 const nextWeek = () => {
@@ -154,19 +134,15 @@ const prevWeek = () => {
 
   const toDayDate = () => {
     setDataCalendar({
-      ...dataCalendar!,
+      ...dataCalendar,
       month: new Date().getMonth() + 1,
       year: new Date().getFullYear(),
     });
   };
 
-  //Disabled past date
   const isPastDate = (date: string): boolean => {
     const newdate = new Date(date);
-    if (newdate < new Date(todayDate.getTime() - 24 * 60 * 60 * 1000)) {
-      return true;
-    }
-    return false;
+    return newdate < new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
   };
 
   const handleDayClick = (date: string) => {
@@ -174,39 +150,21 @@ const prevWeek = () => {
       dispatch(setStartDate(new Date(date).toString()));
       dispatch(toggleModal(true));
     }
-    console.log(date);
   };
 
-  //fonction pour savoir si il y une journné dans un conger et retourne un composant conger
   const IsConger = (date: string): ReactNode => {
-    let inconger: boolean = false;
-    const congerTab: conger[] = [];
-    const newdate = dateToYMDString(date);
-    dataConger?.forEach((conger, index) => {
+    const congerTab = dataConger?.filter((conger) => {
       const congerStart = dateToYMDString(conger.start);
       const congerEnd = dateToYMDString(conger.end);
-      if (newdate >= congerStart && newdate <= congerEnd) {
-        inconger = true;
-        congerTab[index] = conger;
-        return true;
-      }
-      return false;
-    });
-    if (inconger) {
-      return congerTab.map((conger) => (
-        <AbsenceComponent title={conger.title} />
-      ));
-    }
-    return "";
+      return dateToYMDString(date) >= congerStart && dateToYMDString(date) <= congerEnd;
+    }) || [];
+    return congerTab.map((conger) => <AbsenceComponent key={conger.id} title={conger.title} />);
   };
 
   if (!dataConger) {
-    return (
-      <div className="w-full">
-        <LoadSpinner />
-      </div>
-    );
+    return <LoadSpinner />;
   }
+
   return (
     <>
         <div className="mt-3">
@@ -229,7 +187,7 @@ const prevWeek = () => {
 
           {
             calendarType === 'week' && <WeeklyCalendar
-            calendarData={dataCalendar!}
+            calendarWeekData={dataCalendar!}
             nextWeek={nextWeek}
             prevWeek={prevWeek}
             toDayDate={toDayDate}
@@ -237,9 +195,8 @@ const prevWeek = () => {
             isConger={IsConger}
             isPastDate={isPastDate}
           />
-          }
-        </div>
-      
+        }
+      </div>
       <DemandeAbsencePopUp />
     </>
   );

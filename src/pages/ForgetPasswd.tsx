@@ -27,7 +27,7 @@ export default function ForgetPasswprd() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#7BE8D7] hover:bg-[#65c2b4] text-white py-5 text-2xl rounded-xl px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full bg-[#7BE8D7] hover:bg-[#65c2b4] text-white py-5 text-2xl rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Reset Password
               </button>

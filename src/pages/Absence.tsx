@@ -1,7 +1,7 @@
 import DemandeAbsenceContainer from "@/features/employee/Absence/Components/container/DemandeAbsenceContainer";
 import HistoriqueAbsence from "@/features/employee/Absence/Components/presentation/HistoriqueAbsence";
 import SoldeAbsence from "@/features/employee/Absence/Components/presentation/SoldeAbsence";
-import MycalendarContainer from "@/features/employee/home/components/container/MycalendarContainer";
+import MyCalendarContainer from "@/features/employee/home/components/container/MycalendarContainer";
 
 export default function Absence() {
   return (
@@ -16,7 +16,7 @@ export default function Absence() {
           </div>
           <div className="flex flex-col gap-[8vh] w-[95%]">
             <DemandeAbsenceContainer />
-            <MycalendarContainer />
+            <MyCalendarContainer />
           </div>
         </div>
       </div>
