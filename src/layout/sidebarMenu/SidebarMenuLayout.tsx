@@ -16,11 +16,11 @@ export default function SidebarMenuLayout() {
   const {logOut} = useLogout()
   const dispatch = useDispatch()
   return (
-      <div className="text-2xl min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#33333315] relative">
+      <div className="text-2xl min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#41262615] relative">
         <ul className="flex flex-col h-[100vh] gap-8 pt-[15vh]">
           <li ><MenuBtn desc="Home" onClick={()=>{navigate("/")}}><IoMdHome/></MenuBtn> </li>
           <RequiredRole role="EMPLOYEE">  {/*Afficher quand l'utilisateur a le role EMPLOYEE*/}
-            <li><MenuBtn desc="Notification"><IoIosNotifications/></MenuBtn></li>
+            <li><MenuBtn desc="Notification" onClick={()=> {}}><IoIosNotifications/></MenuBtn></li>
             <li><MenuBtn desc="Profile" onClick={()=>{navigate("/profile")}}><BsPersonCircle/></MenuBtn></li>
             <li><MenuBtn desc="Demande d'absence" onClick={()=>{navigate("/absence")}}><BiCalendarExclamation/></MenuBtn></li>
           </RequiredRole>

@@ -72,7 +72,6 @@ export default function MyCalendarContainer({ handleChangeValue }: { handleChang
     setDataCalendar({
       ...dataCalendar,
       weekday: (dataCalendar.weekday! + 7) % 7,
-      
     });
   };
 
@@ -118,7 +117,7 @@ export default function MyCalendarContainer({ handleChangeValue }: { handleChang
 
   return (
     <>
-      <div className="mt-3">
+      <div className="flex -mb-10 justify-end">
         <SelectAffichage handleChangeValue={SwitchType} />
       </div>
       <div>

@@ -32,7 +32,7 @@ export default function MenuBtn({ desc, children, onClick }: propsT) {
         {clonedChildren}
       </Button>
       <div
-        className={`absolute -top-2 left-[50px] 2xl:left-[70px] z-10 bg-gray-50 py-2 px-3 rounded-xl ${
+        className={`absolute -top-2 left-[50px] 2xl:left-[70px] z-10 bg-gray-100 dark:bg-gray-300 py-2 px-3 rounded-xl ${
           hover ? "block" : "hidden"
         } `}
       >

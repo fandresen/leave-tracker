@@ -42,7 +42,7 @@ export const WeeklyCalendar = ({
 
   return (
     <>
-      <div className="flex gap-5 mb-5">
+      <div className="flex flex-col md:flex-row gap-5 mb-5">
         <div className="flex">
           <button
             className="mx-10 text-lg px-3 border-[3px] border-sky-300 hover:bg-sky-300 hover:text-white rounded-xl"
@@ -51,19 +51,19 @@ export const WeeklyCalendar = ({
             Today
           </button>
           <button onClick={handlePrevWeek}>
-            <GrPrevious className="mt-1 mr-2 text-black" />
+            <GrPrevious className="mt-1 mr-2 text-black  dark:text-white" />
           </button>
           <button onClick={handleNextWeek}>
-            <GrNext className="mt-1 ml-2 text-black" />
+            <GrNext className="mt-1 ml-2 text-black  dark:text-white" />
           </button>
         </div>
-        <div className="mt-3 text-sm 2xl:text-2xl font-semibold text-[#333]">
+        <div className="mt-3 text-sm 2xl:text-2xl font-semibold text-[#333] dark:text-zinc-300">
           {numberToMonth(calendarWeekData.month)} {calendarWeekData.year}
         </div>
       </div>
 
-      <div>
-        <table className="w-full h-[70vh] border border-gray-200 bg-white">
+      <div className='p-4'>
+        <table className="w-full h-[70vh] border dark:border-gray-500 border-gray-200 rounded-lg bg-slate-300/40 dark:bg-slate-100">
           <thead>
             <tr className="text-center font-normal text-black">
               <th className="w-[5%] text-sm 2xl:text-lg">Heure</th>
