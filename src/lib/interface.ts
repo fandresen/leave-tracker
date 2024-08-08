@@ -13,7 +13,7 @@ export interface calendardataT {
   }
   
 export  interface propsTMonths {
-    calendarData: calendardataT;
+    calendarMonthData: calendardataT;
     prevMonth: () => void;
     nextMonth: () => void;
     toDayDate: () => void;
@@ -23,7 +23,7 @@ export  interface propsTMonths {
   }
 
   export  interface propsTWeeks {
-    calendarData: calendardataT;
+    calendarWeekData: calendardataT;
     prevWeek: () => void;
     nextWeek: () => void;
     toDayDate: () => void;

@@ -5,7 +5,7 @@ import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 
 const MonthlyCalendar = ({
-  calendarData,
+  calendarMonthData,
   nextMonth,
   prevMonth,
   toDayDate,
@@ -16,12 +16,12 @@ const MonthlyCalendar = ({
   const today = new Date().toString();
   const rows = [];
   const daysPerWeek = 7;
-  if (calendarData && Array.isArray(calendarData.calendarDays)) {
-    const totalDays = calendarData.calendarDays.length;
+  if (calendarMonthData && Array.isArray(calendarMonthData.calendarDays)) {
+    const totalDays = calendarMonthData.calendarDays.length;
 
     // Diviser les jours en semaines
     for (let i = 0; i < totalDays; i += daysPerWeek) {
-      const week = calendarData.calendarDays.slice(i, i + daysPerWeek);
+      const week = calendarMonthData.calendarDays.slice(i, i + daysPerWeek);
       rows.push(week);
     }
   }
@@ -44,8 +44,8 @@ const MonthlyCalendar = ({
           </button>
         </div>
         <div className="mt-3 text-sm- 2xl:text-2xl font-semibold text-[#333]">
-          {numberToMonth(calendarData.month)}
-          {` ${calendarData.year}`}
+          {numberToMonth(calendarMonthData.month)}
+          {` ${calendarMonthData.year}`}
         </div>
       </div>
       <div>
