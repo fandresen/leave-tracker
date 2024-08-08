@@ -16,10 +16,10 @@ export const WeeklyCalendar = ({
   const daysPerWeek = 7;
 
   const weeks = [];
-  if (calendarData && Array.isArray(calendarData.days)) {
-    const totalDays = calendarData.days.length;
+  if (calendarData && Array.isArray(calendarData.calendarDays)) {
+    const totalDays = calendarData.calendarDays.length;
     for (let i = 0; i < totalDays; i += daysPerWeek) {
-      const week = calendarData.days.slice(i, i + daysPerWeek);
+      const week = calendarData.calendarDays.slice(i, i + daysPerWeek);
       weeks.push(week);
     }
   }

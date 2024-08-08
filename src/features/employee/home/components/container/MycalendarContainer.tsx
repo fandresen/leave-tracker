@@ -37,7 +37,7 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     weekday: new Date().getDay(),
-    days: [
+    calendarDays: [
       {
         date: "",
         inMonth: false,
@@ -51,7 +51,7 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
     try {
       //fetching dataCalendar and puting year and month in the request
       const response = await axios.get(
-        `http://192.168.1.87:8080/firstapi-1.0/api/resource?year=${dataCalendar.year}&month=${dataCalendar.month}`
+        `http://192.168.1.87:8080/firstapi-1.0/api/calendar?year=${dataCalendar.year}&month=${dataCalendar.month}`
       );
       if (response.status === 200) {
         setDataCalendar(response.data);
@@ -217,7 +217,7 @@ const prevWeek = () => {
         <div>
           {
             calendarType === 'month' && <MonthlyCalendar
-          calendarData={dataCalendar!}
+          calendarMonthData={dataCalendar!}
           nextMonth={nextMonth}
           prevMonth={prevMonth}
           toDayDate={toDayDate}
