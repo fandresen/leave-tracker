@@ -31,3 +31,10 @@ export  interface propsTMonths {
     isConger: (date: string) => ReactNode;
     isPastDate: (date: string) => boolean;
   }
+
+  export interface propsAbsence {
+    id: number;
+    title: string;
+    startDate: number;
+    endDate: number;
+  }
