@@ -21,13 +21,13 @@ export default function ForgetPasswprd() {
                 <input
                   type="email"
                   id="email"
-                  className="mt-1 block w-full px-3 py-5 text-2xl border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full px-3 border-2 py-5 text-2xl border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-[#65c2b4] focus:border-[#65c2b4] sm:text-sm"
                   placeholder="Enter your email"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#7BE8D7] hover:bg-[#65c2b4] text-white py-5 text-2xl rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full bg-[#7BE8D7] hover:bg-[#65c2b4] text-white py-5 text-2xl rounded-xl px-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#65c2b4]"
               >
                 Reset Password
               </button>
@@ -37,7 +37,7 @@ export default function ForgetPasswprd() {
                 Remember your password?{" "}
                 <Link
                   to="/login"
-                  className="text-indigo-600 text-xl hover:text-indigo-500"
+                  className="text-[#53b6a7] text-xl hover:text-[#26635a]"
                 >
                   Login
                 </Link>
