@@ -1,5 +1,5 @@
 import { ReactNode, useCallback, useEffect, useState } from "react";
-import { useAxiosWithToken } from "@/lib/interceptor";
+import { useAxiosJava, useAxiosWithToken } from "@/lib/interceptor";
 import LoadSpinner from "@/components/ui/LoadSpinner";
 import { dateToYMDString } from "@/lib/others";
 import AbsenceComponent from "../ui/AbsenceComponent";
@@ -10,7 +10,6 @@ import { SelectAffichage } from "../ui/SelectAffichage";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
 import  WeeklyCalendar  from "../presentation/WeeklyCalendar";
 import { calendardataT } from "@/lib/interface";
-import axios from "axios";
 
 export interface conger {
   id: number;
@@ -21,6 +20,7 @@ export interface conger {
 
 export default function MycalendarContainer({handleChangeValue}: {handleChangeValue: (value: string) => void}) {
   const axios1 = useAxiosWithToken();
+  const axiosWithJava = useAxiosJava();
   const dispatch = useDispatch();
   const [calendarType, setCalendarType] = useState<string>('month');
   const [dataConger, setDataConger] = useState<conger[]>();
@@ -38,8 +38,8 @@ export default function MycalendarContainer({handleChangeValue}: {handleChangeVa
   const fetchData = async () => {
     try {
       //fetching dataCalendar and puting year and month in the request
-      const response = await axios.get(
-        `http://192.168.1.87:8080/firstapi-1.0/api/calendar?year=${dataCalendar.year}&month=${dataCalendar.month}`
+      const response = await axiosWithJava.get(
+        `/calendar?year=${dataCalendar.year}&month=${dataCalendar.month}`
       );
       if (response.status === 200) {
         setDataCalendar(response.data);

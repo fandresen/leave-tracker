@@ -16,8 +16,9 @@ export default function SidebarMenuLayout() {
   const {logOut} = useLogout()
   const dispatch = useDispatch()
   return (
-      <div className="text-2xl min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#41262615] relative">
-        <ul className="flex flex-col h-[100vh] gap-8 pt-[15vh]">
+      <div className="text-2xl fixed min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#41262615]">
+        <ul className="flex flex-col justify-between h-[100vh]">
+          <div className="flex flex-col gap-8 pt-[15vh]">
           <li ><MenuBtn desc="Home" onClick={()=>{navigate("/")}}><IoMdHome/></MenuBtn> </li>
           <RequiredRole role="EMPLOYEE">  {/*Afficher quand l'utilisateur a le role EMPLOYEE*/}
             <li><MenuBtn desc="Notification" onClick={()=> {}}><IoIosNotifications/></MenuBtn></li>
@@ -25,8 +26,10 @@ export default function SidebarMenuLayout() {
             <li><MenuBtn desc="Demande d'absence" onClick={()=>{navigate("/absence")}}><BiCalendarExclamation/></MenuBtn></li>
           </RequiredRole>
           <li><MenuBtn desc="Light Mode"onClick={()=>dispatch(toggleDarkMode())}><MdOutlineLightMode/></MenuBtn></li>
+          </div>
           
-          <li className="absolute bottom-6"><MenuBtn desc="Deconnexion" onClick={()=>logOut()}><LuLogOut/></MenuBtn></li>
+          
+          <li className="mb-[2vh]"><MenuBtn desc="Deconnexion" onClick={()=>logOut()}><LuLogOut/></MenuBtn></li>
         </ul>
       </div>
      
