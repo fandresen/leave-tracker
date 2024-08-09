@@ -25,7 +25,7 @@ export default function HistoriqueAbsence() {
         {/* etat de la demande */}
         <div className="flex justify-between">
           <label className="block text-xl font-semibold mb-2">Etat de la demande:</label>
-          Acceptée
+          <span className="text-green-400">Acceptée</span>
         </div>
       </div>
     </div>
