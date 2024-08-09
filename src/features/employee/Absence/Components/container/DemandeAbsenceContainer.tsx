@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DemandeAbsence from "../presentation/DemandeAbsence";
 import { ConfirmationPopUp } from "../presentation/ConfirmationPopUp";
+import axios from "axios";
 
 export interface demandeAdbsenceDataT {
   typeAbsence: string;
@@ -30,10 +31,13 @@ export default function DemandeAbsenceContainer() {
   const handleClosePopUp= () => {
     setIsOpen(false);
   };
-  const handleSubmit = (e:React.FormEvent) => {
-    e.preventDefault()
-    console.log(credentials);
-    setIsOpen(true);
+  const handleSubmit = async (e:React.FormEvent) => {
+    try{
+      await axios.post(`${Api_Demande_ABSENCE}/add`, credentials);
+      setIsOpen(false);
+    } catch (error) {
+      console.error('Error adding event:', error);
+    }
   };
   return (
     <>

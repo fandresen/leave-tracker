@@ -78,7 +78,7 @@ export default function DemandeAbsencePopUp() {
               <div className=" w-full h-[12vh] mt-[5vh] -mb-10 pt-5 flex justify-between px-10 bg-gray-200">
                 <div className="">
                   <h1 className="text-2xl text-gray-700">Absence demandé</h1>
-                  <h1 className="text-3xl mt-3 text-center">{`${absenceDemandee}  jour${absenceDemandee! > 1 ? "s" : ""}`}</h1>
+                  <h1 className="text-3xl mt-3 text-center">{`${absenceDemandee}  jour${absenceDemandee! >= 1 ? "s" : ""}`}</h1>
                 </div>
                 <div>
                   <h1 className="text-2xl text-gray-700">Solde d'absence apres validation</h1>
