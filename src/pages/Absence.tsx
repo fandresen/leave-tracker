@@ -14,7 +14,7 @@ export default function Absence() {
           </div>
           <div className="flex flex-col gap-[8vh] w-[95%]">
             <DemandeAbsenceContainer/>
-            <MycalendarContainer/>
+            <MycalendarContainer handleChangeValue={()=>{}}/>
           </div>
         </div>
         <div className="w-full md:w-[30vw]">
