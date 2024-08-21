@@ -38,3 +38,14 @@ export  interface propsTMonths {
     startDate: number;
     endDate: number;
   }
+
+  export interface conger {
+    id: number;
+    title: string;
+    start: string;
+    end: string;
+  }
+
+  export interface propsT{
+    handleChangeValue: (value: string) => void;
+  }

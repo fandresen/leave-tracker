@@ -7,10 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-  
-  interface propsT{
-    handleChangeValue: (value: string) => void;
-  }
+import { propsT } from "@/lib/interface"
   
   export function SelectAffichage({handleChangeValue}: propsT) {
     return (

@@ -8,15 +8,10 @@ import { setStartDate, toggleModal } from "@/redux/demandeAbsenceSlice";
 import { SelectAffichage } from "../ui/SelectAffichage";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
 import  WeeklyCalendar  from "../presentation/WeeklyCalendar";
-import { calendardataT } from "@/lib/interface";
+import { calendardataT, conger } from "@/lib/interface";
 import { useAxiosWithToken } from "@/lib/interceptor";
 
-export interface conger {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-}
+
 
 export default function MycalendarContainer({handleChangeValue}: {handleChangeValue: (value: string) => void}) {
   const axios1 = useAxiosWithToken();

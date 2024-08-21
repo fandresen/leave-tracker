@@ -5,7 +5,7 @@ import RequiredRole from "@/features/auth/RequiredRole";
 import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "@/redux/themeSlice";
 import { BiCalendarExclamation } from "react-icons/bi";
-import { IoMdHome } from "react-icons/io";
+import { IoIosSettings, IoMdHome } from "react-icons/io";
 import { IoIosNotifications } from "react-icons/io";
 import { BsPersonCircle } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
@@ -24,6 +24,10 @@ export default function SidebarMenuLayout() {
             <li><MenuBtn desc="Notification" onClick={()=> {}}><IoIosNotifications/></MenuBtn></li>
             <li><MenuBtn desc="Profile" onClick={()=>{navigate("/profile")}}><BsPersonCircle/></MenuBtn></li>
             <li><MenuBtn desc="Demande d'absence" onClick={()=>{navigate("/absence")}}><BiCalendarExclamation/></MenuBtn></li>
+          </RequiredRole>
+          <RequiredRole role="ADMIN">
+            <li><MenuBtn desc="Entitys" onClick={()=>{navigate("/entity")}}><BsPersonCircle/></MenuBtn></li>
+            <li><MenuBtn desc="Paramètres" onClick={()=>{navigate("/paramètre")}}><IoIosSettings/></MenuBtn></li>
           </RequiredRole>
           <li><MenuBtn desc="Light Mode"onClick={()=>dispatch(toggleDarkMode())}><MdOutlineLightMode/></MenuBtn></li>
           </div>
