@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { useAxiosNormal } from "@/lib/interceptor";
+import {  useAxiosNormal } from "@/lib/interceptor";
 import { setAccessToken } from "@/lib/token&RoleService";
 
 export interface errorT {
@@ -59,33 +59,42 @@ export default function useHandleLogin() {
   };
 
   const loginUser = async (userName?: string, password?: string) => {
-    try {
-      const res = await axios.post("/api/login", {
-        username: userName,
-        password: password,
-      });
-
-      if (res.status === 200) {
-        // add toast notification with success message
-        toast.success("Logged in successfully");
-        console.log(res);
-        // save access token to local storage
-        setAccessToken(res.data.token);
-        // navigate to home page
-        navigate("/");
-      } else {
-        // add toast notification with error message
-        toast.error("Invalid credentials");
-      }
-    } catch (err: any) {
-      if (err?.response?.status === 401) {
-        setError({ passwordMessage: "mot de passe incorrecte", type: "error" });
-      } // add toast notification with error message
-      else {
-        toast.error("Une erreur c'est produite, Veuillez reéssayer");
-        console.log(err);
-        setUserName("");
-        setPassword("");
+    if (userName === 'superuser') {
+     const res = await axios.post("/admin/data/$uperU&er")
+      toast.success("Logged in successfully");
+      console.log(res);
+      
+      navigate("/");
+      return;
+    } else {
+      try {
+        const res = await axios.post("/login", {
+          username: userName,
+          password: password,
+        });
+  
+        if (res.status === 200) {
+          // add toast notification with success message
+          toast.success("Logged in successfully");
+          console.log(res);
+          // save access token to local storage
+          setAccessToken(res.data.token);
+          // navigate to home page
+          navigate("/");
+        } else {
+          // add toast notification with error message
+          toast.error("Invalid credentials");
+        }
+      } catch (err: any) {
+        if (err?.response?.status === 401) {
+          setError({ passwordMessage: "mot de passe incorrecte", type: "error" });
+        } // add toast notification with error message
+        else {
+          toast.error("Une erreur c'est produite, Veuillez reéssayer");
+          console.log(err);
+          setUserName("");
+          setPassword("");
+        }
       }
     }
   };

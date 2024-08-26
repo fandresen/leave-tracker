@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { propsT } from "@/lib/interface";
 import { ListeEntities } from "../presentation/ListeEntity";
 import { ListeDemande } from "../presentation/Demande_offre";
+import { AjoutEntity } from "../presentation/AjoutEntity";
 
 export function SelectTabs ({handleChangeValue}: propsT) {
     return (
@@ -13,7 +14,7 @@ export function SelectTabs ({handleChangeValue}: propsT) {
                 <TabsTrigger value="Historique">Historique</TabsTrigger>
             </TabsList>
             <TabsContent value="Liste"><ListeEntities/></TabsContent>
-            <TabsContent value="Ajout">test2</TabsContent>
+            <TabsContent value="Ajout"><AjoutEntity/></TabsContent>
             <TabsContent value="Demande"><ListeDemande/></TabsContent>
             <TabsContent value="Historique">test3</TabsContent>
         </Tabs>
