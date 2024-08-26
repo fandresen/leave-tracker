@@ -60,7 +60,7 @@ export default function useHandleLogin() {
 
   const loginUser = async (userName?: string, password?: string) => {
     try {
-      const res = await axios.post("/login", {
+      const res = await axios.post("/api/login", {
         username: userName,
         password: password,
       });

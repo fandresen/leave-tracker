@@ -90,7 +90,10 @@ export default function DemandeAbsencePopUp() {
             <DialogFooter>
               <button
                 type="submit"
-                onClick={ (e)=> handleSubmit(e)}
+                onClick={(e) => {
+                  e.preventDefault(); // Prevents default form submission if needed
+                  handleSubmit();
+                }} 
                 className="w-[90%] mx-auto h-16 p-3 text-xl 2xl:text-2xl text-[#333] rounded-xl mt-7 bg-[#7BE8D7] hover:bg-[#68c2b4] hover:text-[#ffffff]"
               >
                 Valider
