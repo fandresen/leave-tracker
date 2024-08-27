@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import MyCalendar, { calendardataT } from "../presentation/MyCalendar";
-import { useAxiosWithToken } from "@/lib/interceptor";
+import { useAxiosJava, useAxiosWithToken } from "@/lib/interceptor";
 import LoadSpinner from "@/components/ui/LoadSpinner";
 import { dateToYMDString } from "@/lib/others";
 import AbsenceComponent from "../ui/AbsenceComponent";
@@ -16,36 +16,44 @@ export interface conger {
 }
 
 export default function MycalendarContainer() {
-  const axios = useAxiosWithToken();
+  const axios1 = useAxiosWithToken();
+  const axiosJava = useAxiosJava()
   const dispatch = useDispatch();
 
   const [dataConger, setDataConger] = useState<conger[]>();
 
-  const [dataCalendar, setDataCalendar] = useState<calendardataT>({
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    calendarDays: [
-      {
-        date: "",
-        inMonth: false,
-      },
-    ],
-  });
+  const [dataCalendar, setDataCalendar] = useState<calendardataT|undefined>(undefined);
 
   const todayDate = new Date();
+
+  useEffect(() => {
+    if (!dataCalendar) {
+      // Initial load, set the default dataCalendar
+      setDataCalendar({
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        calendarDays: [
+          {
+            date: "",
+            inMonth: false,
+          },
+        ],
+      });
+    }
+  }, []);
 
   const fetchData = async () => {
     try {
       //fetching dataCalendar and puting year and month in the request
-      const response = await axios.get(
-        `/calendar?year=${dataCalendar.year}&month=${dataCalendar.month}`
+      const response = await axiosJava.get(
+        `/calendar?year=${dataCalendar?.year}&month=${dataCalendar?.month}`
       );
       if (response.status === 200) {
         setDataCalendar(response.data);
       }
 
       //fetching data for conger
-      const res = await axios.get("/absence");
+      const res = await axios1.get("/absence");
       if (res.status === 200) {
         setDataConger(res.data);
       }
@@ -55,8 +63,10 @@ export default function MycalendarContainer() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [dataCalendar.month]);
+    if(dataCalendar?.month){
+      fetchData();
+    }
+  }, [dataCalendar?.month]);
 
   const nextMonth = () => {
     if (dataCalendar?.month === 12) {
