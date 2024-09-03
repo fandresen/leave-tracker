@@ -1,7 +1,8 @@
 export const numberToMonth =(number: number):string=>{
-    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"];
+    const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     return months[number-1];
 }
+
 export const getDateByDate=(date: string)=>{
     const newDate = new Date(date);
     return `${newDate.getDate()}`;
@@ -18,6 +19,14 @@ export const dateToYMDString=(date:string)=>{
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate;
 }
+
+export const getDateByWeekday=(date: string, weekday: number)=>{
+  const newDate = new Date(date);
+  const daysOfWeek = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+  newDate.setDate(newDate.getDate() + weekday);
+  return daysOfWeek[newDate.getDay()];
+}
+
 
 export const dateSoustraction = (date1?: Date, date2?: Date) => {
     if (date1 && date2) {

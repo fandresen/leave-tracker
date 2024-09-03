@@ -3,6 +3,7 @@ import { demandeAdbsenceDataT } from "../Components/container/DemandeAbsenceCont
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal } from "@/redux/demandeAbsenceSlice";
 import { Rootstate } from "@/redux/store";
+import { useAxiosWithToken } from "@/lib/interceptor";
 
 export default function useHandleDemandeAbsence() {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ export default function useHandleDemandeAbsence() {
     startDate: clickedDate,
     endDate: undefined,
   });
+
+  const axios = useAxiosWithToken();
 
   useEffect(() => {
     console.log("niakatra leka");
@@ -41,10 +44,16 @@ export default function useHandleDemandeAbsence() {
   const handleClosePopUp = () => {
     dispatch(toggleModal(false));
   };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(credentials);
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post("/absence", credentials);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  
   return {
     isOpen,
     credentials,

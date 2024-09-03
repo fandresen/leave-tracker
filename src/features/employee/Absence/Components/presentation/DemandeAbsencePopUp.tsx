@@ -34,7 +34,7 @@ export default function DemandeAbsencePopUp() {
     <>
     
         <Dialog open={isOpen} onOpenChange={handleClosePopUp}>
-          <DialogContent className="bg-white min-w-[60vw] min-h-[80vh] 2xl:min-w-[40vw] 2xl:min-h-[60vh]">
+          <DialogContent className="bg-white min-w-[60vw] min-h-[80vh] 2xl:min-w-[40vw] 2xl:min-h-[60vh] rounded-lg">
             <DialogHeader>
               <DialogTitle className="2xl:text-2xl">
                 Demande d'absence
@@ -78,7 +78,7 @@ export default function DemandeAbsencePopUp() {
               <div className=" w-full h-[12vh] mt-[5vh] -mb-10 pt-5 flex justify-between px-10 bg-gray-200">
                 <div className="">
                   <h1 className="text-2xl text-gray-700">Absence demandé</h1>
-                  <h1 className="text-3xl mt-3 text-center">{`${absenceDemandee}  jour${absenceDemandee! > 1 ? "s" : ""}`}</h1>
+                  <h1 className="text-3xl mt-3 text-center">{`${absenceDemandee}  jour${absenceDemandee! >= 1 ? "s" : ""}`}</h1>
                 </div>
                 <div>
                   <h1 className="text-2xl text-gray-700">Solde d'absence apres validation</h1>
@@ -90,7 +90,10 @@ export default function DemandeAbsencePopUp() {
             <DialogFooter>
               <button
                 type="submit"
-                onClick={ (e)=> handleSubmit(e)}
+                onClick={(e) => {
+                  e.preventDefault(); // Prevents default form submission if needed
+                  handleSubmit();
+                }} 
                 className="w-[90%] mx-auto h-16 p-3 text-xl 2xl:text-2xl text-[#333] rounded-xl mt-7 bg-[#7BE8D7] hover:bg-[#68c2b4] hover:text-[#ffffff]"
               >
                 Valider

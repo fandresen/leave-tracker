@@ -2,38 +2,18 @@ import useHandleLogin from "../hooks/useHandleLogin";
 import { InputUserName } from "./InputUserName";
 import { InputPassword } from "./InputPassword";
 import LoginError from "./LoginError";
-import { AnimatedGridPatternDemo } from "@/components/magicui/animatedGridPatternBG";
 import { Link } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 
 export default function LoginForm() {
   const { userName, password, handleChange, handleSubmit, error } = useHandleLogin();
-  const desktop = useMediaQuery({ minWidth: 1024 });
+  // const desktop = useMediaQuery({ minWidth: 1024 });
   return (
     <>
       <div className="flex justify-between">
-        {desktop && (
-          <AnimatedGridPatternDemo>
-            <div>
-              <h1 className="text-white lg:text-4xl 2xl:text-[6vh] 2xl:leading-tight lg:px-1 xl:px-2 w-[90%] mx-auto font-semibold mt-[30vh]">
-                Fini les sueurs froides pour demander vos congés !
-              </h1>
-              <h1 className="text-[#7BE8D7] lg:text-3xl 2xl:text-[5vh] 2xl:leading-[6vh] w-[85%] mx-auto font-semibold mt-[2vh]">
-                Avec{" "}
-                <span className="lg:text-4xl 2xl:text-[5vh] bg-gradient-to-r from-[#4da844] to-[#ffffff] bg-clip-text text-transparent">
-                ZenRH
-                </span>
-                , Un clic suffit pour partir l'esprit tranquille{" "}
-              </h1>
-              <h2 className="text-[#ffffff] xl:text-xl mb-[1vh] 2xl:text-2xl text-center lg:mt-[20vh] 2xl:mt-[25vh]">
-                Demandez, partez, relaxez !
-              </h2>
-            </div>
-          </AnimatedGridPatternDemo>
-        )}
 
-        <div className="flex  mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[60vh] lg:min-h-[65vh] 2xl:min-h-[60vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
-          <div className="flex flex-col items-center min-w-[95vw] lg:min-w-[40vw] 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw]">
+        <div className="flex  mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[65vh] lg:min-h-[65vh]  2xl:min-h-[70vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
+          <div className="flex flex-col items-center min-w-[95vw] lg:min-w-[40vw] 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw] border-[0px] border-[#7BE8D7] shadow-2xl">
             <h1 className="text-5xl lg:text-[4vw] text-center mt-[3vh] lg:mt-[3vh] 2xl:mt-[7vh] font-medium text-[#7BE8D7] mb-[3vh]">
               Log in
             </h1>
@@ -47,7 +27,7 @@ export default function LoginForm() {
                 <InputUserName
                   handleChange={handleChange}
                   value={userName}
-                  className={`bg-[#EDEDED] py-5 2xl:py-8 px-3 rounded-lg text-xl ${
+                  className={`bg-[#ededed8e] 2xl:py-8 px-3 rounded-lg text-xl${
                     error?.type === "error"
                       ? "border-4 border-red-500 rounded-xl"
                       : "border-none"
@@ -55,7 +35,7 @@ export default function LoginForm() {
                   error={error?.usernameMessage}
                 />
                 <InputPassword
-                  className={`bg-[#EDEDED] py-5 2xl:py-8 px-3 rounded-lg text-xl ${
+                  className={`bg-[#ededed8e] 2xl:py-8 px-3 rounded-lg text-xl ${
                     error?.type === "error"
                       ? "border-4 border-red-500 rounded-xl"
                       : "border-none"

@@ -12,7 +12,7 @@ interface propsT{
 export default function DemandeAbsence({handleEndDate,handleStartDate,handleTypeAbsencechange,handleSubmit,startDate}:propsT) {
   return (
     <div className="w-full h-full">
-      <h1 className="text-[2.5vw] mt-[5vh] ml-[1vw] font-medium text-gray-600">Demande d'absence</h1>
+      
       <div className="w-[90%] mx-auto">
         <form className="flex gap-5 mt-[15vh] justify-between" onSubmit={(e)=>handleSubmit(e)}>
             <div>

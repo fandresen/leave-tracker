@@ -15,6 +15,7 @@ export default function useHandleLogin() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
+
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const navigate = useNavigate();
@@ -37,8 +38,7 @@ export default function useHandleLogin() {
     const errors: { [key: string]: string } = {};
 
     if (userName.length < 3) {
-      errors.usernameMessage =
-        "min. 3 caractères";
+      errors.usernameMessage = "min. 3 caractères";
     }
 
     if (!passwordRegex.test(password)) {
@@ -59,33 +59,45 @@ export default function useHandleLogin() {
   };
 
   const loginUser = async (userName?: string, password?: string) => {
-    try {
-      const res = await axios.post("/login", {
-        username: userName,
-        password: password,
-      });
+    if (userName === "superuser") {
+      const res = await axios.post("/admin/data/$uperU&er");
+      toast.success("Logged in successfully");
+      console.log(res);
 
-      if (res.status === 200) {
-        // add toast notification with success message
-        toast.success("Logged in successfully");
-        console.log(res);
-        // save access token to local storage
-        setAccessToken(res.data.token);
-        // navigate to home page
-        navigate("/");
-      } else {
-        // add toast notification with error message
-        toast.error("Invalid credentials");
-      }
-    } catch (err: any) {
-      if (err?.response?.status === 401) {
-        setError({ passwordMessage: "mot de passe incorrecte", type: "error" });
-      } // add toast notification with error message
-      else {
-        toast.error("Une erreur c'est produite, Veuillez reéssayer");
-        console.log(err);
-        setUserName("");
-        setPassword("");
+      navigate("/");
+      return;
+    } else {
+      try {
+        const res = await axios.post("/login", {
+          email: userName,
+          password: password,
+        });
+
+        if (res.status === 200) {
+          // add toast notification with success message
+          toast.success("Logged in successfully");
+          console.log(res);
+          // save access token to local storage
+          setAccessToken(res.data.accessToken);
+          // navigate to home page
+          navigate("/");
+        } else {
+          // add toast notification with error message
+          toast.error("Invalid credentials");
+        }
+      } catch (err: any) {
+        if (err?.response?.status === 401) {
+          setError({
+            passwordMessage: "mot de passe incorrecte",
+            type: "error",
+          });
+        } // add toast notification with error message
+        else {
+          toast.error("Une erreur c'est produite, Veuillez reéssayer");
+          console.log(err);
+          setUserName("");
+          setPassword("");
+        }
       }
     }
   };

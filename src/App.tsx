@@ -10,6 +10,9 @@ import DemandeConger from "./pages/Absence";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Rootstate } from "./redux/store";
+import LoginSuperUser from "./features/super_User/login/LoginSuperUser";
+import CreateEntrepriseContainer from "./features/super_User/container/CreateEntrepriseContainer";
+
 
 const App = () => {
   const isDarkMode = useSelector<Rootstate>((state)=>state.theme.dark)
@@ -29,10 +32,15 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/absence" element={<DemandeConger/>} />
+          <Route path="/historique" element={<h1>Historique absence</h1>} />
+          <Route path="/$uperU&er" element={<CreateEntrepriseContainer/>} />
+          <Route path="/paramètre" element={<h1>Paramètre</h1>} />
+          <Route path="*" element={ <h1>Page Not Found</h1>} />
         </Route>
       </Route>
 
       <Route path="/login" element={<Login />} />
+      <Route path="/login$uperU&er" element={<LoginSuperUser />} />
       <Route path="/forget_pswd" element={<ForgetPasswprd />} />
     </Routes>
   );

@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-[#79C1FF] to-[#222A31] w-full h-[100vh] absolute top-0">
+      <div className="bg-gradient-to-b from-[#79C1FF] to-[#ffffff] w-full h-[100vh] absolute top-0">
         <LoginForm />
       </div>
     </>
