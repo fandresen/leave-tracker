@@ -5,7 +5,7 @@ interface propsT {
     children: React.ReactNode;
 }
 
-export default function RequiredRole({ role, children }: propsT) {
+export default function RequiredRoleComponent({ role, children }: propsT) {
     const userRole = getRole();
     return <>
         {
