@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAxiosNormal } from "@/lib/interceptor";
-import { setAccessToken } from "@/lib/token&RoleService";
+import { getRole, setAccessToken } from "@/lib/token&RoleService";
 
 export interface errorT {
   usernameMessage?: string;
@@ -16,7 +16,8 @@ export default function useHandleLogin() {
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
 
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{}|;:,.<>?/])[A-Za-z\d!@#$%^&*()_\-+=[\]{}|;:,.<>?/]{8,}$/;
+
 
   const navigate = useNavigate();
 
@@ -80,7 +81,14 @@ export default function useHandleLogin() {
           // save access token to local storage
           setAccessToken(res.data.accessToken);
           // navigate to home page
-          navigate("/");
+          const role = getRole();
+          if(role == "ADMIN"){
+            navigate("/admin/home");
+          }
+          else if(role == "USER"){
+            navigate("/");
+          }
+        
         } else {
           // add toast notification with error message
           toast.error("Invalid credentials");

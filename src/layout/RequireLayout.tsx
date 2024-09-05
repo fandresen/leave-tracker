@@ -8,7 +8,9 @@ export default function RequireLayout() {
       <SidebarMenuLayout />
       <div className="felx flex-col w-full h-full ml-[16%] md:ml-[4%] p-3 bg-[#fbfff6] dark:bg-slate-700">
         <Header />
-        <Outlet />
+        <div>
+          <Outlet />
+        </div>
       </div>
     </div>
   );

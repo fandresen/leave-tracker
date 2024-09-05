@@ -71,7 +71,7 @@ export default function useHandleLoginSuperUser() {
           // save access token to local storage
           setAccessToken(res.data.accessToken);
           // navigate to home page
-          navigate("/");
+          navigate("/$uperU&er");
         } else {
           // add toast notification with error message
           toast.error("Invalid credentials");

@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { Rootstate } from "./redux/store";
 import LoginSuperUser from "./features/super_User/login/LoginSuperUser";
 import CreateEntrepriseContainer from "./features/super_User/container/CreateEntrepriseContainer";
+import RequiredRolePages from "./features/auth/RequiredRolePage";
+import HomeAdmin from "./pages/admin/HomeAdmin";
 
 
 const App = () => {
@@ -35,6 +37,9 @@ const App = () => {
           <Route path="/historique" element={<h1>Historique absence</h1>} />
           <Route path="/$uperU&er" element={<CreateEntrepriseContainer/>} />
           <Route path="/paramètre" element={<h1>Paramètre</h1>} />
+          <Route path="/admin" element={<RequiredRolePages requiredRole="ADMIN"/>}>
+            <Route path="home" element={<HomeAdmin/>}/>
+          </Route>
           <Route path="*" element={ <h1>Page Not Found</h1>} />
         </Route>
       </Route>
