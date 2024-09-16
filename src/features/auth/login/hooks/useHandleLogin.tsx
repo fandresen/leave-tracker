@@ -16,8 +16,8 @@ export default function useHandleLogin() {
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
 
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{}|;:,.<>?/])[A-Za-z\d!@#$%^&*()_\-+=[\]{}|;:,.<>?/]{8,}$/;
-
+  const passwordRegex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{}|;:,.<>?/])[A-Za-z\d!"@#$%^&*()_\-+=[\]{}|;:,.<>?/]{8,}$/;
 
   const navigate = useNavigate();
 
@@ -60,52 +60,41 @@ export default function useHandleLogin() {
   };
 
   const loginUser = async (userName?: string, password?: string) => {
-    if (userName === "superuser") {
-      const res = await axios.post("/admin/data/$uperU&er");
-      toast.success("Logged in successfully");
-      console.log(res);
+    try {
+      const res = await axios.post("/login", {
+        email: userName,
+        password: password,
+      });
 
-      navigate("/");
-      return;
-    } else {
-      try {
-        const res = await axios.post("/login", {
-          email: userName,
-          password: password,
+      if (res.status === 200) {
+        // add toast notification with success message
+        toast.success("Logged in successfully");
+        console.log(res);
+        // save access token to local storage
+        setAccessToken(res.data.accessToken);
+        // navigate to home page
+        const role = getRole();
+        if (role == "ADMIN") {
+          navigate("/admin/home");
+        } else if (role == "USER") {
+          navigate("/");
+        }
+      } else {
+        // add toast notification with error message
+        toast.error("Invalid credentials");
+      }
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        setError({
+          passwordMessage: "mot de passe incorrecte",
+          type: "error",
         });
-
-        if (res.status === 200) {
-          // add toast notification with success message
-          toast.success("Logged in successfully");
-          console.log(res);
-          // save access token to local storage
-          setAccessToken(res.data.accessToken);
-          // navigate to home page
-          const role = getRole();
-          if(role == "ADMIN"){
-            navigate("/admin/home");
-          }
-          else if(role == "USER"){
-            navigate("/");
-          }
-        
-        } else {
-          // add toast notification with error message
-          toast.error("Invalid credentials");
-        }
-      } catch (err: any) {
-        if (err?.response?.status === 401) {
-          setError({
-            passwordMessage: "mot de passe incorrecte",
-            type: "error",
-          });
-        } // add toast notification with error message
-        else {
-          toast.error("Une erreur c'est produite, Veuillez reéssayer");
-          console.log(err);
-          setUserName("");
-          setPassword("");
-        }
+      } // add toast notification with error message
+      else {
+        toast.error("Une erreur c'est produite, Veuillez reéssayer");
+        console.log(err);
+        setUserName("");
+        setPassword("");
       }
     }
   };

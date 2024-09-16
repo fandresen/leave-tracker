@@ -1,9 +1,13 @@
 import { useHomeContext } from "../../Context/HomeContext";
+import SelectDepartement from "./SelectDepartement";
 
 export default function TopBar() {
-  const { openDepModal } = useHomeContext();
+  const { openDepModal,openUserModal } = useHomeContext();
   const newDepClick =()=>{
     openDepModal();
+  }
+  const newUserClick = ()=>{
+    openUserModal();
   }
   return (
     <div>
@@ -11,18 +15,13 @@ export default function TopBar() {
         <thead>
           <tr className="text-xl bg-green-200">
             <th>
-              <select name="Deaprtement" id="departement" className="bg-transparent">
-                <option value="">Select Department</option>
-                <option value="Village de l'emploie">Village de l'emploie</option>
-                <option value="Ecole">Ecole</option>
-                <option value="Autre">Autre</option>
-              </select>
+              <SelectDepartement className="bg-transparent"/>
             </th>
             <th>
               <button onClick={newDepClick}>New Departement</button>
             </th>
             <th>
-              <button>New User</button>
+              <button onClick={newUserClick}>New User</button>
             </th>
           </tr>
         </thead>

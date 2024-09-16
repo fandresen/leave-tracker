@@ -6,16 +6,16 @@ import { cn } from "@/lib/utils";
 import { Label } from "@radix-ui/react-label";
 
 const InputPassword = forwardRef<HTMLInputElement, InputProps>(
-  ({ className,error, ...props}, ref) => {
+  ({ divclassName,inputClassName,error,label="Mot de passe", ...props}, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
       <>
-        <div className="relative mt-4">
-          <Label className="2xl:text-xl">Mot de passe</Label>
+        <div className={cn("relative mt-4",divclassName)}>
+          <Label className="2xl:text-xl">{label}</Label>
           <Input
             type={showPassword ? "text" : "password"}
-            className={cn("hide-password-toggle pr-10", className)}
+            className={cn("hide-password-toggle pr-10",inputClassName)}
             ref={ref}
             {...props}
           />
@@ -47,13 +47,14 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
 					}
 				`}</style>
         </div>
-
-        {/* password Error message */}
-        {error && (
-          <div className="text-red-600 lg:text-sm 2xl:text-lg">
+           {/* password Error message */}
+           {error && (
+          <div className="text-red-600 lg:text-sm 2xl:text-lg text-center">
             {error.passwordMessage}
           </div>
         )}
+
+     
       </>
     );
   }

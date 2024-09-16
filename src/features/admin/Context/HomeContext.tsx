@@ -4,12 +4,12 @@ import React, { createContext, ReactNode, useState, Dispatch, SetStateAction } f
 type HomeContextType = {
   departementModalOpen: boolean;
   userModalOpen: boolean;
-  setUserModalOpen: Dispatch<SetStateAction<boolean>>
-  openUserModal:()=>void;
-  closeUserModal:()=>void;
-  setDepartementModalOpen: Dispatch<SetStateAction<boolean>>; 
-  openDepModal: () => void; 
-  closeDepartmentModal: () => void;  
+  setUserModalOpen: Dispatch<SetStateAction<boolean>>;
+  openUserModal: () => void;
+  closeUserModal: () => void;
+  setDepartementModalOpen: Dispatch<SetStateAction<boolean>>;
+  openDepModal: () => void;
+  closeDepartmentModal: () => void;
 };
 
 // Création du contexte
@@ -25,17 +25,23 @@ export const useHomeContext = () => {
 
 export default function HomeProvider({ children }: { children: ReactNode }) {
   const [departementModalOpen, setDepartementModalOpen] = useState<boolean>(false);
+  const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
 
-  // Fonctions pour ouvrir et fermer le modal
+  // Fonctions pour ouvrir et fermer les modals
   const openDepModal = () => setDepartementModalOpen(true);
   const closeDepartmentModal = () => setDepartementModalOpen(false);
+
+  const openUserModal = () => setUserModalOpen(true);
+  const closeUserModal = () => setUserModalOpen(false);
 
   return (
     <HomeContext.Provider
       value={{
-        closeUserModal,
-        openUserModal,
         departementModalOpen,
+        userModalOpen,
+        setUserModalOpen,
+        openUserModal,
+        closeUserModal,
         setDepartementModalOpen,
         openDepModal,
         closeDepartmentModal,

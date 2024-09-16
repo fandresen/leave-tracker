@@ -6,7 +6,9 @@ import { errorT } from "@/features/auth/login/hooks/useHandleLogin"
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
     type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search" | "date" | "datetime-local" | "month" | "week" | "time" | "color"
-    className?: string
+    divclassName?: string
+    inputClassName?:string
+    label?:string
     error?: errorT
     disabled?: boolean
   }

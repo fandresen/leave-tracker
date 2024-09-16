@@ -63,6 +63,26 @@ export interface AdminT {
   password: string;
 }
 
+export interface DepartementT {
+  id: number;
+  name: string;
+  entreprise_id:number;
+}
+
+export interface UserT {
+  id?: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  role?:"USER";
+  address?: string;
+  picture?:string;
+  departement_id:number;
+  password?: string;
+  in_Conger:boolean;
+}
+
 export interface createEntrepriseT{
   entreprise : EntrepriseT;
   admin : AdminT;

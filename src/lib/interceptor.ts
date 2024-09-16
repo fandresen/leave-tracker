@@ -5,7 +5,7 @@ import {
   setAccessToken,
 } from "./token&RoleService";
 
-const BASE_URL = "http://localhost:8085/api";
+const BASE_URL = "http://192.168.1.87:8085/api";
 
 //hook personaliser pour les requette sans token
 export const useAxiosNormal = () => {

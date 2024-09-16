@@ -1,15 +1,17 @@
 import HomeProvider from "@/features/admin/Context/HomeContext";
+import UsersArrayContainer from "@/features/admin/home/container/UsersArrayContainer";
 import NewDepartementModalContainer from "@/features/admin/home/container/NewDepartementModalContainer";
+import NewUserModalContainer from "@/features/admin/home/container/NewUserModalContainer";
 import TopBar from "@/features/admin/home/presentation/TopBar";
-import UsersArray from "@/features/admin/home/presentation/UsersArray";
 
 export default function HomeAdmin() {
   return (
     <>
       <HomeProvider>
         <NewDepartementModalContainer />
+        <NewUserModalContainer/>
         <TopBar />
-        <UsersArray />
+        <UsersArrayContainer/>
       </HomeProvider>
     </>
   );

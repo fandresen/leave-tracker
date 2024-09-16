@@ -1,17 +1,17 @@
 
 import { Link } from "react-router-dom";
-import useHandleLoginSuperUser from "./UseHandleLogin";
 import LoginError from "@/features/auth/login/components/LoginError";
 import { InputUserName } from "@/features/auth/login/components/InputUserName";
 import { InputPassword } from "@/features/auth/login/components/InputPassword";
+import useHandleLoginSuperUser from "./UseHandleLoginSuperUser";
 // import { useMediaQuery } from "react-responsive";
 
-export default function LoginForm() {
+export default function LoginFormSuperUser() {
   const { userName, password, handleChange, handleSubmit, error } = useHandleLoginSuperUser();
   // const desktop = useMediaQuery({ minWidth: 1024 });
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between relative">
 
         <div className="flex  mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[65vh] lg:min-h-[65vh]  2xl:min-h-[70vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
           <div className="flex flex-col items-center min-w-[95vw] lg:min-w-[40vw] 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw] border-[0px] border-[#7BE8D7] shadow-2xl">

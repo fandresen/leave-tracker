@@ -51,10 +51,6 @@ export const CreateEntreprise = ({handleChange,handleFormSubmit}:propsT) => {
             <Label htmlFor="address">Adress</Label>
             <Input type="text" id="address" placeholder="Adress"  onChange={(e)=>handleChange(e)}/>
           </div>
-          <div className="my-5">
-            <Label htmlFor="password">PassWord</Label>
-            <Input type="password" id="password" placeholder="Password"  onChange={(e)=>handleChange(e)}/>
-          </div>
           <button type="submit" className="bg-sky-400 hover:bg-sky-500 py-3 w-[40vw] rounded-xl">Save</button>
         </form>
       </div>
