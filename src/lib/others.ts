@@ -35,3 +35,7 @@ export const dateSoustraction = (date1?: Date, date2?: Date) => {
       return diffDays;
     }
   };
+
+  export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[&"'(\-_çà)=¹~#{\[|\]`\\^@}\]!\*§;,\?\.\/+\£¨\^$])[A-Za-z\d&"'(\-_çà)=¹~#{\[|\]`\\^@}\]!\*§;,\?\.\/+\£¨\^$]{8,}$/;
+
+

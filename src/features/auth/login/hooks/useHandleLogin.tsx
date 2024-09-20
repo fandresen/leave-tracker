@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAxiosNormal } from "@/lib/interceptor";
 import { getRole, setAccessToken } from "@/lib/token&RoleService";
+import { passwordRegex } from "@/lib/others";
 
 export interface errorT {
   usernameMessage?: string;
@@ -15,9 +16,6 @@ export default function useHandleLogin() {
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
-
-  const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=[\]{}|;:,.<>?/])[A-Za-z\d!"@#$%^&*()_\-+=[\]{}|;:,.<>?/]{8,}$/;
 
   const navigate = useNavigate();
 

@@ -1,5 +1,6 @@
 import { errorT } from "@/features/super_User/login/UseHandleLoginSuperUser";
 import { useAxiosNormal } from "@/lib/interceptor";
+import { passwordRegex } from "@/lib/others";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +15,6 @@ export default function UseNewPassword() {
 
   const axios1 = useAxiosNormal();
   const navigate = useNavigate();
-
-  const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     //Toast Parameters
     const customOptions: ToastOptions = {
