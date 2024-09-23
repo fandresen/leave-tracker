@@ -14,8 +14,9 @@ import CreateEntrepriseContainer from "./features/super_User/container/CreateEnt
 import RequiredRolePages from "./features/auth/RequiredRolePage";
 import HomeAdmin from "./pages/admin/HomeAdmin";
 import NewPassword from "./pages/Auth/NewPassword";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Auth/login";
+import RequireNotAuth from "./features/auth/RequireNotAuth";
 
 const App = () => {
   const isDarkMode = useSelector<Rootstate>((state) => state.theme.dark);
@@ -33,26 +34,32 @@ const App = () => {
       <Routes>
         <Route path="" element={<RequiredAuth />}>
           <Route path="" element={<RequireLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/absence" element={<DemandeConger />} />
-            <Route path="/historique" element={<h1>Historique absence</h1>} />
-            <Route path="/$uperU&er" element={<CreateEntrepriseContainer />} />
-            <Route path="/paramètre" element={<h1>Paramètre</h1>} />
-            <Route
-              path="/admin"
-              element={<RequiredRolePages requiredRole="ADMIN" />}
-            >
+            <Route path="/" element={<RequiredRolePages requiredRole="USER" />}>
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/absence" element={<DemandeConger />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/historique" element={<h1>Historique absence</h1>} />
+                    <Route path="/paramètre" element={<h1>Paramètre</h1>} />
+            </Route>
+
+            <Route path="/$uperU&er" element={<CreateEntrepriseContainer />}/>
+
+            <Route path="/admin"  element={<RequiredRolePages requiredRole="ADMIN" />}>
               <Route path="home" element={<HomeAdmin />} />
             </Route>
             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Route>
         </Route>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/login$uperU&er" element={<LoginSuperUser />} />
-        <Route path="/forget_pswd" element={<ForgetPasswprd />} />
-        <Route path="/newPassword" element={<NewPassword />} />
+
+        {/* cannot Acessed if authenticated */}
+        <Route path="/" element={<RequireNotAuth/>}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/login$uperU&er" element={<LoginSuperUser />} />
+            <Route path="/forget_pswd" element={<ForgetPasswprd />} />
+            <Route path="/newPassword" element={<NewPassword />} />
+        </Route>
+        
       </Routes>
     </>
   );

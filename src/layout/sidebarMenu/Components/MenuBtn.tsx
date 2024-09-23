@@ -19,7 +19,7 @@ export default function MenuBtn({ desc, children, onClick }: propsT) {
 
   // Cloner l'enfant pour ajouter une className
   if (React.isValidElement(children)) {
-    clonedChildren = React.cloneElement(children, {className: `w-7 h-7 2xl:w-11 2xl:h-11 ${hover ? "hover:text-[#7BE8D7]" : "text-[#333] dark:text-[#7BE8D7]"}`});
+    clonedChildren = React.cloneElement(children, {className: `w-7 h-7 2xl:w-11 2xl:h-11 ${hover ? "hover:text-sky-700" : "text-sky-900 dark:text-[#fff]"}`});
   }
   
   return (

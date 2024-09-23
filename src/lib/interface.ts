@@ -14,8 +14,6 @@ export interface calendardataT {
 
 export interface propsTMonths {
   calendarMonthData: calendardataT;
-  prevMonth: () => void;
-  nextMonth: () => void;
   toDayDate: () => void;
   handleDayClick: (date: string) => void;
   isConger: (date: string) => ReactNode;

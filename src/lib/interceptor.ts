@@ -37,7 +37,8 @@ export const useAxiosWithToken = () => {
         if (accessToken) {
           // save access token to local storage
           setAccessToken(accessToken);
-          axiosReq.defaults.headers.Authorization = `Bearer ${accessToken}`;
+          error.config.headers['Authorization'] = `Bearer ${accessToken}`;
+          return axiosReq.request(error.config);  // Renvoie la requête échouée avec le nouveau token
         }
       }
       else if (error.response.status === 500 || error.response.status === 403){

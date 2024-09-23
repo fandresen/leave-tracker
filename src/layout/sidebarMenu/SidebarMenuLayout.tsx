@@ -16,7 +16,7 @@ export default function SidebarMenuLayout() {
   const {logOut} = useLogout()
   const dispatch = useDispatch()
   return (
-      <div className="text-2xl fixed min-w-[4vw] bg-[#ffffff] dark:bg-[#747474] border-r-2 border-[#41262615]">
+      <div className="text-2xl fixed min-w-[4vw] bg-[#ffffff] dark:bg-[#747474]">
         <ul className="flex flex-col justify-between h-[100vh]">
           <div className="flex flex-col gap-8 pt-[15vh]">
           <li ><MenuBtn desc="Home" onClick={()=>{navigate("/")}}><IoMdHome/></MenuBtn> </li>

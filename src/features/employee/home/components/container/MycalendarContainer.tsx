@@ -4,33 +4,28 @@ import AbsenceComponent from "../ui/AbsenceComponent";
 import DemandeAbsencePopUp from "@/features/employee/Absence/Components/presentation/DemandeAbsencePopUp";
 import { useDispatch } from "react-redux";
 import { setStartDate, toggleModal } from "@/redux/demandeAbsenceSlice";
-import { SelectAffichage } from "../ui/SelectAffichage";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
-import  WeeklyCalendar  from "../presentation/WeeklyCalendar";
+import WeeklyCalendar from "../presentation/WeeklyCalendar";
 import { calendardataT, conger } from "@/lib/interface";
 import { useAxiosWithToken } from "@/lib/interceptor";
-
-
+import TopCommand from "../presentation/TopCommand";
 
 export default function MycalendarContainer() {
   const axios1 = useAxiosWithToken();
   const dispatch = useDispatch();
-  const [calendarType, setCalendarType] = useState<"month"|"week">('month');
+  const [calendarType, setCalendarType] = useState<"month" | "week">("month");
   const [dataConger, setDataConger] = useState<conger[]>();
 
-  const [dataCalendar, setDataCalendar] = useState<calendardataT>(
-    {
-      year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      calendarDays: [
-        {
-          date: "",
-          inMonth: false,
-        },
-      ],
-    }
-  );
-
+  const [dataCalendar, setDataCalendar] = useState<calendardataT>({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+    calendarDays: [
+      {
+        date: "",
+        inMonth: false,
+      },
+    ],
+  });
 
   useEffect(() => {
     if (!dataCalendar) {
@@ -69,7 +64,7 @@ export default function MycalendarContainer() {
   };
 
   useEffect(() => {
-    if(dataCalendar?.month){
+    if (dataCalendar?.month) {
       fetchData();
     }
   }, [dataCalendar?.month]);
@@ -78,7 +73,10 @@ export default function MycalendarContainer() {
     setDataCalendar({
       ...dataCalendar!,
       month: dataCalendar!.month === 12 ? 1 : dataCalendar!.month + 1,
-      year: dataCalendar!.month === 12 ? dataCalendar!.year + 1 : dataCalendar!.year,
+      year:
+        dataCalendar!.month === 12
+          ? dataCalendar!.year + 1
+          : dataCalendar!.year,
     });
   };
 
@@ -86,66 +84,66 @@ export default function MycalendarContainer() {
     setDataCalendar({
       ...dataCalendar!,
       month: dataCalendar!.month === 1 ? 12 : dataCalendar!.month - 1,
-      year: dataCalendar!.month === 1 ? dataCalendar!.year - 1 : dataCalendar!.year,
+      year:
+        dataCalendar!.month === 1 ? dataCalendar!.year - 1 : dataCalendar!.year,
     });
   };
 
-const nextWeek = () => {
-  const currentWeekday = dataCalendar!.weekday!;
-  const currentMonth = dataCalendar?.month;
-  const currentYear = dataCalendar?.year;
+  const nextWeek = () => {
+    const currentWeekday = dataCalendar!.weekday!;
+    const currentMonth = dataCalendar?.month;
+    const currentYear = dataCalendar?.year;
 
-  if (currentWeekday === 6) {
-    if (currentMonth === 12) {
-      setDataCalendar({
-        ...dataCalendar!,
-        year: currentYear! + 1,
-        month: 1,
-        weekday: 0,
-      });
+    if (currentWeekday === 6) {
+      if (currentMonth === 12) {
+        setDataCalendar({
+          ...dataCalendar!,
+          year: currentYear! + 1,
+          month: 1,
+          weekday: 0,
+        });
+      } else {
+        setDataCalendar({
+          ...dataCalendar!,
+          month: currentMonth! + 1,
+          weekday: 0,
+        });
+      }
     } else {
       setDataCalendar({
         ...dataCalendar!,
-        month: currentMonth! + 1,
-        weekday: 0,
+        weekday: currentWeekday! + 1,
       });
     }
-  } else {
-    setDataCalendar({
-      ...dataCalendar!,
-      weekday: currentWeekday! + 1,
-    });
-  }
-};
+  };
 
-const prevWeek = () => {
-  const currentWeekday = dataCalendar!.weekday!;
-  const currentMonth = dataCalendar?.month;
-  const currentYear = dataCalendar?.year;
+  const prevWeek = () => {
+    const currentWeekday = dataCalendar!.weekday!;
+    const currentMonth = dataCalendar?.month;
+    const currentYear = dataCalendar?.year;
 
-  if (currentWeekday === 0) {
-    if (currentMonth === 1) {
-      setDataCalendar({
-        ...dataCalendar!,
-        year: currentYear! - 1,
-        month: 12,
-        weekday: 6,
-      });
+    if (currentWeekday === 0) {
+      if (currentMonth === 1) {
+        setDataCalendar({
+          ...dataCalendar!,
+          year: currentYear! - 1,
+          month: 12,
+          weekday: 6,
+        });
+      } else {
+        setDataCalendar({
+          ...dataCalendar!,
+          month: currentMonth! - 1,
+          weekday: 6,
+        });
+      }
     } else {
       setDataCalendar({
         ...dataCalendar!,
-        month: currentMonth! - 1,
-        weekday: 6,
+        weekday: currentWeekday - 1,
       });
     }
-  } else {
-    setDataCalendar({
-      ...dataCalendar!,
-      weekday: currentWeekday - 1,
-    });
-  }
-};
-
+  };
 
   const toDayDate = () => {
     setDataCalendar({
@@ -168,44 +166,51 @@ const prevWeek = () => {
   };
 
   const IsConger = (date: string): ReactNode => {
-    const congerTab = dataConger?.filter((conger) => {
-      const congerStart = dateToYMDString(conger.start);
-      const congerEnd = dateToYMDString(conger.end);
-      return dateToYMDString(date) >= congerStart && dateToYMDString(date) <= congerEnd;
-    }) || [];
-    return congerTab.map((conger) => <AbsenceComponent key={conger.id} title={conger.title} />);
+    const congerTab =
+      dataConger?.filter((conger) => {
+        const congerStart = dateToYMDString(conger.start);
+        const congerEnd = dateToYMDString(conger.end);
+        return (
+          dateToYMDString(date) >= congerStart &&
+          dateToYMDString(date) <= congerEnd
+        );
+      }) || [];
+    return congerTab.map((conger) => (
+      <AbsenceComponent key={conger.id} title={conger.title} />
+    ));
   };
 
-  const SwitchType =(mode:"month"|"week")=>{
-    setCalendarType(mode)
-  }
-
+  const SwitchType = (mode: "month" | "week") => {
+    setCalendarType(mode);
+  };
+ 
   // if (!dataConger) {
   //   return <LoadSpinner />;
   // }
 
   return (
     <>
-        <div className="mt-3">
-          <SelectAffichage 
-            handleChangeValue={SwitchType}
-          />
-        </div>
-        <div>
-          {
-            calendarType === 'month' && <MonthlyCalendar
-          calendarMonthData={dataCalendar!}
-          nextMonth={nextMonth}
-          prevMonth={prevMonth}
-          toDayDate={toDayDate}
-          handleDayClick={handleDayClick}
-          isConger={IsConger}
-          isPastDate={isPastDate}
-        />
-          }
+      <TopCommand
+        SwitchType={SwitchType}
+        calendarMonthData={dataCalendar}
+        nextMonth={nextMonth}
+        prevMonth={prevMonth}
+        toDayDate={toDayDate}
+      />
 
-          {
-            calendarType === 'week' && <WeeklyCalendar
+      <div>
+        {calendarType === "month" && (
+          <MonthlyCalendar
+            calendarMonthData={dataCalendar!}
+            toDayDate={toDayDate}
+            handleDayClick={handleDayClick}
+            isConger={IsConger}
+            isPastDate={isPastDate}
+          />
+        )}
+
+        {calendarType === "week" && (
+          <WeeklyCalendar
             calendarWeekData={dataCalendar!}
             nextWeek={nextWeek}
             prevWeek={prevWeek}
@@ -214,7 +219,7 @@ const prevWeek = () => {
             isConger={IsConger}
             isPastDate={isPastDate}
           />
-        }
+        )}
       </div>
       <DemandeAbsencePopUp />
     </>

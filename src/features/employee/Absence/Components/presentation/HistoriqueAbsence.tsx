@@ -25,7 +25,7 @@ export default function HistoriqueAbsence() {
   }, []);
 
   return(
-    <div className="w-full h-full mt-2 p-4 border-t-2 md:border-t-0 border-l-0 md:border-l-2">
+    <div className="w-full h-full mt-2 p-4 border-t-2 md:border-t-0 border-l-0 md:border-r-2 bg-white">
       <h1 className="text-center dark:text-slate-200 text-2xl font-semibold">Historique des absences</h1>
       <div className="bg-slate-600/10 dark:bg-slate-300/10 shadow-lg rounded-2xl p-3 mt-2 justify-center items-center">
         {/* date de début , fin et jour d'absence */}
