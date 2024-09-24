@@ -34,7 +34,7 @@ export function DatePicker({ handleSelectValue, pastDate, clasName,defaultValue 
           variant={"outline"}
           className={cn(
             clasName,
-            " py-6 rounded-[8px] justify-start text-xl text-left font-normal bg-white border border-gray-200",
+            " py-2 rounded-[8px] justify-start text-md text-left font-normal bg-white border border-gray-200",
             !date && "text-muted-foreground"
           )}
         >

@@ -183,45 +183,47 @@ export default function MycalendarContainer() {
   const SwitchType = (mode: "month" | "week") => {
     setCalendarType(mode);
   };
- 
+
   // if (!dataConger) {
   //   return <LoadSpinner />;
   // }
 
   return (
     <>
-      <TopCommand
-        SwitchType={SwitchType}
-        calendarMonthData={dataCalendar}
-        nextMonth={nextMonth}
-        prevMonth={prevMonth}
-        toDayDate={toDayDate}
-      />
+      <div className="w-full px-10 2xl:mt-20">
+        <TopCommand
+          SwitchType={SwitchType}
+          calendarMonthData={dataCalendar}
+          nextMonth={nextMonth}
+          prevMonth={prevMonth}
+          toDayDate={toDayDate}
+        />
 
-      <div>
-        {calendarType === "month" && (
-          <MonthlyCalendar
-            calendarMonthData={dataCalendar!}
-            toDayDate={toDayDate}
-            handleDayClick={handleDayClick}
-            isConger={IsConger}
-            isPastDate={isPastDate}
-          />
-        )}
+        <div>
+          {calendarType === "month" && (
+            <MonthlyCalendar
+              calendarMonthData={dataCalendar!}
+              toDayDate={toDayDate}
+              handleDayClick={handleDayClick}
+              isConger={IsConger}
+              isPastDate={isPastDate}
+            />
+          )}
 
-        {calendarType === "week" && (
-          <WeeklyCalendar
-            calendarWeekData={dataCalendar!}
-            nextWeek={nextWeek}
-            prevWeek={prevWeek}
-            toDayDate={toDayDate}
-            handleDayClick={handleDayClick}
-            isConger={IsConger}
-            isPastDate={isPastDate}
-          />
-        )}
+          {calendarType === "week" && (
+            <WeeklyCalendar
+              calendarWeekData={dataCalendar!}
+              nextWeek={nextWeek}
+              prevWeek={prevWeek}
+              toDayDate={toDayDate}
+              handleDayClick={handleDayClick}
+              isConger={IsConger}
+              isPastDate={isPastDate}
+            />
+          )}
+        </div>
+        <DemandeAbsencePopUp />
       </div>
-      <DemandeAbsencePopUp />
     </>
   );
 }

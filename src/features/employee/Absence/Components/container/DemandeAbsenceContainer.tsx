@@ -37,6 +37,9 @@ export default function DemandeAbsenceContainer() {
   };
   return (
     <>
+    <div className="-mt-28">
+
+   
       <DemandeAbsence
         handleTypeAbsencechange={(value) => handleTypeAbsencechange(value)}
         handleStartDate={(value) => handleStartDate(value)}
@@ -46,6 +49,7 @@ export default function DemandeAbsenceContainer() {
         endDate={credentials.endDate!}
       />
       <ConfirmationPopUp isOpen={isOpen} onClose={handleClosePopUp} data={credentials}/>
+      </div>
     </>
   );
 }

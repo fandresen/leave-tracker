@@ -11,24 +11,24 @@ interface propsT{
 }
 export default function DemandeAbsence({handleEndDate,handleStartDate,handleTypeAbsencechange,handleSubmit,startDate}:propsT) {
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       
-      <div className="w-[90%] mx-auto">
-        <form className="flex gap-5 mt-[15vh] justify-between" onSubmit={(e)=>handleSubmit(e)}>
+      <div className="w-[90%]">
+        <form className="flex gap-5 mt-[13vh] justify-between" onSubmit={(e)=>handleSubmit(e)}>
             <div>
-            <label className="block text-xl font-semibold mb-2">Type d'absence</label>
+            <label className="block text-lg font-semibold mb-2">Type d'absence</label>
                 <SelectTypeAbsence handleChangeValue={(value)=>handleTypeAbsencechange(value)}/>
             </div>
           <div>
-            <label className="block text-xl mb-2">Date début</label>
-            <DatePicker clasName="w-[20vw]" handleSelectValue={(value)=>handleStartDate(value)}/>
+            <label className="block text-lg mb-2">Date début</label>
+            <DatePicker clasName="w-[15vw]" handleSelectValue={(value)=>handleStartDate(value)}/>
           </div>
           <div>
-            <label className="block text-xl mb-2">Date fin</label>
-            <DatePicker clasName="w-[20vw]" handleSelectValue={(value)=>handleEndDate(value)} pastDate={startDate}/>
+            <label className="block text-lg mb-2">Date fin</label>
+            <DatePicker clasName="w-[15vw]" handleSelectValue={(value)=>handleEndDate(value)} pastDate={startDate}/>
           </div>
 
-          <button type="submit" className="w-[180px] h-16 p-3 text-xl text-[#333] rounded-xl mt-7 bg-[#7BE8D7] hover:bg-[#68c2b4] hover:text-[#ffffff]">Confirmer</button>
+          <button type="submit" className="w-[180px]  px-3 text-md text-white rounded-xl mt-7 bg-sky-600 hover:bg-sky-700 hover:text-[#ffffff]">Confirmer</button>
         </form>
       </div>
     </div>

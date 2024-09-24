@@ -47,7 +47,7 @@ const MonthlyCalendar = ({
                         ? "cursor-pointer"
                         : "cursor-not-allowed"
                     } ${!day.inMonth ? "bg-gray-100 dark:bg-slate-500" : "bg-white dark:bg-gray-500"}
-                    ${day.date == dateToYMDString(today) ? "bg-blue-200" : ""}`}
+                    ${day.date == dateToYMDString(today) ? "bg-blue-300" : ""}`}
                     onClick={() => handleDayClick(day.date)}
                   >
                     <div className=" min-h-[13vh]">
