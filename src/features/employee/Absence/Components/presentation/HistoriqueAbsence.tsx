@@ -26,7 +26,7 @@ export default function HistoriqueAbsence() {
   }, []);
 
   return(
-    <div className="w-full h-full mt-2 p-4 border-t-2 md:border-t-0 border-l-0 md:border-r-2 bg-white">
+    <div className="w-full h-full mt-2 p-4 border-t-2 md:border-t-0 border-l-0 md:border-r-2 bg-sky-50">
       <h1 className="text-center dark:text-slate-200 text-2xl font-semibold">Historique des absences</h1>
       <OneAbsenceHistory begin="10/20/2024" end="12/20/2024" etat="ACCEPTE" jours={10} type="Maladie"/>
       <OneAbsenceHistory begin="10/20/2024" end="12/20/2024" etat="REFUSE" jours={10} type="Maladie"/>
