@@ -42,7 +42,7 @@ const MonthlyCalendar = ({
                 {week.map((day) => (
                   <td
                     key={day.date}
-                    className={`border border-sky-100 dark:border-sky-900 relative hover:bg-sky-50 dark:hover:bg-gray-400  text-sm 2xl:text-lg ${
+                    className={`border border-sky-100 dark:border-sky-900 relative z-0 hover:bg-sky-50 dark:hover:bg-gray-400  text-sm 2xl:text-lg ${
                       !isPastDate(day.date)
                         ? "cursor-pointer"
                         : "cursor-not-allowed"

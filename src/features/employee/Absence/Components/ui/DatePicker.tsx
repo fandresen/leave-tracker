@@ -34,7 +34,7 @@ export function DatePicker({ handleSelectValue, pastDate, clasName,defaultValue 
           variant={"outline"}
           className={cn(
             clasName,
-            " py-2 rounded-[8px] justify-start text-md text-left font-normal bg-white border border-gray-200",
+            " py-2 rounded-[8px] justify-start 2xl:text-md text-left font-normal bg-white border border-gray-200",
             !date && "text-muted-foreground"
           )}
         >
@@ -42,7 +42,7 @@ export function DatePicker({ handleSelectValue, pastDate, clasName,defaultValue 
           {date ? format(date, "PPP") : <span>Choisir une date</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 bg-white">
+      <PopoverContent className="lg:scale-75 lg:-mt-10 2xl:-mt-0 2xl:scale-100 w-auto p-0 bg-white">
         <Calendar
           mode="single"
           selected={date}

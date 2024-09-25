@@ -190,7 +190,7 @@ export default function MycalendarContainer() {
 
   return (
     <>
-      <div className="w-full px-10 2xl:mt-20">
+      <div className="w-full px-10 lg:mt-12 2xl:mt-20">
         <TopCommand
           SwitchType={SwitchType}
           calendarMonthData={dataCalendar}

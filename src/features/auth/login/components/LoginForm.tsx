@@ -12,13 +12,13 @@ export default function LoginForm() {
     <>
       <div className="flex justify-between relative z-10">
 
-        <div className="flex  mx-auto lg:mr-[15vw] lg:w-[30vw] 2xl:w-[50vw] min-h-[65vh] lg:min-h-[65vh]  2xl:min-h-[70vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
-          <div className="flex flex-col items-center min-w-[95vw] lg:min-w-[40vw] 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw] shadow-xl">
-            <h1 className="text-5xl lg:text-[4vw] text-center mt-[3vh] lg:mt-[3vh] 2xl:mt-[7vh] font-medium text-[#7BE8D7] mb-[3vh]">
+        <div className="flex  mx-auto  2xl:w-[50vw] min-h-[65vh] lg:h-[450px] 2xl:min-h-[70vh] mt-[15vh] lg:mt-[10vh] rounded-br-[3vw] rounded-tl-[4vw] rounded-tr-xl rounded-bl-xl">
+          <div className="flex flex-col items-center lg:w-[380px] 2xl:mx-auto 2xl:min-w-[26vw] bg-white rounded-tl-[3vw] rounded-br-[3vw] shadow-xl">
+            <h1 className="text-5xl lg:text-[40px] 2xl:text-6xl text-center mt-[3vh] lg:mt-8 2xl:mt-[7vh] font-medium text-[#7BE8D7] mb-[4vh]">
               Log in
             </h1>
             <div>
-              <div className="h-1 w-28 lg:w-[10vw] bg-[#7BE8D7] mb-10"></div>
+              <div className="h-1 w-28 lg:w-[10vw] bg-[#7BE8D7] mb-10 lg:mb-9 2xl:mb-6"></div>
               <LoginError />
             </div>
 
@@ -27,18 +27,18 @@ export default function LoginForm() {
                 <InputUserName
                   handleChange={handleChange}
                   value={userName}
-                  className={`bg-[#ededed8e] 2xl:py-8 px-3 rounded-lg text-xl${
+                  className={`bg-[#f7f7f78e] 2xl:py-8 px-3 rounded-lg text-xl${
                     error?.type === "error"
                       ? "border-4 border-red-500 rounded-xl"
-                      : "border-none"
+                      : "border border-gray-300"
                   }`}
                   error={error?.usernameMessage}
                 />
                 <InputPassword
-                  className={`bg-[#ededed8e] 2xl:py-8 px-3 rounded-lg text-xl ${
+                  className={`bg-[#f7f7f78e] 2xl:py-8 px-3 rounded-lg text-xl ${
                     error?.type === "error"
                       ? "border-4 border-red-500 rounded-xl"
-                      : "border-none"
+                      : "border border-gray-300"
                   }`}
                   value={password}
                   onChange={(e) => handleChange(e.target.value, "password")}
@@ -53,7 +53,7 @@ export default function LoginForm() {
                 </button>
                 <div className="h-1 w-[10vw] bg-[#7BE8D7] mb-2 mt-[2vh] mx-auto"></div>
                 <Link to={"/forget_pswd"}>
-                  <h2 className="text-sm lg:text-lg text-center mt-[1vh]">
+                  <h2 className="text-sm lg:text-sm text-center mt-[1vh]">
                     Mot de passe Oublié?
                   </h2>
                 </Link>

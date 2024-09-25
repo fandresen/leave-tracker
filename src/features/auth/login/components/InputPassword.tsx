@@ -12,7 +12,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
     return (
       <>
         <div className={cn("relative mt-4",divclassName)}>
-          <Label className="2xl:text-xl">{label}</Label>
+          <Label className="2xl:text-xl lg:text-sm">{label}</Label>
           <Input
             type={showPassword ? "text" : "password"}
             className={cn("hide-password-toggle pr-10",inputClassName)}

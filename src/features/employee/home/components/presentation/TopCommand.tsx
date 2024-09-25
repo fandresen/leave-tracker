@@ -17,7 +17,7 @@ export default function TopCommand({ SwitchType,calendarMonthData,nextMonth,prev
     <div className="flex w-full justify-between">
         <div className="flex ">
           <button
-            className="mx-10 text-lg px-3 border-[3px] border-sky-300 hover:bg-sky-300 hover:text-white rounded-xl"
+            className="mx-10 lg:text-sm 2xl:text-lg px-3 border-[3px] border-sky-300 hover:bg-sky-300 hover:text-white rounded-xl"
             onClick={toDayDate}
           >
             Today

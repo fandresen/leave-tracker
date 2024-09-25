@@ -37,7 +37,7 @@ export default function DemandeAbsenceContainer() {
   };
   return (
     <>
-    <div className="-mt-28">
+    <div className="lg:-mt-[70px] 2xl:-mt-28">
 
    
       <DemandeAbsence

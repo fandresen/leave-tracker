@@ -9,7 +9,7 @@ interface propsT {
 export function InputUserName({ handleChange, value, className,error }: propsT) {
   return (
     <div className="flex flex-col">
-      <label htmlFor="email" className="2xl:text-xl mb-2">
+      <label htmlFor="email" className="2xl:text-xl lg:text-sm mb-2">
         Username
       </label>
       <Input

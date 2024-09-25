@@ -24,3 +24,12 @@
         font-size: 2rem;
     }
 }
+
+.scrollbar-left {
+    direction: rtl;
+  }
+  
+  .scrollbar-left > * {
+    direction: ltr;
+  }
+  

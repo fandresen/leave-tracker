@@ -29,11 +29,11 @@ export default function SoldeAbsence() {
 
   return (
     <div className="">
-      <h1 className="text-xl text-gray-500 mb-6">
+      <h1 className="lg:text-lg 2xl:text-xl text-gray-500 lg:mb-3 2xl:mb-6 font-medium lg:mt-2 2xl:mt-0">
         Solde d'absence
       </h1>
-      <h1 className="text-4xl 2xl:text-6xl text-center font-semiboldbold">
-        {solde} <span className="text-xl">jours</span>
+      <h1 className="text-4xl 2xl:text-6xl text-center font-medium text-[#333]">
+        {solde} <span className="text-xl font-normal">jours</span>
       </h1>
     </div>
   );
