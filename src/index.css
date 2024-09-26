@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 #root > div > div.felx.flex-col.w-full.bg-\[\#fbfff6\].dark\:bg-slate-700 > div.text-gray-500.text-3xl.w-\[80\%\].mx-auto.mt-\[5vh\] > div > div > div.rbc-toolbar > span.rbc-toolbar-label{
     font-size: 3rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -31,5 +33,11 @@
   
   .scrollbar-left > * {
     direction: ltr;
+  }
+  .roboto{
+    font-family: 'Roboto', sans-serif;
+  }
+  .roboto-medium{
+    font-weight: 600;
   }
   

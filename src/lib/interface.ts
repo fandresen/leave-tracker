@@ -85,3 +85,11 @@ export interface createEntrepriseT{
   entreprise : EntrepriseT;
   admin : AdminT;
 }
+
+export interface formDatacreatetionEntreprise{
+  companyName: string;
+  email: string;
+  address: string;
+  phone: string;
+  licenseType: string;
+}

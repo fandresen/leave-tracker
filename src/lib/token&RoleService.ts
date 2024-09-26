@@ -15,6 +15,11 @@ export const setAccessToken = (token: string) => {
   setRole(token)
 };
 
+export const setRoleSU = (token:string) => {
+  const role = JSON.parse(atob(token.split(".")[1])).role[0].authority; 
+  Cookies.set("role", role);
+}
+
 export const clearToken = () => {
   Cookies.remove("accessToken");
   Cookies.remove("role");

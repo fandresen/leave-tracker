@@ -9,8 +9,8 @@ interface propsT {
 export function InputUserName({ handleChange, value, className,error }: propsT) {
   return (
     <div className="flex flex-col">
-      <label htmlFor="email" className="2xl:text-xl lg:text-sm mb-2">
-        Username
+      <label htmlFor="email" className="2xl:text-lg lg:text-sm mb-2 text-[#333]">
+        Email
       </label>
       <Input
         type="email"

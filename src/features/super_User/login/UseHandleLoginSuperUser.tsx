@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAxiosNormal } from "@/lib/interceptor";
-import { setAccessToken } from "@/lib/token&RoleService";
+import { setAccessToken, setRoleSU } from "@/lib/token&RoleService";
 import { passwordRegex } from "@/lib/others";
 
 export interface errorT {
@@ -69,6 +69,7 @@ export default function useHandleLoginSuperUser() {
           console.log(res);
           // save access token to local storage
           setAccessToken(res.data.accessToken);
+          setRoleSU(res.data.accessToken);
           // navigate to home page
           navigate("/$uperU&er");
         } else {
