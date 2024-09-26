@@ -1,27 +1,32 @@
 import { useState } from "react";
-import StepOne from "./StepOne";
-import StepIndicator from "./StepIndicator";
-import NavigationButtons from "./NavigationButtons";
-import StepTwo from "./Step2";
-import StepThree from "./Step3";
 import {
-  createEntrepriseT,
-  formDatacreatetionEntreprise,
+  UserT,
 } from "@/lib/interface";
 import { useNavigate } from "react-router-dom";
+import StepIndicatorUser from "./StepIndicatorUser";
+import StepOneUser from "./StepOneUser";
+import StepTwoUser from "./Step2User";
+import StepThreeUser from "./Step3User";
+import NavigationButtonsUser from "./NavigationButtonsUser";
 
 interface propsT {
-  handlecreate: (data: createEntrepriseT) => Promise<boolean>;
+  handlecreate: (data: UserT) => Promise<boolean>;
 }
-export default function MultiStepForm({ handlecreate }: propsT) {
+export default function MultiStepFormUser({ handlecreate }: propsT) {
   const [currentStep, setCurrentStep] = useState(1);
   const [error, setError] = useState<boolean | undefined>(undefined);
-  const [formData, setFormData] = useState<formDatacreatetionEntreprise>({
-    companyName: "",
-    email: "",
-    address: "",
-    phone: "",
-    licenseType: "",
+  const [formData, setFormData] = useState<UserT>({
+    departement_id:0,
+    email:"",
+    first_name:"",
+    last_name:"",
+    phone_number:"",
+    picture: undefined,
+    in_Conger: false,
+    address:"",
+    id:0,
+    password:"",
+    role:"USER"
   });
 
   const navigate = useNavigate();
@@ -40,22 +45,9 @@ export default function MultiStepForm({ handlecreate }: propsT) {
   };
 
   const handleSubmit = () => {
-    const data: createEntrepriseT = {
-      entreprise: {
-        name: formData.companyName,
-      },
-      admin: {
-        email: formData.email,
-        password: "",
-        address: formData.address,
-        phone_number: formData.phone,
-        first_name: formData.companyName,
-        last_name: formData.companyName,
-      },
-    };
-    handlecreate(data).then((value)=>{
+    handlecreate(formData).then((value)=>{
       setError(value);
-      value?navigate("/$uperU&er"):setCurrentStep(1);
+      value?navigate("/home"):setCurrentStep(1);
     });
     setError(undefined);
   };
@@ -83,22 +75,22 @@ export default function MultiStepForm({ handlecreate }: propsT) {
       )}
       
       <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333] lg:-mt-10 2xl:-mt-0">
-        Creér un nouveau Compte d'entreprise
+        Creér un nouveau Compte d'Utilisateur
       </h1>
       <div className="w-full lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto lg:mt-6 2xl:px-12 2xl:py-10 bg-white">
-        <StepIndicator currentStep={currentStep} />
+        <StepIndicatorUser currentStep={currentStep} />
 
         {currentStep === 1 && (
-          <StepOne formData={formData} handleChange={handleChange} />
+          <StepOneUser formData={formData} handleChange={handleChange} />
         )}
         {currentStep === 2 && (
-          <StepTwo formData={formData} handleChange={handleChange} />
+          <StepTwoUser formData={formData} handleChange={handleChange} />
         )}
         {currentStep === 3 && (
-          <StepThree formData={formData} handleChange={handleChange} />
+          <StepThreeUser formData={formData} handleChange={handleChange} />
         )}
 
-        <NavigationButtons
+        <NavigationButtonsUser
           currentStep={currentStep}
           handleNext={handleNext}
           handleBack={handleBack}

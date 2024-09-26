@@ -73,7 +73,7 @@ export default function useHandleLogin() {
         // navigate to home page
         const role = getRole();
         if (role == "ADMIN") {
-          navigate("/admin/home");
+          navigate("/home");
         } else if (role == "USER") {
           navigate("/");
         }

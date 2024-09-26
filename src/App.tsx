@@ -18,6 +18,7 @@ import RequireNotAuth from "./features/auth/RequireNotAuth";
 import LoginSU from "./pages/SuperUser/LoginSU";
 import HomeEntreprise from "./pages/SuperUser/Home";
 import CreateEntreprise from "./pages/SuperUser/CreateEntreprise";
+import CreateUser from "./pages/admin/CreateUser";
 
 const App = () => {
   const isDarkMode = useSelector<Rootstate>((state) => state.theme.dark);
@@ -52,10 +53,11 @@ const App = () => {
             </Route>
 
             <Route
-              path="/admin"
+              path="/"
               element={<RequiredRolePages requiredRole="ADMIN" />}
             >
-              <Route path="home" element={<HomeAdmin />} />
+              <Route path="/home" element={<HomeAdmin />} />
+              <Route path="create-user" element={<CreateUser />} />
             </Route>
             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Route>
