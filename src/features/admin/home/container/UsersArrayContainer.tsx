@@ -3,12 +3,11 @@ import UsersArray from '../presentation/UsersArray'
 import { UserT } from '@/lib/interface'
 import { useAxiosWithToken } from '@/lib/interceptor';
 import { useHomeContext } from '../../Context/HomeContext';
+import TopBar from '../presentation/TopBar';
 
 export default function UsersArrayContainer() {
   const axios = useAxiosWithToken()
-  const [users,setUsers]=useState<UserT[]>([
-    { id: 1, first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', phone_number: '123-456-7890', departement_id: 1, in_Conger: false },
-  ]);
+  const [users,setUsers]=useState<UserT[]>([]);
 
   const {userModalOpen}=useHomeContext();
 
@@ -42,6 +41,9 @@ export default function UsersArrayContainer() {
 
     
   return (
+    <>
+    <TopBar/>
     <UsersArray users={users}/>
+    </>
   )
 }

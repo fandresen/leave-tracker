@@ -8,7 +8,7 @@ interface propsT {
 const RequiredRolePages = ({ requiredRole}: propsT) => {
     const userRole = getRole();
   {
-    return requiredRole == userRole?<Outlet /> : <Navigate to="login" />;
+    return requiredRole == userRole?<Outlet /> : <Navigate to="/" />;
   }
 };
 export default  RequiredRolePages;

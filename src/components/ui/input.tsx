@@ -8,6 +8,7 @@ export interface InputProps
     type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search" | "date" | "datetime-local" | "month" | "week" | "time" | "color"
     divclassName?: string
     inputClassName?:string
+    errorClassName?:string
     label?:string
     error?: errorT
     disabled?: boolean

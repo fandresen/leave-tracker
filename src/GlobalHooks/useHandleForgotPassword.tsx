@@ -1,40 +1,63 @@
-import { useAxiosNormal } from "@/lib/interceptor"
+import { useAxiosNormal } from "@/lib/interceptor";
+import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastOptions } from "react-toastify";
 
 export default function useHandleForgotPassword() {
-    const [email, setEmail] = useState("")
-    const axios = useAxiosNormal();
+  const [email, setEmail] = useState("");
+  const [noAcount, setNoAucount] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const Axios = useAxiosNormal();
 
+  //Toast Parameters
+  const customOptions: ToastOptions = {
+    position: "top-center",
+    className:
+      "top-[8vh] text-center w-[36] 2xl:w-[15vw] 2xl:min-h-[8vh] lg:text-sm 2xl:text-sm font-semibold",
+    autoClose: 8000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
-    //Toast Parameters
-    const customOptions: ToastOptions = {
-        position: 'top-center',
-        className:"top-[8vh] w-[22] 2xl:w-[15vw] 2xl:min-h-[8vh] 2xl:text-xl font-semibold",
-        autoClose: 8000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    noAcount ? setNoAucount(false) : "";
+    setEmail(e.target.value);
+  };
 
-    const handleChange=(e:ChangeEvent<HTMLInputElement>)=>{
-        setEmail(e.target.value)
-    }
-
-    const handleSubmit=async (e:FormEvent)=>{
-        e.preventDefault();
-        try{
-            const response = await axios.post("/forgotPassword", {"email":email});
-            console.log(response);
-            toast.success("Email envoyé",customOptions);
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await Axios.post("/forgotPassword", { email: email });
+      if (response.status === 200) {
+        toast.success("Email envoyé", customOptions);
+        setTimeout(() => {
+          setLoading(false);
+          navigate("/login");
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          setNoAucount(true);
+        } else {
+          toast.error(
+            "Nous avons rencontré une erreur , Veulliez réessayer",
+            customOptions
+          );
         }
-        catch(error){
-            toast.error("Pas de compte lié a cette email",customOptions);
-            console.log(error)
-        }
-        setEmail("");
+      }
+    } finally {
+      setLoading(false);
     }
-  return {handleChange,handleSubmit,email}
+    
+    
+  };
+  return { handleChange, handleSubmit, email, noAcount, loading };
 }

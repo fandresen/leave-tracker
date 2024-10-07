@@ -6,13 +6,19 @@ const setRole = (token: string) =>{
   Cookies.set("role", role);
 }
 
+const setUserName =(token:string)=>{
+  const userName = JSON.parse(atob(token.split(".")[1])).userName; 
+  Cookies.set("user-name", userName);
+}
+
 export const getAccessToken = () => {
   return Cookies.get("accessToken") || "";
 };
 
 export const setAccessToken = (token: string) => {
   Cookies.set("accessToken", token);
-  setRole(token)
+  setRole(token);
+  setUserName(token);
 };
 
 export const setRoleSU = (token:string) => {
@@ -23,8 +29,13 @@ export const setRoleSU = (token:string) => {
 export const clearToken = () => {
   Cookies.remove("accessToken");
   Cookies.remove("role");
+  Cookies.remove("user-name");
 };
 
 export const getRole = ():string=> {
   return Cookies.get("role") || ""
+}
+
+export const getUserName = ():string=> {
+  return Cookies.get("user-name") || ""
 }

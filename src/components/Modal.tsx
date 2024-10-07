@@ -20,7 +20,7 @@ const ModalComponent = ({ isOpen, onClose, children }:propsT) => {
     <div
       id="modal-overlay"
       onClick={handleClickOutside}
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10"
     >
       <div className="bg-white p-6 rounded-md">
         {children}

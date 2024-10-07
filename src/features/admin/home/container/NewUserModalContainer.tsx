@@ -9,7 +9,7 @@ export default function NewUserModalContainer() {
 
     const axios = useAxiosWithToken()
 
-    const handleSubmit= async (data:UserT) : Promise<boolean> =>{
+    const handleSubmit = async (data:UserT):Promise<boolean> => {
         if(data){
             try {
                 const response = await axios.post("/users", data)

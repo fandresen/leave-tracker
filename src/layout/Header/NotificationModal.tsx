@@ -15,7 +15,7 @@ type notificationType = {
   time: number;
   id: number;
   seen: boolean; 
-  senderId: number; 
+  senderId: string; 
 
 }
 

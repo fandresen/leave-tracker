@@ -4,12 +4,12 @@ interface propsT{
     name: string;
     desc: string;
     time : number;
-    senderId:number;
+    senderId:string;
 }
 export default function SingleNotification({desc,name,time,senderId}:propsT) {
   return (
     <div className="flex lg:gap-3 2xl:gap-4 bg-white py-2 px-2 rounded-xl">
-        <ProfilAvatar url="https://github.com/shadcn.png" className="min-w-10 max-w-10 min-h-10 max-h-10"/>
+        <ProfilAvatar url="https:/shadcn.png" className="min-w-10 max-w-10 min-h-10 max-h-10" classNameProfil="W-10 h-10 text-xl" lastName={senderId.toString()}/>
         <div>
             <h1 className="text-gray-800 font-medium lg:text-sm -mt-1">{name}  <span className="text-gray-500 lg:text-[11px] 2xl:text-[12px] font-normal">{desc}</span></h1>   
         </div>

@@ -16,10 +16,9 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 
 interface propsT {
-  firstName: string;
   lastName: string;
 }
-export default function ProfilModal({ firstName, lastName }: propsT) {
+export default function ProfilModal({lastName }: propsT) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { logOut } = useLogout();
@@ -27,9 +26,9 @@ export default function ProfilModal({ firstName, lastName }: propsT) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="flex gap-2 cursor-pointer">
-          <ProfilAvatar url="https://github.com/shadcn.png" className="w-10" />
+          <ProfilAvatar url="" lastName={lastName} className="w-10" classNameProfil=""/>
           <h1 className="2xl:text-md text-gray-500 dark:text-gray-400 font-semibold mt-1">
-            Fandresena
+            {lastName}
           </h1>
         </div>
       </DropdownMenuTrigger>
@@ -37,11 +36,13 @@ export default function ProfilModal({ firstName, lastName }: propsT) {
         <DropdownMenuLabel>
           <div className="flex flex-col items-center gap-2">
             <ProfilAvatar
-              url="https://github.com/shadcn.png"
+              url=""
               className="w-14 h-14"
+              classNameProfil="w-16 h-16 lg:text-2xl 2xl:text-3xl"
+              lastName={lastName}
             />
             <h1 className="2xl:text-xl text-gray-500 font-semibold">
-              {firstName} {lastName}
+             {lastName}
             </h1>
           </div>
         </DropdownMenuLabel>

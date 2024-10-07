@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  UserT,
+  UserT
 } from "@/lib/interface";
 import { useNavigate } from "react-router-dom";
 import StepIndicatorUser from "./StepIndicatorUser";
@@ -10,7 +10,7 @@ import StepThreeUser from "./Step3User";
 import NavigationButtonsUser from "./NavigationButtonsUser";
 
 interface propsT {
-  handlecreate: (data: UserT) => Promise<boolean>;
+  handlecreate:(data: UserT) => Promise<boolean>;
 }
 export default function MultiStepFormUser({ handlecreate }: propsT) {
   const [currentStep, setCurrentStep] = useState(1);

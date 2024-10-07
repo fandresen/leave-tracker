@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAxiosNormal } from "@/lib/interceptor";
 import { getRole, setAccessToken } from "@/lib/token&RoleService";
-import { passwordRegex } from "@/lib/others";
+import { emailRegex } from "@/lib/others";
 
 export interface errorT {
   usernameMessage?: string;
@@ -36,13 +36,12 @@ export default function useHandleLogin() {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
 
-    if (userName.length < 3) {
-      errors.usernameMessage = "min. 3 caractères";
+    if (!emailRegex.test(userName)) {
+      errors.usernameMessage = "Saisissez une adresse email valide.";
     }
 
-    if (!passwordRegex.test(password)) {
-      errors.passwordMessage =
-        "min.8, 1 chiffre, 1 lettre et 1 caractère spécial";
+    if (password.length < 2) {
+      errors.passwordMessage = "Saisissez un mot de passe";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -82,9 +81,20 @@ export default function useHandleLogin() {
         toast.error("Invalid credentials");
       }
     } catch (err: any) {
-      if (err?.response?.status === 401) {
+      if (
+        err?.response?.status === 401 &&
+        err?.response?.data === "Password is incorrect"
+      ) {
         setError({
           passwordMessage: "mot de passe incorrecte",
+          type: "error",
+        });
+      } else if (
+        err?.response?.status === 401 &&
+        err?.response?.data === "User doesn't exist"
+      ) {
+        setError({
+          usernameMessage: "Aucun utilisateur trouvé avec cette adresse email",
           type: "error",
         });
       } // add toast notification with error message

@@ -1,5 +1,6 @@
 import ProfilModal from "./ProfilModal";
 import NotificationModal from "./NotificationModal";
+import { getUserName } from "@/lib/token&RoleService";
 
 const notification = [{
   name: "Shad",
@@ -7,24 +8,26 @@ const notification = [{
   time: 1400,
   id: 1,
   seen: true,
-  senderId: 1,
+  senderId: "Anjara",
 },{
   name: "fandresena",
   desc: "a demandé un conger de type Perlission",
   time: 163073,
   id: 2,
   seen: false,
-  senderId: 1,
+  senderId: "fandresena",
 },{
   name: "Shad",
   desc: "a demandé un conger de type maladie",
   time: 16300,
   id: 3,
   seen: false,
-  senderId: 1,
+  senderId: "valisoa",
 }]
 
 export default function Header() {
+  const userName = getUserName();
+  console.log(userName);
   return (
     <>
       <div className="flex px-3 pt-[1vh] pb-3 justify-between fixed w-full left-0 bg-white dark:bg-transparent z-50">
@@ -33,7 +36,7 @@ export default function Header() {
         <NotificationModal notifications={notification}/>
 
           <div className="flex justify-between lg:gap-2 2xl:gap-3 lg:-mt-1">
-            <ProfilModal firstName="fandresena" lastName="Antokiniaina"/>
+            <ProfilModal lastName={userName}/>
           </div>
         </div>
       </div>

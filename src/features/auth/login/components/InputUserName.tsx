@@ -21,7 +21,7 @@ export function InputUserName({ handleChange, value, className,error }: propsT) 
       />
       {/* username Error message */}
       {error && (
-          <div className="text-red-600 lg:text-sm 2xl:text-lg">
+          <div className="text-red-600 lg:text-sm 2xl:text-sm">
             {error}
           </div>
         )}

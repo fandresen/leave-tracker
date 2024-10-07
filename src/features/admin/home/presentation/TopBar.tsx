@@ -17,7 +17,7 @@ export default function TopBar() {
       <div className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
         {/* Select Department Dropdown */}
         <div className="flex-1">
-          <SelectDepartement className="w-[20%] p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+          <SelectDepartement className="w-56 p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
         </div>
 
         {/* New Department Button */}

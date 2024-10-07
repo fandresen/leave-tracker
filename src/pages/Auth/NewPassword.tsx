@@ -1,7 +1,9 @@
 import { InputPassword } from "@/features/auth/login/components/InputPassword";
 import UseNewPassword from "@/GlobalHooks/UseNewPassword";
 import { ToastContainer } from "react-toastify";
-
+import { CiLock } from "react-icons/ci";
+import { useMediaQuery } from "react-responsive";
+import Loading from "@/components/ui/Loading";
 export default function NewPassword() {
   const {
     handleChange,
@@ -10,49 +12,75 @@ export default function NewPassword() {
     handleSubmit,
     errorNotMatch,
     confirmPsswd,
-    psswd
+    psswd,
+    loading
   } = UseNewPassword();
 
+  const is2XlScreen = useMediaQuery({ query: "(min-width: 1536px)" });
 
   return (
-    <div className="w-full h-[100vh] absolute top-0 ">
-      <div className="mt-[5vh] 2xl:mt-[15vh] bg-white pb-24 lg:pb-12 2xl:pb-28 2xl:pt-10 lg:w-[40%] 2xl:w-[35%] lg:mx-auto relative z-10 rounded-lg shadow-xl">
-      <ToastContainer />
-        <div className="flex flex-col items-center justify-center pt-10 mb-5">
-          <img src="src/assets/ZenRH.png" className="w-52 lg:w-44 2xl:w-72" />
+    <div className="w-full h-screen flex items-center justify-center bg-white">
+
+      <div className="flex flex-col items-center justify-center mb-6 absolute lg:top-3 2xl:top-10 lg:left-16 2xl:left-28">
+        <img
+          src="src/assets/ZenRH.png"
+          className="w-40 lg:w-52 2xl:w-60"
+          alt="ZenRH Logo"
+        />
+      </div>
+      <Loading loading={loading}/>
+      <div className="bg-white w-full lg:w-[33%] 2xl:w-[30%] lg:px-12 lg:min-h-[70vh] 2xl:min-h-[55vh] pb-5 2xl:pb-10 rounded-lg shadow-xl relative z-10">
+        <ToastContainer />
+        <div className="flex justify-center">
+        <CiLock size={`${is2XlScreen ? 150 : 110}`} className="text-sky-600"/>
         </div>
-        <h1 className="text-2xl 2xl:text-3xl text-center mt-[2vh] 2xl:mt-[4vh] mb-5 2xl:mb-24 lg:mb-8 font-medium text-[#333]">
-          Create a new password
+        <h1 className="text-2xl 2xl:text-3xl text-center lg:mb-5 2xl:mb-10 font-semibold text-gray-700">
+          Créer votre Mot de passe
         </h1>
-        <form onSubmit={(e) => handleSubmit(e)}>
+
+        <form onSubmit={(e) => handleSubmit(e)} className="">
+          {/* Password Input */}
           <InputPassword
             error={errorPsswd}
-            divclassName="w-[80%] 2xl:w-[65%] mx-auto text-sm border-b-4 border-gray-300"
-            inputClassName="h-12 2xl:h-16 border-none lg:text-lg 2xl:text-xl"
+            divclassName="lg:w-full 2xl:w-[90%] mx-auto"
+            errorClassName="ml-4 2xl:ml-12"
+            inputClassName="py-5 2xl:py-6 2xl:mt-2 bg-white border border-gray-300 text-sm 2xl:text-lg rounded-xl text-gray-700" 
             onChange={(e) => handleChange(e)}
             value={psswd}
           />
+
+          {/* Confirm Password Input */}
           <InputPassword
             error={errorNotMatch}
-            divclassName="w-[80%] 2xl:w-[65%] mx-auto text-sm border-b-4 border-gray-300  2xl:mt-16 lg:mt-12"
-            inputClassName="h-12  2xl:h-16 border-none lg:text-xl"
+            divclassName="lg:w-full 2xl:w-[90%] mx-auto"
+            inputClassName="py-5 2xl:py-7 2xl:mt-2 bg-white border border-gray-300 text-sm 2xl:text-lg rounded-xl text-gray-700" 
+            errorClassName="ml-4 2xl:ml-12"
             label="Confirmer le Mot de passe"
             onChange={(e) => handleConfirmChange(e)}
-            onPaste={(e)=>{e.preventDefault()}}
+            onPaste={(e) => {
+              e.preventDefault();
+            }}
             value={confirmPsswd}
           />
-          <div className="flex flex-col items-center justify-center">
+
+          {/* Submit Button */}
+          <div className="flex justify-center">
             <button
               type="submit"
-              disabled={errorPsswd?.type==="error"||errorNotMatch?.type==="error"?true:false}
-              className={`${errorPsswd?.type==="error"||errorNotMatch?.type==="error"?"cursor-not-allowed":"cursor-pointer"} text-lg 2xl:text-xl w-[90%] lg:w-[80%] 2xl:w-[65%] text-white bg-[#7BE8D7] hover:bg-[#6cccbe] py-4 lg:py-3 2xl:py-5 mx-auto mt-[5vh] rounded-lg font-bold`}
+              disabled={
+                errorPsswd?.type === "error" || errorNotMatch?.type === "error"
+              }
+              className={`${
+                errorPsswd?.type === "error" || errorNotMatch?.type === "error"
+                  ? "cursor-not-allowed bg-sky-300"
+                  : "bg-sky-600 hover:bg-sky-500 cursor-pointer"
+              } text-white w-full lg:py-3 rounded-lg font-medium text-sm 2xl:text-lg mt-5`}
             >
               Valider
             </button>
           </div>
         </form>
       </div>
-      <div className="w-full h-[40vh] bg-gradient-to-b from-[#79C1FF] to-[#ffffff] absolute top-0 z-0"></div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export default function LoginFormSuperUser() {
                 value={userName}
                 className={`bg-[#f7f7f78e] 2xl:py-6 px-3 rounded-lg text-xl${
                   error?.type === "error"
-                    ? "border-4 border-red-500 rounded-xl"
+                    ? "border-2 border-red-500 rounded-xl"
                     : "border border-gray-300"
                 }`}
                 error={error?.usernameMessage}
@@ -36,7 +36,7 @@ export default function LoginFormSuperUser() {
               <InputPassword
                 className={`bg-[#f7f7f78e] 2xl:py-6 lg:mt-1 2xl:mt-2 px-3 rounded-lg text-xl ${
                   error?.type === "error"
-                    ? "border-4 border-red-500 rounded-xl"
+                    ? "border-2 border-red-500 rounded-xl"
                     : "border border-gray-300"
                 }`}
                 value={password}
@@ -45,7 +45,7 @@ export default function LoginFormSuperUser() {
               />
               <button
                 type="submit"
-                className="w-full py-3 2xl:py-4 2xl:text-2xl text-white font-semibold rounded-xl bg-[#7BE8D7] hover:bg-[#6ccebf] mt-[5vh] mr-8"
+                className="w-full py-3 2xl:py-4 2xl:text-2xl text-white font-semibold rounded-xl bg-sky-600 hover:bg-sky-700 mt-[5vh] mr-8"
                 onClick={handleSubmit}
               >
                 Log in
