@@ -15,42 +15,66 @@ export default function useHandleDemandeAbsence() {
   ) as Date;
 
   const [credentials, setCredentials] = useState<demandeAdbsenceDataT>({
-    typeAbsence: "",
+    type: "",
     startDate: clickedDate,
-    endDate: undefined,
+    endDate: null,
   });
+
+  const [invalidCredential,setInvalidCredential] = useState<boolean>(true);
 
   const axios = useAxiosWithToken();
 
+  // Synchroniser credentials.startDate avec clickedDate lorsque clickedDate change
   useEffect(() => {
-    console.log("niakatra leka");
-    if (credentials.endDate === undefined) {
-      setCredentials({ ...credentials, endDate: new Date(clickedDate) });
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      startDate: clickedDate,
+    }));
+  }, [clickedDate]);
+
+   // Utilisation d'un useEffect pour surveiller les changements dans credentials et mettre à jour invalidCredential
+   useEffect(() => {
+    if (credentials.endDate != null && credentials.type !== "") {
+      setInvalidCredential(false);
+    } else {
+      setInvalidCredential(true);
     }
   }, [credentials]);
 
+
+
   const handleTypeAbsencechange = (value: string) => {
     console.log(value);
-    setCredentials({ ...credentials, typeAbsence: value });
+    setCredentials({ ...credentials, type: value });
   };
   const handleStartDate = (value?: Date) => {
-    console.log(value);
     setCredentials({ ...credentials, startDate: value });
   };
   const handleEndDate = (value?: Date) => {
-    console.log(value);
     setCredentials({ ...credentials, endDate: value });
   };
   const handleClosePopUp = () => {
+    setCredentials({startDate: clickedDate, endDate: null,type:"" });
     dispatch(toggleModal(false));
+    setInvalidCredential(true);
   };
   const handleSubmit = async () => {
-    try {
-      const response = await axios.post("/absence", credentials);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
+    if(credentials.endDate != null && credentials.type != ""){
+      console.log(credentials.endDate);
+      try {
+        const response = await axios.post("/absence", credentials);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+      finally{
+        handleClosePopUp();
+      }
     }
+    else{
+      console.log("Veuillez remplir le formulaire");
+    }
+   
   };
 
   
@@ -62,5 +86,6 @@ export default function useHandleDemandeAbsence() {
     handleEndDate,
     handleStartDate,
     handleTypeAbsencechange,
+    invalidCredential
   };
 }

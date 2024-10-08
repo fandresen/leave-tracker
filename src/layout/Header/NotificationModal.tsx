@@ -38,7 +38,7 @@ export default function NotificationModal({ notifications }: propsT) {
           <DropdownMenuSeparator className="bg-gray-300 h-[2px] lg:mb-3" />
 
           {notifications.map((notification) => (
-            <DropdownMenuItem className="outline-none mt-2">
+            <DropdownMenuItem className="outline-none mt-2" key={notification.id}>
               <SingleNotification
                 key={notification.id}
                 name={notification.name}

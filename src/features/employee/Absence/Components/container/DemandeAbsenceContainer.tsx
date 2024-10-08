@@ -3,21 +3,21 @@ import DemandeAbsence from "../presentation/DemandeAbsence";
 import { ConfirmationPopUp } from "../presentation/ConfirmationPopUp";
 
 export interface demandeAdbsenceDataT {
-  typeAbsence: string;
+  type: string;
   startDate?: Date ;
-  endDate?: Date ;
+  endDate?: Date|null;
 }
 
 export default function DemandeAbsenceContainer() {
   const [credentials, setCredentials] = useState<demandeAdbsenceDataT>({
-    typeAbsence: "",
+    type: "",
     startDate: undefined,
     endDate: undefined,
   });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleTypeAbsencechange = (value: string) => {
     console.log(value);
-    setCredentials({ ...credentials, typeAbsence: value });
+    setCredentials({ ...credentials, type: value });
   };
   const handleStartDate = (value?: Date) => {
     console.log(value);

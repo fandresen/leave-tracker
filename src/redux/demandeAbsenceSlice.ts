@@ -18,6 +18,7 @@ const demandeAbsenceSlice = createSlice({
         },
         setStartDate(state,action:PayloadAction<string>){
             const newdate = new Date(action.payload)
+            console.log(newdate);
             state.startDate = newdate;
         }
     }

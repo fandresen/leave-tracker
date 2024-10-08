@@ -15,7 +15,7 @@ interface propsT{
 export function SelectTypeAbsence({handleChangeValue}:propsT) {
   return (
     <Select onValueChange={(e)=>handleChangeValue(e)}>
-      <SelectTrigger className="lg:w-[9vw] 2xl:w-[10vw] 2xl:py-2 rounded-[8px] bg-white lg:text-[13px] 2xl:text-[15px] border border-gray-200">
+      <SelectTrigger className="lg:w-[12vw] 2xl:w-[14vw] 2xl:py-2 rounded-[8px] bg-white lg:text-[13px] 2xl:text-[15px] border border-gray-200">
 
         <SelectValue placeholder="Type d'absence"/>
       </SelectTrigger>

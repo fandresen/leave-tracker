@@ -93,3 +93,22 @@ export interface formDatacreatetionEntreprise{
   phone: string;
   licenseType: string;
 }
+
+// enum Status {
+//   EN_COURS = "EN_COURS",
+//   APPROUVE = "APPROUVE",
+//   REFUSE = "REFUSE"
+// }
+
+// export interface AbsenceModel {
+//   id?: number;               
+//   user_id?: number;           
+  
+//   startDate: string;         
+//   endDate: string;           
+  
+//   status?: Status;            
+//   type: string;          
+// }
+
+
