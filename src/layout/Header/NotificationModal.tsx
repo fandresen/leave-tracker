@@ -8,21 +8,58 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import SingleNotification from "./SingleNotification";
+import { useAxiosWithToken } from "@/lib/interceptor";
+import { useEffect, useState } from "react";
+import { getSecondsSinceDate } from "@/lib/others";
 
-type notificationType = {
-  name: string;
-  desc: string;
-  time: number;
+interface notificationT {
   id: number;
-  seen: boolean; 
-  senderId: string; 
-
+  senderID: number;
+  recipientId: number;
+  notification_date: string;
+  subject: string;
+  senderName: string;
+  senderProfilePictureUrl: string;
 }
 
-interface propsT {
-  notifications: notificationType[];
-}
-export default function NotificationModal({ notifications }: propsT) {
+
+export default function NotificationModal() {
+  const axios = useAxiosWithToken();
+
+  const [notifications, setNotifications] = useState<notificationT[]>([]);
+
+  const getNotification = async (): Promise<notificationT | undefined> => {
+    try {
+      const res = (await axios.get<notificationT>(`/notification?lastNotifId=${notifications[notifications.length-1]?.id?notifications[notifications.length-1].id:0}`)).data;
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log("error :" ,error);
+      return undefined;
+    }
+  };
+
+  useEffect(() => {
+    const fetchNotification = async () => {
+      const newNotification = await getNotification();
+      if (newNotification) {
+        const audio = new Audio('src/assets/notificationSound.wav');
+        audio.play();
+        setNotifications([...notifications,newNotification]);
+      }
+    };
+
+    const notificationFetch = setInterval(() => {
+      fetchNotification();
+    }, 10000);
+
+    // Retourne une fonction de nettoyage
+    return () => {
+      clearInterval(notificationFetch);
+      console.log("Interval cleared");
+    };
+  }, []);
+
   return (
     <div>
       <DropdownMenu>
@@ -37,14 +74,17 @@ export default function NotificationModal({ notifications }: propsT) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator className="bg-gray-300 h-[2px] lg:mb-3" />
 
-          {notifications.map((notification) => (
-            <DropdownMenuItem className="outline-none mt-2" key={notification.id}>
+          {notifications?.map((notification) => (
+            <DropdownMenuItem
+              className="outline-none mt-2"
+              key={notification.id}
+            >
               <SingleNotification
                 key={notification.id}
-                name={notification.name}
-                desc={notification.desc}
-                time={notification.time}
-                senderId={notification.senderId}
+                name={notification.senderName}
+                desc={notification.subject}
+                senderProfilePictureUrl={notification.senderProfilePictureUrl}
+                time={getSecondsSinceDate(notification.notification_date)}
               />
             </DropdownMenuItem>
           ))}

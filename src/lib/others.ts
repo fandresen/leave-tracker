@@ -39,3 +39,8 @@ export const dateSoustraction = (date1?: Date, date2?: Date |null) => {
 export const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[&"'(\-_çà)=¹~#{\[|\]`\\^@}\]!\*§;,\?\.\/+\£¨\^$])[A-Za-z\d&"'(\-_çà)=¹~#{\[|\]`\\^@}\]!\*§;,\?\.\/+\£¨\^$]{8,}$/;
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export const getSecondsSinceDate = (pastDate : string) : number =>{
+  const past = new Date(pastDate);
+  const now = new Date();
+  return Math.abs(now.getTime() - past.getTime()) / 1000;
+}
