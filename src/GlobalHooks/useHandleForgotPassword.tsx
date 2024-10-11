@@ -1,8 +1,9 @@
 import { useAxiosNormal } from "@/lib/interceptor";
+import { customOptions } from "@/lib/others";
 import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastOptions } from "react-toastify";
+import { toast} from "react-toastify";
 
 export default function useHandleForgotPassword() {
   const [email, setEmail] = useState("");
@@ -11,18 +12,7 @@ export default function useHandleForgotPassword() {
   const navigate = useNavigate();
   const Axios = useAxiosNormal();
 
-  //Toast Parameters
-  const customOptions: ToastOptions = {
-    position: "top-center",
-    className:
-      "top-[8vh] text-center w-[36] 2xl:w-[15vw] 2xl:min-h-[8vh] lg:text-sm 2xl:text-sm font-semibold",
-    autoClose: 8000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     noAcount ? setNoAucount(false) : "";

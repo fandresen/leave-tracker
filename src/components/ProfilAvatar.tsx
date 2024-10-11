@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 interface propsT{
-  url:string;
+  url?:string;
   className?:string;
   lastName:string;
   classNameProfil:string;

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setStartDate, toggleModal } from "@/redux/demandeAbsenceSlice";
 import MonthlyCalendar from "../presentation/MonthlyCalendar";
 import WeeklyCalendar from "../presentation/WeeklyCalendar";
-import { calendardataT, conger } from "@/lib/interface";
+import { absenceDTO, calendardataT } from "@/lib/interface";
 import { useAxiosWithToken } from "@/lib/interceptor";
 import TopCommand from "../presentation/TopCommand";
 
@@ -14,7 +14,7 @@ export default function MycalendarContainer() {
   const axios1 = useAxiosWithToken();
   const dispatch = useDispatch();
   const [calendarType, setCalendarType] = useState<"month" | "week">("month");
-  const [dataConger, setDataConger] = useState<conger[]>();
+  const [dataConger, setDataConger] = useState<absenceDTO[]>();
 
   const [dataCalendar, setDataCalendar] = useState<calendardataT>({
     year: new Date().getFullYear(),
@@ -54,7 +54,7 @@ export default function MycalendarContainer() {
       }
 
       //fetching data for conger
-      const res = await axios1.get("/absence");
+      const res = await axios1.get<absenceDTO[]>("/absence/department");
       if (res.status === 200) {
         setDataConger(res.data);
       }
@@ -168,15 +168,15 @@ export default function MycalendarContainer() {
   const IsConger = (date: string): ReactNode => {
     const congerTab =
       dataConger?.filter((conger) => {
-        const congerStart = dateToYMDString(conger.start);
-        const congerEnd = dateToYMDString(conger.end);
+        const congerStart = dateToYMDString(conger.startDate);
+        const congerEnd = dateToYMDString(conger.endDate);
         return (
-          dateToYMDString(date) >= congerStart &&
-          dateToYMDString(date) <= congerEnd
+          dateToYMDString(date)! >= congerStart! &&
+          dateToYMDString(date)! <= congerEnd!
         );
       }) || [];
     return congerTab.map((conger) => (
-      <AbsenceComponent key={conger.id} title={conger.title} />
+      <AbsenceComponent key={conger.id} title={conger.user_name} status={conger.status} />
     ));
   };
 

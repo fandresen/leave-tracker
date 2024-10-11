@@ -1,14 +1,17 @@
 import ProfilAvatar from "@/components/ProfilAvatar";
+import { useNavigate } from "react-router-dom";
 
 interface propsT{
     name: string;
     desc: string;
     senderProfilePictureUrl:string;
     time : number;
+    path: string;
 }
-export default function SingleNotification({desc,name,time,senderProfilePictureUrl}:propsT) {
+export default function SingleNotification({desc,name,time,senderProfilePictureUrl,path}:propsT) {
+  const navigate = useNavigate()
   return (
-    <div className="flex lg:gap-3 2xl:gap-4 bg-white py-2 px-2 rounded-xl">
+    <div onClick={()=>navigate(path)} className="flex lg:gap-3 2xl:gap-4 bg-white hover:bg-slate-50 py-2 px-2 rounded-xl cursor-pointer transition-all duration-300 ease-in-out transform hover:scale-105">
         <ProfilAvatar url={senderProfilePictureUrl} className="min-w-10 max-w-10 min-h-10 max-h-10" classNameProfil="W-10 h-10 text-xl" lastName={name}/>
         <div>
             <h1 className="text-gray-800 font-medium lg:text-sm -mt-1">{name}  <span className="text-gray-500 lg:text-[11px] 2xl:text-[12px] font-normal">{desc}</span></h1>   

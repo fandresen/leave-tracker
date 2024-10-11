@@ -1,6 +1,8 @@
 import { useAxiosWithToken } from "@/lib/interceptor";
 import { DepartementT } from "@/lib/interface";
+import { setDepartement } from "@/redux/AdminSlice";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 interface PropsT {
   className?: string;
@@ -13,11 +15,16 @@ export default function SelectDepartement({ className, handleChange }: PropsT) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [value, setValue] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   // Fetch departments from the API
   const fetchData = async () => {
     try {
-      const res = await axios.get("/departement");
+      const res = await axios.get<DepartementT[]>("/departement");
       if (res.status === 200) {
+        if(res.data.length > 0){
+          dispatch(setDepartement())
+        }
         setDepartements(res.data);
       }
     } catch (error) {

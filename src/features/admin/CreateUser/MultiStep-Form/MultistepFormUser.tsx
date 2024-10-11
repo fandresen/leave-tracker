@@ -47,7 +47,7 @@ export default function MultiStepFormUser({ handlecreate }: propsT) {
   const handleSubmit = () => {
     handlecreate(formData).then((value)=>{
       setError(value);
-      value?navigate("/home"):setCurrentStep(1);
+      value?navigate("/admin"):setCurrentStep(1);
     });
     setError(undefined);
   };

@@ -72,9 +72,12 @@ export default function useHandleLogin() {
         // navigate to home page
         const role = getRole();
         if (role == "ADMIN") {
-          navigate("/home");
+          navigate("/admin");
         } else if (role == "USER") {
           navigate("/");
+        }
+        else if (role == "CHEF_DEP") {
+          navigate("/chef-dep");
         }
       } else {
         // add toast notification with error message
@@ -83,7 +86,7 @@ export default function useHandleLogin() {
     } catch (err: any) {
       if (
         err?.response?.status === 401 &&
-        err?.response?.data === "Password is incorrect"
+        err?.response?.data === "Email or password is incorrect"
       ) {
         setError({
           passwordMessage: "mot de passe incorrecte",

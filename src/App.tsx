@@ -20,6 +20,8 @@ import HomeEntreprise from "./pages/SuperUser/Home";
 import CreateEntreprise from "./pages/SuperUser/CreateEntreprise";
 import CreateUser from "./pages/admin/CreateUser";
 import { useMediaQuery } from "react-responsive";
+import AbsenceValidation from "./pages/admin/AbsenceValidation";
+import HomeDepChef from "./pages/Chef_departement/HomeDepChef";
 
 const App = () => {
   const isDarkMode = useSelector<Rootstate>((state) => state.theme.dark);
@@ -37,10 +39,9 @@ const App = () => {
     return (
       <>
         <Routes>
-          <Route path="" element={<RequiredAuth />}>
-            <Route path="" element={<RequireLayout />}>
+          <Route path="/" element={<RequiredAuth />}>
+            <Route path="/" element={<RequireLayout />}>
               <Route
-                path="/"
                 element={<RequiredRolePages requiredRole="USER" />}
               >
                 <Route path="/profile" element={<Profile />} />
@@ -54,7 +55,6 @@ const App = () => {
               </Route>
 
               <Route
-                path="/"
                 element={<RequiredRolePages requiredRole="SUP_USER" />}
               >
                 <Route path="/$uperU&er" element={<HomeEntreprise />} />
@@ -65,11 +65,17 @@ const App = () => {
               </Route>
 
               <Route
-                path="/"
                 element={<RequiredRolePages requiredRole="ADMIN" />}
               >
                 <Route path="create-user" element={<CreateUser />} />
-                <Route path="/" element={<HomeAdmin />} />
+                <Route path="/admin" element={<HomeAdmin />} />
+              </Route>
+
+              <Route
+                element={<RequiredRolePages requiredRole="CHEF_DEP" />}
+              >
+                 <Route path="/chef-dep" element={<HomeDepChef />} />
+                 <Route path="/absence-validation" element={<AbsenceValidation />} />
               </Route>
 
               <Route path="*" element={<h1>Page Not Found</h1>} />

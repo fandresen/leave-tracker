@@ -37,12 +37,12 @@ export interface propsAbsence {
   endDate: number;
 }
 
-export interface conger {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-}
+// export interface conger {
+//   id: number;
+//   title: string;
+//   start: string;
+//   end: string;
+// }
 
 export interface propsT {
   handleChangeValue: (value: "month" | "week") => void;
@@ -73,12 +73,19 @@ export interface UserT {
   last_name: string;
   email: string;
   phone_number: string;
-  role?:"USER";
+  role?:"USER"|"DEP_CHEF";
   address?: string;
   picture?:string;
   departement_id:number;
   password?: string;
   in_Conger:boolean;
+}
+export interface UserDTO{
+  id:number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  profilePictureUrl: string;
 }
 
 export interface createEntrepriseT{
@@ -92,6 +99,26 @@ export interface formDatacreatetionEntreprise{
   address: string;
   phone: string;
   licenseType: string;
+}
+
+export interface notificationT {
+  id: number;
+  senderID: number;
+  recipientId: number;
+  notification_date: string;
+  subject: string;
+  senderName: string;
+  senderProfilePictureUrl: string;
+  data:string;
+}
+
+export interface absenceDTO{
+  id:number;
+  user_name:string;
+  startDate : string;
+  endDate: string;
+  type: string;
+  status : "APPROUVE" | "REJECTEE" | "EN_COURS";
 }
 
 // enum Status {

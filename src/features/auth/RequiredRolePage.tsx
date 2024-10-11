@@ -2,7 +2,7 @@ import { getRole } from "@/lib/token&RoleService";
 import { Navigate, Outlet } from "react-router-dom";
 
 interface propsT {
-    requiredRole: "ADMIN"|"USER"|"SUP_USER"|"DEP_CHEF";
+    requiredRole: "ADMIN"|"USER"|"SUP_USER"|"CHEF_DEP";
 }
 
 const RequiredRolePages = ({ requiredRole}: propsT) => {
