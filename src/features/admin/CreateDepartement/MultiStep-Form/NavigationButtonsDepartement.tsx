@@ -1,6 +1,12 @@
-export default function NavigationButtonsDepartement({ currentStep, handleNext, handleBack,handleSubmit }) {
+interface propsT{
+  currentStep : number; 
+  handleNext :()=>void;
+  handleBack :()=>void;
+  handleSubmit : ()=>void;
+}
+export default function NavigationButtonsDepartement({ currentStep, handleNext, handleBack,handleSubmit }:propsT) {
     return (
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-8 px-16">
         {currentStep > 1 && (
           <button
             onClick={handleBack}
@@ -9,15 +15,15 @@ export default function NavigationButtonsDepartement({ currentStep, handleNext, 
             Back
           </button>
         )}
-        {currentStep < 3 && (
+        {currentStep < 2 && (
           <button
             onClick={handleNext}
-            className="ml-auto px-6 py-2 bg-sky-600 text-white rounded-md hover:bg-transparent hover:border-2 hover:border-sky-600 hover:text-sky-600"
+            className={`${currentStep == 1? "mx-auto px-14" : "ml-auto px-6"} py-2 bg-sky-600 text-white rounded-md hover:bg-transparent hover:border-2 hover:border-sky-600 hover:text-sky-600`}
           >
             Next
           </button>
         )}
-        {currentStep === 3 && (
+        {currentStep === 2 && (
           <button
             className="ml-auto px-6 py-2 bg-sky-600 text-white rounded-md hover:bg-transparent hover:border-2 hover:border-sky-600 hover:text-sky-600"
             onClick={()=>handleSubmit()}

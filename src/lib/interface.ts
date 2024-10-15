@@ -121,6 +121,26 @@ export interface absenceDTO{
   status : "APPROUVE" | "REJECTEE" | "EN_COURS";
 }
 
+export interface CreationDepartementT {
+  departement_id: number;
+  departement_name: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  picture: any;
+  in_Conger: boolean;
+  address: string;
+  id: number;
+  password: string;
+  role: "USER" | "DEP_CHEF";
+}
+
+export interface CreationDepartmentDTO{
+  user : UserT;
+  departement_name : string;
+}
+
 // enum Status {
 //   EN_COURS = "EN_COURS",
 //   APPROUVE = "APPROUVE",

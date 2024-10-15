@@ -25,15 +25,15 @@ const MonthlyCalendar = ({
     <>
       <div className="p-4">
         <table className="w-full h-[70vh] border dark:border-gray-500 border-gray-200">
-          <thead className=" bg-sky-700 dark:bg-sky-200">
+          <thead className=" bg-sky-700/80 dark:bg-sky-200">
             <tr className="text-center font-normal text-white">
-              <td className="w-[14%] p-3 text-sm 2xl:text-lg">Dimanche</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Lundi</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Mardi</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Mercredi</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Jeudi</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Vendredi</td>
-              <td className=" w-[14%] text-sm 2xl:text-lg">Samedi</td>
+              <td className="w-[14%] p-3 text-xs 2xl:text-sm font-light">Dimanche</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Mardi</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Lundi</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Mercredi</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Jeudi</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Vendredi</td>
+              <td className=" w-[14%] text-xs 2xl:text-sm font-light">Samedi</td>
             </tr>
           </thead>
           <tbody>

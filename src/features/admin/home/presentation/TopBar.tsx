@@ -1,3 +1,4 @@
+import { FaPlus } from "react-icons/fa";
 import { useHomeContext } from "../../Context/HomeContext";
 import SelectDepartement from "./SelectDepartement";
 
@@ -34,9 +35,9 @@ export default function TopBar() {
         <div className="ml-4">
           <button
             onClick={newUserClick}
-            className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+            className="px-4 py-2 flex bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
           >
-            New User
+            <FaPlus className="mt-1 mr-1"/>Ajouter
           </button>
         </div>
       </div>

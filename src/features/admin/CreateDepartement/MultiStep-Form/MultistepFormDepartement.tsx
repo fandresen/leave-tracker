@@ -1,33 +1,20 @@
 import { useState } from "react";
-import { UserT } from "@/lib/interface";
+import { CreationDepartementT, CreationDepartmentDTO } from "@/lib/interface";
 import { useNavigate } from "react-router-dom";
 import StepIndicatorUser from "./StepIndicatorDepartement";
 import StepOneUser from "./StepOneDepartement";
 import StepTwoUser from "./Step2Departement";
-import StepThreeUser from "./Step3Departeùent";
 import NavigationButtonsUser from "./NavigationButtonsDepartement";
 
 interface propsT {
-  handlecreate: (data: UserT, departement_name: string) => Promise<boolean>;
+  handlecreate: (data: CreationDepartmentDTO) => Promise<boolean>;
 }
 
-interface fomDataT {
-  departement_name: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone_number: string;
-  picture: any;
-  in_Conger: boolean;
-  address: string;
-  id: number;
-  password: string;
-  role: "USER" | "DEP_CHEF";
-}
 export default function MultiStepFormDepartement({ handlecreate }: propsT) {
   const [currentStep, setCurrentStep] = useState(1);
   const [error, setError] = useState<boolean | undefined>(undefined);
-  const [formData, setFormData] = useState<fomDataT>({
+  const [formData, setFormData] = useState<CreationDepartementT>({
+    departement_id: 0,
     departement_name: "",
     email: "",
     first_name: "",
@@ -38,13 +25,13 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
     address: "",
     id: 0,
     password: "",
-    role: "USER",
+    role: "DEP_CHEF",
   });
 
   const navigate = useNavigate();
 
   const handleNext = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1);
+    if (currentStep < 2) setCurrentStep(currentStep + 1);
   };
 
   const handleBack = () => {
@@ -57,8 +44,8 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
   };
 
   const handleSubmit = () => {
-    handlecreate(
-      {
+    handlecreate({
+      user: {
         departement_id: 0,
         email: formData.email,
         first_name: formData.first_name,
@@ -70,8 +57,8 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
         password: formData.password,
         role: formData.role,
       },
-      formData.departement_name
-    ).then((value) => {
+      departement_name: formData.departement_name,
+    }).then((value) => {
       setError(value);
       value ? navigate("/admin") : setCurrentStep(1);
     });
@@ -100,7 +87,7 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
         ""
       )}
 
-      <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333] lg:-mt-10 2xl:-mt-0">
+      <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333]">
         Creér un Departement
       </h1>
       <div className="w-full lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto lg:mt-6 2xl:px-12 2xl:py-10 bg-white">
@@ -112,9 +99,9 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
         {currentStep === 2 && (
           <StepTwoUser formData={formData} handleChange={handleChange} />
         )}
-        {currentStep === 3 && (
+        {/* {currentStep === 3 && (
           <StepThreeUser formData={formData} handleChange={handleChange} />
-        )}
+        )} */}
 
         <NavigationButtonsUser
           currentStep={currentStep}
