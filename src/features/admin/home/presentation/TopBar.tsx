@@ -1,43 +1,38 @@
 import { FaPlus } from "react-icons/fa";
 import { useHomeContext } from "../../Context/HomeContext";
-import SelectDepartement from "./SelectDepartement";
+import { AiOutlineDown } from "react-icons/ai";
+import Research from "@/components/Research";
 
 export default function TopBar() {
-  const { openDepModal, openUserModal } = useHomeContext();
-
-  const newDepClick = () => {
-    openDepModal();
-  };
+  const { openUserModal } = useHomeContext();
 
   const newUserClick = () => {
     openUserModal();
   };
 
   return (
-    <div className="w-[90%] mx-auto mt-6 mb-4">
-      <div className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
+    <div className="w-full px-10 mx-auto mt-6 mb-4 bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="flex justify-between items-center py-5">
         {/* Select Department Dropdown */}
-        <div className="flex-1">
-          <SelectDepartement className="w-56 p-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+        <div className="">
+          <button className="border border-gray-300 py-1 px-5 text-xs font-medium flex rounded-sm shadow-md">
+            Fltre <AiOutlineDown className="mt-1 ml-2" />
+          </button>
         </div>
 
         {/* New Department Button */}
         <div className="ml-4">
-          <button
-            onClick={newDepClick}
-            className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300 transition-all"
-          >
-            New Department
-          </button>
+          <Research className="w-[400px] text-sm" />
         </div>
 
         {/* New User Button */}
         <div className="ml-4">
           <button
             onClick={newUserClick}
-            className="px-4 py-2 flex bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+            className="px-3 py-2 text-xs flex bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 cursor-pointer"
           >
-            <FaPlus className="mt-1 mr-1"/>Ajouter
+            <FaPlus className="mt-1 mr-1" />
+            Ajouter
           </button>
         </div>
       </div>

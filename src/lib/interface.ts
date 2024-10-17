@@ -133,8 +133,9 @@ export interface CreationDepartementT {
   address: string;
   id: number;
   password: string;
-  role: "USER" | "DEP_CHEF";
+  role: "USER" | "CHEF_DEP";
 }
+
 
 export interface CreationDepartmentDTO{
   user : UserT;

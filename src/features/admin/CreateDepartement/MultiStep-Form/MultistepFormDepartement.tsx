@@ -25,7 +25,7 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
     address: "",
     id: 0,
     password: "",
-    role: "DEP_CHEF",
+    role: "CHEF_DEP",
   });
 
   const navigate = useNavigate();

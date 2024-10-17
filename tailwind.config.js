@@ -38,7 +38,11 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
          'slide-in-out': 'slide-in-out 5s ease-in-out forwards'
       },
+      boxShadow: {
+        'top': '0 -4px 6px -1px rgba(0, 0, 0, 0.1)', // Ombre en haut
+      },
     },
+    
   },
   plugins: [require("tailwindcss-animate")],
 }

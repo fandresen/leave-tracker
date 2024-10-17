@@ -1,15 +1,12 @@
-import React, { createContext, ReactNode, useState, Dispatch, SetStateAction } from "react";
+import { useAxiosWithToken } from "@/lib/interceptor";
+import { DepartementT } from "@/lib/interface";
+import { setDepartement } from "@/redux/AdminSlice";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-// Type du contexte
 type HomeContextType = {
-  departementModalOpen: boolean;
-  userModalOpen: boolean;
-  setUserModalOpen: Dispatch<SetStateAction<boolean>>;
-  openUserModal: () => void;
-  closeUserModal: () => void;
-  setDepartementModalOpen: Dispatch<SetStateAction<boolean>>;
-  openDepModal: () => void;
-  closeDepartmentModal: () => void;
+  actualDepID: number;
+  changeActualDepID: (id: number) => void;
 };
 
 // Création du contexte
@@ -24,27 +21,48 @@ export const useHomeContext = () => {
 };
 
 export default function HomeProvider({ children }: { children: ReactNode }) {
-  const [departementModalOpen, setDepartementModalOpen] = useState<boolean>(false);
-  const [userModalOpen, setUserModalOpen] = useState<boolean>(false);
+  const [actualDepID, setActualDepID] = useState<number>(0);
+  const axios = useAxiosWithToken();
+  const dispatch = useDispatch();
 
-  // Fonctions pour ouvrir et fermer les modals
-  const openDepModal = () => setDepartementModalOpen(true);
-  const closeDepartmentModal = () => setDepartementModalOpen(false);
+  const fetchDepartement = async () => {
+    try {
+      const response = (
+        await axios.get<DepartementT>(`/departement/${actualDepID}`)
+      ).data;
+      setActualDepID(response.id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const fetchAllDepartement = async () => {
+    try {
+      const res = await axios.get<DepartementT[]>("/departement");
+      if (res.status === 200) {
+        if (res.data.length > 0) {
+          dispatch(setDepartement());
+        }
+        // setDepartements(res.data);
+      }
+    } catch (error) {
+      console.error("Error fetching departments:", error);
+    }
+  };
 
-  const openUserModal = () => setUserModalOpen(true);
-  const closeUserModal = () => setUserModalOpen(false);
+  useEffect(() => {
+    fetchDepartement();
+    fetchAllDepartement();
+  }, []);
+
+  const changeActualDepID = (id: number) => {
+    setActualDepID(id);
+  };
 
   return (
     <HomeContext.Provider
       value={{
-        departementModalOpen,
-        userModalOpen,
-        setUserModalOpen,
-        openUserModal,
-        closeUserModal,
-        setDepartementModalOpen,
-        openDepModal,
-        closeDepartmentModal,
+        actualDepID,
+        changeActualDepID,
       }}
     >
       {children}
