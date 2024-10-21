@@ -9,12 +9,13 @@ export default function HomeAdmin() {
   const thereIsNoDepartement: boolean = useSelector<Rootstate>(
     (state) => state.admin
   ) as boolean;
-  const [noDepartement,setNodepartement] = useState<boolean>(thereIsNoDepartement);
+  const [noDepartement, setNoDepartement] =
+    useState<boolean>(thereIsNoDepartement);
 
   useEffect(() => {
-    setNodepartement(thereIsNoDepartement);
+    setNoDepartement(thereIsNoDepartement);
   }, [thereIsNoDepartement]);
-  console.log(noDepartement)
+  console.log(noDepartement);
   return (
     <>
       <HomeProvider>
