@@ -8,7 +8,7 @@ const initialState:stateT = {
 } 
 
 const adminSlice = createSlice({
-    name: 'conger',
+    name: 'departement',
     initialState,
     reducers: {
         setDepartement(state){

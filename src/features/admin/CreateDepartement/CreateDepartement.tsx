@@ -25,9 +25,9 @@ export default function CreateDepartement() {
   };
   return (
     <>
-      <div className="bg-white  lg:-mt-5 2xl:mt-10 lg:py-10 2xl:pt-10 w-[55%] 2xl:w-[50%] px-10 2xl:px-0 mx-auto border-2 border-gray-50 shadow-2xl rounded-lg">
+      {/* <div className="bg-white  lg:-mt-5 2xl:mt-10 lg:py-10 2xl:pt-10 w-[55%] 2xl:w-[50%] px-10 2xl:px-0 mx-auto border-2 border-gray-50 shadow-2xl rounded-lg"> */}
         <MultiStepFormDepartement handlecreate={handleSubmit} />
-      </div>
+      {/* </div> */}
     </>
   );
 }

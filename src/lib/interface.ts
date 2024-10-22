@@ -62,9 +62,18 @@ export interface AdminT {
 }
 
 export interface DepartementT {
-  id: number;
-  name: string;
-  entreprise_id:number;
+  departementModel:{
+    id:number;
+    name:string;
+  }
+  responsable:{
+    email:string;
+    firstname:string;
+    id:number;
+    lastname:string;
+    profilePictureUrl:string;
+  }
+  numberOfEmployees:number;
 }
 
 export interface UserT {
@@ -73,7 +82,7 @@ export interface UserT {
   last_name: string;
   email: string;
   phone_number: string;
-  role?:"USER"|"DEP_CHEF";
+  role?:"USER"|"CHEF_DEP";
   address?: string;
   picture?:string;
   departement_id:number;

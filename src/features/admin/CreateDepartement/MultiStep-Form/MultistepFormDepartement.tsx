@@ -90,9 +90,11 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
       <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333]">
         Creér un Departement
       </h1>
-      <div className="w-full lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto lg:mt-6 2xl:px-12 2xl:py-10 bg-white">
+      <div className="lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto mt-10 scale-75">
         <StepIndicatorUser currentStep={currentStep} />
+      </div>
 
+      <div className="w-full lg:max-w-[50vw] 2xl:max-w-[30vw] mx-auto lg:mt-6 2xl:px-12 2xl:py-10">
         {currentStep === 1 && (
           <StepOneUser formData={formData} handleChange={handleChange} />
         )}

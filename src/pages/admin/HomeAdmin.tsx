@@ -3,23 +3,16 @@ import UsersArrayContainer from "@/features/admin/home/container/UsersArrayConta
 import { useSelector } from "react-redux";
 import { Rootstate } from "@/redux/store";
 import CreateDepartement from "./CreateDepartementPage";
-import { useEffect, useState } from "react";
 
 export default function HomeAdmin() {
   const thereIsNoDepartement: boolean = useSelector<Rootstate>(
-    (state) => state.admin
+    (state) => state.admin.noDepartement
   ) as boolean;
-  const [noDepartement, setNoDepartement] =
-    useState<boolean>(thereIsNoDepartement);
 
-  useEffect(() => {
-    setNoDepartement(thereIsNoDepartement);
-  }, [thereIsNoDepartement]);
-  console.log(noDepartement);
   return (
     <>
       <HomeProvider>
-        {!noDepartement ? (
+        {!thereIsNoDepartement ? (
           <>
             <div>
               <UsersArrayContainer />

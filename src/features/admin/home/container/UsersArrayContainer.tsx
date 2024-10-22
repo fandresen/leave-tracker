@@ -5,39 +5,69 @@ import { useAxiosWithToken } from "@/lib/interceptor";
 import TopBar from "../presentation/TopBar";
 import TopSection from "../presentation/TopSection";
 import { useHomeContext } from "../../Context/HomeContext";
-import { useDispatch } from "react-redux";
-import { setDepartement } from "@/redux/AdminSlice";
 
 export default function UsersArrayContainer() {
   const axios = useAxiosWithToken();
   const [users, setUsers] = useState<UserT[]>([]);
-  const [departementInfo, setDepartementInfo] = useState<DepartementT>();
+  const [allDepartement, setAllDepartement] = useState<DepartementT[]>([]);
+  const [departementInfo, setDepartementInfo] = useState<DepartementT>({
+    departementModel: {
+      id: 0,
+      name: "",
+    },
+    responsable: {
+      lastname: "",
+      email: "",
+      firstname: "",
+      id: 0,
+      profilePictureUrl: "",
+    },
+    numberOfEmployees: 0,
+  });
 
+  const { actualDepID, changeActualDepID } = useHomeContext();
 
-  const { actualDepID } = useHomeContext();
-
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get("/users/entreprise");
-      setUsers(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchUsers = async () => {
+  //   try {
+  //     const response = await axios.get("/users/entreprise");
+  //     setUsers(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const fetchDepartement = async () => {
     try {
-      const response = await axios.get(`/departements/${actualDepID}`);
+      const response = await axios.get<DepartementT>(
+        `/departement/${actualDepID}`
+      );
       setDepartementInfo(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
+  const fetchAllDepartement = async () => {
+    try {
+      const res = await axios.get<DepartementT[]>("/departement");
+      if (res.status === 200) {
+        setAllDepartement(res.data);
+      }
+    } catch (error) {
+      console.error("Error fetching departments:", error);
+    }
+  };
+
+  //CLiquer sur un departement Component
+  const onclickSingleDepartement = (departement_id: number) => {
+    changeActualDepID(departement_id);
+  };
+
   useEffect(() => {
-    fetchUsers();
+    // fetchUsers();
     fetchDepartement();
-  }, []);
+    fetchAllDepartement();
+  }, [actualDepID]);
 
   // useEffect(() => {
   //   // Implement search functionality here
@@ -58,7 +88,13 @@ export default function UsersArrayContainer() {
     <>
       <div className="flex justify-center">
         <div className="w-[90vw]">
-          <TopSection />
+          {allDepartement.length > 0 && (
+            <TopSection
+              departement_info={departementInfo}
+              allDepartement={allDepartement}
+              onClickDepartement={onclickSingleDepartement}
+            />
+          )}
           <TopBar />
           <UsersArray users={users} />
         </div>

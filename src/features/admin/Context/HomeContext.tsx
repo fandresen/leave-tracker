@@ -30,28 +30,18 @@ export default function HomeProvider({ children }: { children: ReactNode }) {
       const response = (
         await axios.get<DepartementT>(`/departement/${actualDepID}`)
       ).data;
-      setActualDepID(response.id);
+      if(response.departementModel.id){
+        dispatch(setDepartement());
+        setActualDepID(response.departementModel.id);
+      }
+     
     } catch (error) {
       console.error(error);
-    }
-  };
-  const fetchAllDepartement = async () => {
-    try {
-      const res = await axios.get<DepartementT[]>("/departement");
-      if (res.status === 200) {
-        if (res.data.length > 0) {
-          dispatch(setDepartement());
-        }
-        // setDepartements(res.data);
-      }
-    } catch (error) {
-      console.error("Error fetching departments:", error);
     }
   };
 
   useEffect(() => {
     fetchDepartement();
-    fetchAllDepartement();
   }, []);
 
   const changeActualDepID = (id: number) => {
