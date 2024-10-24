@@ -1,7 +1,7 @@
 import ModalComponent from "@/components/Modal";
 import { ChangeEvent, FormEvent} from "react";
 import { useHomeContext } from "../../Context/HomeContext";
-import SelectDepartement from "./SelectDepartement";
+import ChooseDepartement from "./ChooseDepartement";
 
 interface propsT {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -104,7 +104,7 @@ export default function NewUserModal({ handleSubmit, handleChange }: propsT) {
           <label htmlFor="departement_id" className="text-2xl mt-5">
             Department ID:
           </label>
-         <SelectDepartement handleChange={(e)=>handleChange(e)} className="bg-slate-200 p-3 rounded-lg w-[30%] text-2xl"/>
+         <ChooseDepartement handleChange={(e)=>handleChange(e)} className="bg-slate-200 p-3 rounded-lg w-[30%] text-2xl"/>
 
           {/* Password */}
           <label htmlFor="password" className="text-2xl mt-5">

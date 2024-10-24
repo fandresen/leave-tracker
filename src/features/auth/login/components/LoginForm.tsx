@@ -3,16 +3,17 @@ import { InputUserName } from "./InputUserName";
 import { InputPassword } from "./InputPassword";
 import LoginError from "./LoginError";
 import { Link } from "react-router-dom";
+import Loading from "@/components/ui/Loading";
 // import { useMediaQuery } from "react-responsive";
 
 export default function LoginForm() {
-  const { userName, password, handleChange, handleSubmit, error } = useHandleLogin();
+  const { userName, password, handleChange, handleSubmit, error,loading } = useHandleLogin();
   // const desktop = useMediaQuery({ minWidth: 1024 });
   return (
     <>
       <div className="flex justify-between relative z-10">
 
-       
+       <Loading loading={loading}/>
           <div className="flex flex-col items-center lg:w-[380px] mx-auto lg:mt-14 2xl:mt-28 2xl:min-w-[26vw] bg-white lg:pb-14 2xl:pb-16 rounded-tl-[3vw] rounded-br-[3vw] shadow-xl">
             <h1 className="text-5xl lg:text-[40px] 2xl:text-6xl text-center mt-[3vh] lg:mt-8 2xl:mt-[7vh] font-medium text-[#7BE8D7] mb-[4vh]">
               Log in

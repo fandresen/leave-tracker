@@ -14,6 +14,7 @@ export interface errorT {
 export default function useHandleLogin() {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading,setLoading]=useState<boolean>(false);
   const [error, setError] = useState<errorT>();
   const axios = useAxiosNormal();
 
@@ -57,6 +58,7 @@ export default function useHandleLogin() {
   };
 
   const loginUser = async (userName?: string, password?: string) => {
+    setLoading(true);
     try {
       const res = await axios.post("/login", {
         email: userName,
@@ -108,7 +110,10 @@ export default function useHandleLogin() {
         setPassword("");
       }
     }
+    finally{
+      setLoading(false);
+    }
   };
 
-  return { userName, password, handleChange, handleSubmit, error };
+  return { userName, password, handleChange, handleSubmit, error,loading };
 }

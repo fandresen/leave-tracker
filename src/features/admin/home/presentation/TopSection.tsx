@@ -2,25 +2,28 @@ import ProfilAvatar from "@/components/ProfilAvatar";
 import { useCallback, useEffect, useState } from "react";
 import { FaGear } from "react-icons/fa6";
 import { HiOutlineChevronLeft } from "react-icons/hi";
-import RightSideBar from "./RightSideBar";
+import RightSideBarDepartement from "./RightSideBar";
 import { DepartementT } from "@/lib/interface";
-import DepartementComponent from "./DepartementComponent";
-import Research from "@/components/Research";
-import { FaPlus } from "react-icons/fa";
 import Loading from "@/components/ui/Loading";
+import ChooseDepartement from "./ChooseDepartement";
+import CreateDepartement from "../../CreateDepartement/CreateDepartement";
+import ResearchUser from "../../UI/Presentation/ResearchUser";
 
 interface propsT {
   departement_info: DepartementT;
   allDepartement: DepartementT[];
   onClickDepartement: (departementID: number) => void;
 }
-export default function TopSection({departement_info,allDepartement,onClickDepartement,}: propsT) {
-  useEffect(()=>{
-    console.log(allDepartement)
-  },[])
+export default function TopSection({departement_info,allDepartement,onClickDepartement}: propsT) {
+  useEffect(() => {
+    console.log(allDepartement);
+  }, []);
   const [openLayout, setOpenLayout] = useState(false);
-  const [researchedDepartements, setResearchedDepartements] = useState<DepartementT[]>(() => allDepartement);
-  const [loading,setLoading] = useState(false);
+  const [researchedDepartements, setResearchedDepartements] = useState<
+    DepartementT[]
+  >(() => allDepartement);
+  const [isCreateDepartement, setIsCreateDepartement] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const onSingleDepartementClick = (departement_id: number) => {
     onClickDepartement(departement_id);
     setOpenLayout(false);
@@ -40,9 +43,13 @@ export default function TopSection({departement_info,allDepartement,onClickDepar
     },
     [allDepartement]
   );
+
+  const createDepartement =()=>{
+    setIsCreateDepartement(true);
+  }
   return (
     <>
-    <Loading loading={loading}/>
+      <Loading loading={loading} />
       <div className="flex justify-between w-full pl-10">
         <div>
           <h1 className="text-lg font-medium text-gray-500">
@@ -77,29 +84,25 @@ export default function TopSection({departement_info,allDepartement,onClickDepar
         </button>
       </div>
       <div className="max-h-1">
-        <RightSideBar openLayout={openLayout} setOpenLayout={setOpenLayout}>
-          <div className="flex justify-center mt-0 2xl:mt-6">
-            <Research
-              className="rounded-full w-[280px] border border-gray-500 text-sm"
-              filteredData={researchDepartement}
-              data={allDepartement}
+        <RightSideBarDepartement
+          openLayout={openLayout}
+          setOpenLayout={setOpenLayout}
+        >
+          {isCreateDepartement ? (
+            <>
+            <CreateDepartement />
+            <ResearchUser classNameDiv="w-[20vw] bg-black" classNameInput="border border-gray-600 py-3 rounded-lg"/>
+            </>
+          ) : (
+            <ChooseDepartement
+              allDepartement={allDepartement}
+              onSingleDepartementClick={onSingleDepartementClick}
+              researchDepartements={researchedDepartements}
+              searchDepartement={researchDepartement}
+              handleCreateDepartement={createDepartement}
             />
-            <div className="ml-4">
-              <button className="px-3 py-3 2xl:py-3 text-xs 2xl:text-sm flex bg-[#0496ff] text-white font-semibold rounded-lg shadow hover:bg-blue-600 cursor-pointer">
-                <FaPlus className="mt-[2px] 2xl:mt-[3px] mr-1" />
-                Créer
-              </button>
-            </div>
-          </div>
-          {researchedDepartements.map((departement) => (
-            <DepartementComponent
-              departmentName={departement.departementModel.name}
-              departmentNumber={departement.departementModel.id}
-              employeeCount={departement.numberOfEmployees}
-              onclick={onSingleDepartementClick}
-            />
-          ))}
-        </RightSideBar>
+          )}
+        </RightSideBarDepartement>
       </div>
     </>
   );

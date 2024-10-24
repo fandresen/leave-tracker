@@ -7,7 +7,7 @@ interface propsT {
   setOpenLayout: (open: boolean) => void;
   children: ReactNode;
 }
-export default function RightSideBar({
+export default function RightSideBarDepartement({
   openLayout,
   setOpenLayout,
   children,
@@ -24,7 +24,7 @@ export default function RightSideBar({
         </h1>
         
         <div className="mt-5">
-          <div className="w-full h-full overflow-y-auto">{children}</div>
+          <div className="w-full h-full">{children}</div>
         </div>
       </ToggleRightLayout>
     </div>
