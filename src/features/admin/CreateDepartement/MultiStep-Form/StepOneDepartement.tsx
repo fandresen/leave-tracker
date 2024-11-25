@@ -6,7 +6,7 @@ interface propsT {
 }
 export default function StepOneDepartement({ formData, handleChange }: propsT) {
   return (
-    <div className="lg:mt-10 2xl:mt-16 mx-auto">
+    <div className="mx-auto">
       <div className="mb-6 lg:w-[80%] 2xl:w-[80%] mx-auto">
         <label className="block text-xs 2xl:text-sm text-gray-700 roboto">
           Nom du departement
@@ -20,7 +20,7 @@ export default function StepOneDepartement({ formData, handleChange }: propsT) {
         />
       </div>
       {/* <div className="flex 2xl:gap-3 max-w-[40vw] mx-auto"> */}
-      <div className="mb-6 lg:w-[45%] 2xl:w-[80%] mx-auto">
+      <div className="mb-6 lg:w-[80%] 2xl:w-[80%] mx-auto">
         <label className="block text-xs 2xl:text-sm text-gray-400 roboto">
           <span className="text-gray-700">Nom</span> du chef de departement
         </label>
@@ -33,7 +33,7 @@ export default function StepOneDepartement({ formData, handleChange }: propsT) {
         />
       </div>
 
-      <div className="mb-6 lg:w-[45%] 2xl:w-[80%] mx-auto">
+      <div className="mb-6 lg:w-[80%] 2xl:w-[80%] mx-auto">
         <label className="block text-xs 2xl:text-sm text-gray-400 roboto">
           <span className="text-gray-700">Prenom</span> du chef de departement
         </label>

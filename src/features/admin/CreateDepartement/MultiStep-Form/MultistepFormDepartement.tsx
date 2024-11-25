@@ -87,10 +87,10 @@ export default function MultiStepFormDepartement({ handlecreate }: propsT) {
         ""
       )}
 
-      <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333]">
+      {/* <h1 className="text-center lg:text-2xl 2xl:text-4xl roboto roboto-medium text-[#333]">
         Creér un Departement
-      </h1>
-      <div className="lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto mt-10 scale-75">
+      </h1> */}
+      <div className="lg:max-w-[50vw] 2xl:max-w-[40vw] mx-auto mt-1 scale-75">
         <StepIndicatorUser currentStep={currentStep} />
       </div>
 

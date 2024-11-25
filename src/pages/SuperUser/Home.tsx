@@ -1,9 +1,9 @@
-import ListeEntrerpise from "@/features/super_User/home/ListeEntrerpise";
+import GetEntrepriseContainer from "@/features/super_User/container/GetEntrepriseContainer";
 
 export default function HomeEntreprise() {
   return (
     <>
-        <ListeEntrerpise entrerpises={[]}/>
+       <GetEntrepriseContainer/>
     </>
   )
 }

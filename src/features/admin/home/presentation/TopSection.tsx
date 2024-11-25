@@ -1,5 +1,5 @@
 import ProfilAvatar from "@/components/ProfilAvatar";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback,useState } from "react";
 import { FaGear } from "react-icons/fa6";
 import { HiOutlineChevronLeft } from "react-icons/hi";
 import RightSideBarDepartement from "./RightSideBar";
@@ -7,7 +7,6 @@ import { DepartementT } from "@/lib/interface";
 import Loading from "@/components/ui/Loading";
 import ChooseDepartement from "./ChooseDepartement";
 import CreateDepartement from "../../CreateDepartement/CreateDepartement";
-import ResearchUser from "../../UI/Presentation/ResearchUser";
 
 interface propsT {
   departement_info: DepartementT;
@@ -15,15 +14,14 @@ interface propsT {
   onClickDepartement: (departementID: number) => void;
 }
 export default function TopSection({departement_info,allDepartement,onClickDepartement}: propsT) {
-  useEffect(() => {
-    console.log(allDepartement);
-  }, []);
+
   const [openLayout, setOpenLayout] = useState(false);
-  const [researchedDepartements, setResearchedDepartements] = useState<
-    DepartementT[]
-  >(() => allDepartement);
+
+  const [researchedDepartements, setResearchedDepartements] = useState<DepartementT[]>(() => allDepartement);
+
   const [isCreateDepartement, setIsCreateDepartement] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+
   const onSingleDepartementClick = (departement_id: number) => {
     onClickDepartement(departement_id);
     setOpenLayout(false);
@@ -87,11 +85,13 @@ export default function TopSection({departement_info,allDepartement,onClickDepar
         <RightSideBarDepartement
           openLayout={openLayout}
           setOpenLayout={setOpenLayout}
+          depCreation={isCreateDepartement}
+          backToDepartementList={()=>setIsCreateDepartement(false)}
         >
           {isCreateDepartement ? (
             <>
             <CreateDepartement />
-            <ResearchUser classNameDiv="w-[20vw] bg-black" classNameInput="border border-gray-600 py-3 rounded-lg"/>
+            {/* <ResearchUser classNameDiv="w-[20vw] bg-black" classNameInput="border border-gray-600 py-3 rounded-lg"/> */}
             </>
           ) : (
             <ChooseDepartement
