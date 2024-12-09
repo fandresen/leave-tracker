@@ -1,0 +1,43 @@
+import { propsAbsence } from "@/lib/interface";
+
+export default function HistoriqueAbsence() {
+  const absences: propsAbsence[] = ;
+
+  return (
+    <div className="w-full h-full mt-2 p-4 border-r-2">
+      <h1 className="text-center dark:text-slate-200 text-2xl font-semibold">Historique des absences</h1>
+      <div className="space-y-4">
+        {absences.map((absence: propsAbsence, index: number) => {
+          const startDate = new Date(absence.startDate);
+          const endDate = new Date(absence.endDate);
+          const numberOfDays = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+          return (
+            <div key={index} className="bg-slate-600/10 dark:bg-slate-300/10 shadow-lg rounded-2xl p-3 mt-2 justify-center items-center">
+              <div className="flex justify-between">
+                <label className="block dark:text-slate-200 text-lg font-semibold mb-2">Date début:</label>
+                {startDate.toLocaleDateString()}
+              </div>
+              <div className="flex justify-between">
+                <label className="block dark:text-slate-200 text-lg font-semibold mb-2">Date fin:</label>
+                {endDate.toLocaleDateString()}
+              </div>
+              <div className="flex justify-between">
+                <label className="block dark:text-slate-200 text-lg font-semibold mb-2">Jour d'absence:</label>
+                {numberOfDays} jours
+              </div>
+              <div className="flex justify-between">
+                <label className="block dark:text-slate-200 text-lg font-semibold mb-2">Type d'absence:</label>
+                {absence.title}
+              </div>
+              <div className="flex justify-between">
+                <label className="block dark:text-slate-200 text-lg font-semibold mb-2">Etat de la demande:</label>
+                <span className="text-green-500">Validée</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

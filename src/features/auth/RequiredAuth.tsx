@@ -1,9 +1,9 @@
-import { getAccessToken } from "@/lib/tokenService";
+import { getRole } from "@/lib/token&RoleService";
 import { Navigate, Outlet } from "react-router-dom";
 
 const RequiredAuth = () => {
-  const accessToken = getAccessToken();
+  const role = getRole();
 
-  return accessToken != "" ? <Outlet /> : <Navigate to="login" />;
+  return role != "" ? <Outlet /> : <Navigate to="login" />;
 };
 export default RequiredAuth;
